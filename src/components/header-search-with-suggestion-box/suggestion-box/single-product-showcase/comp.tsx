@@ -13,7 +13,10 @@ const SingleProductComp: React.FC<SingleProductCompProps> = ({ product }) => {
     useMemo(() => product, [product]);
 
   return (
-    <Link href={`/products/${id}`} className="grid grid-cols-4 bg-gray-100">
+    <Link
+      href={`/products/${id}`}
+      className="grid grid-cols-4 items-center gap-4 p-4 hover:bg-gray-100"
+    >
       <div className="relative col-span-1 h-[80px] w-full rounded-md">
         <Image
           src="/wallhaven-m95x7k.jpg"
@@ -23,14 +26,14 @@ const SingleProductComp: React.FC<SingleProductCompProps> = ({ product }) => {
           className="rounded-md"
         />
       </div>
-      <div className="col-span-3 grid grid-cols-4">
-        <div className="col-span-3 flex flex-col">
+      <div className="col-span-3 flex">
+        <div className="flex flex-1 flex-col">
           <span>{name}</span>
-          <span>{description}</span>
+          {/* <span>{description}</span> */}
           <span>{brand}</span>
           <span>{category}</span>
         </div>
-        <div className="col-span-1">{price}</div>
+        <div className="">{price}</div>
       </div>
     </Link>
   );

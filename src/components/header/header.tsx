@@ -12,7 +12,11 @@ import Link from "next/link";
 import HeaderSearchWithSuggestionBox from "../header-search-with-suggestion-box";
 import useHeaderController from "./header-controller";
 
-const Header = () => {
+interface HeaderProps {
+  isSearchVisible?: boolean;
+}
+
+const Header: React.FC<HeaderProps> = ({ isSearchVisible = true }) => {
   const { scrollY, isUserPopoverOpen, setIsUserPopoverOpen } =
     useHeaderController();
 
@@ -29,13 +33,15 @@ const Header = () => {
           // scrollY > 10 && "rounded-md",
         )}
       >
-        <Link className="px-12" href={"/"}>
+        <Link className="pr-12" href={"/"}>
           LOGO
         </Link>
-        <div className="flex-1 px-12">
-          <HeaderSearchWithSuggestionBox />
-        </div>
-        <div className="px-12">
+        {isSearchVisible && (
+          <div className="flex-1 px-12">
+            <HeaderSearchWithSuggestionBox />
+          </div>
+        )}
+        <div className="pl-12">
           <Popover
             open={isUserPopoverOpen}
             onOpenChange={(open) => {
