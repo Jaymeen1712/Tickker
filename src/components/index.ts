@@ -9,6 +9,7 @@ import DashboardComp from "./dashboard";
 import Header from "./header";
 import SearchWithSuggestionBox from "./header-search-with-suggestion-box";
 import QuantitySelector from "./quantity-selector";
+import Rating from "./rating";
 import Spinner from "./spinner";
 
 export {
@@ -23,6 +24,7 @@ export {
   DashboardComp,
   Header,
   QuantitySelector,
+  Rating,
   SearchWithSuggestionBox,
   Spinner,
 };

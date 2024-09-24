@@ -42,7 +42,7 @@ const QuantitySelector: React.FC<QuantitySelectorProps> = ({
   };
 
   return (
-    <div className="flex items-center space-x-2">
+    <div className="flex items-center space-x-4">
       <Button
         onClick={decreaseQuantity}
         disabled={quantity <= 1 || isBothButtonDisable}
