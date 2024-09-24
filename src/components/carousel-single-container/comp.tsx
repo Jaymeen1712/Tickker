@@ -26,10 +26,18 @@ const CarouselSingleContainer: React.FC<CarouselSingleContainerProps> = ({
           className="rounded-md"
         />
       </div>
-      <div className="font-semibold">{name}</div>
-      <div className="truncate text-ellipsis">{description}</div>
-      <div>{price}</div>
-      <div>{brand}</div>
+      <div className="my-2">
+        <div className="font-semibold">{name}</div>
+        <div className="line-clamp-2 text-ellipsis">{description}</div>
+        <div className="mt-2 space-x-2">
+          <span className="font-semibold">Price:</span>
+          <span>{price}</span>
+        </div>
+        <div className="space-x-2">
+          <span className="font-semibold">Brand:</span>
+          <span>{brand}</span>
+        </div>
+      </div>
     </Link>
   );
 };
