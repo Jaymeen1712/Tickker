@@ -28,6 +28,10 @@ const useSingleProductShowcasePageController = ({
     quantity: 1,
   });
   const [isBuyButtonLoading, setIsBuyButtonLoading] = useState(false);
+  const [handlePrevClick, setHandlePrevClick] = useState<() => void>(() => {});
+  const [handleNextClick, setHandleNextClick] = useState<() => void>(() => {});
+  const [isPrevDisable, setIsPrevDisable] = useState(false);
+  const [isNextDisable, setIsNextDisable] = useState(false);
 
   const { profile } = useAppStore();
 
@@ -138,6 +142,14 @@ const useSingleProductShowcasePageController = ({
     handleBuyNowButtonClick,
     productModifications,
     isBuyButtonLoading,
+    handlePrevClick,
+    setHandlePrevClick,
+    handleNextClick,
+    setHandleNextClick,
+    isPrevDisable,
+    setIsPrevDisable,
+    isNextDisable,
+    setIsNextDisable,
   };
 };
 

@@ -1,12 +1,10 @@
 "use client";
+import { CustomButton, CustomSlider } from "@/components";
 import { Product } from "@prisma/client";
 import React from "react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa"; // Use icons for buttons
-import Slider from "react-slick";
 import CarouselSingleContainer from "../carousel-single-container";
-import CustomButton from "../custom-button";
 import useCarouselWithTitleCompController from "./comp-controller";
-import "./comp.css";
 
 interface CarouselWithTitleProps {
   title: string | React.ReactNode;
@@ -19,12 +17,14 @@ const CarouselWithTitle: React.FC<CarouselWithTitleProps> = ({
 }) => {
   const {
     handlePrevClick,
+    setHandlePrevClick,
     handleNextClick,
-    settings,
-    sliderRef,
-    currentSlide,
-    totalSlides,
-  } = useCarouselWithTitleCompController({ products });
+    setHandleNextClick,
+    isPrevDisable,
+    setIsPrevDisable,
+    isNextDisable,
+    setIsNextDisable,
+  } = useCarouselWithTitleCompController();
 
   return (
     <div className="container">
@@ -32,32 +32,33 @@ const CarouselWithTitle: React.FC<CarouselWithTitleProps> = ({
         {title}
         <div className="flex gap-4">
           <CustomButton
-            onClick={handlePrevClick}
+            onClick={() => handlePrevClick()}
             className="carousel-btn"
-            disabled={currentSlide === 0}
+            disabled={isPrevDisable}
           >
             <FaArrowLeft />
           </CustomButton>
           <CustomButton
-            onClick={handleNextClick}
+            onClick={() => handleNextClick()}
             className="carousel-btn"
-            disabled={currentSlide === totalSlides}
+            disabled={isNextDisable}
           >
             <FaArrowRight />
           </CustomButton>
         </div>
       </div>
 
-      <div className="slider-container">
-        <Slider
-          {...settings}
-          ref={sliderRef}
-        >
-          {products.map((product, index) => (
-            <CarouselSingleContainer key={index} product={product} />
-          ))}
-        </Slider>
-      </div>
+      <CustomSlider
+        itemsLength={products.length}
+        setHandlePrevClick={setHandlePrevClick}
+        setHandleNextClick={setHandleNextClick}
+        setIsPrevDisable={setIsPrevDisable}
+        setIsNextDisable={setIsNextDisable}
+      >
+        {products.map((product, index) => (
+          <CarouselSingleContainer key={index} product={product} />
+        ))}
+      </CustomSlider>
     </div>
   );
 };
