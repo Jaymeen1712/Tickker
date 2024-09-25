@@ -27,7 +27,7 @@ const useSearchProductPageController = ({
     } finally {
       setIsLoading(false);
     }
-  }, [searchQuery]);
+  }, [searchQuery, setIsLoading]);
 
   useEffect(() => {
     handleGetSearchQueryProducts();
@@ -37,7 +37,7 @@ const useSearchProductPageController = ({
     return () => {
       setIsLoading(true);
     };
-  }, []);
+  }, [setIsLoading]);
 
   return { isLoading, searchedProducts };
 };

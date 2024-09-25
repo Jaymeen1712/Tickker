@@ -1,6 +1,6 @@
 "use client";
 
-import { CustomAvatar } from "@/components";
+import { CustomAvatar, CustomLabelValuePair } from "@/components";
 import useProfilePageController from "./page-controller";
 
 const ProfilePage = () => {
@@ -12,8 +12,10 @@ const ProfilePage = () => {
         <div className="relative h-[180px] w-fit rounded-full">
           <CustomAvatar />
         </div>
-        <span>Name: {profile?.name}</span>
-        <span>Email: {profile?.email}</span>
+        <div className="mt-8">
+          <CustomLabelValuePair label="Name" value={profile?.name} />
+          <CustomLabelValuePair label="Email" value={profile?.email} />
+        </div>
       </div>
     </div>
   );
