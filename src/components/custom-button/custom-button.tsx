@@ -12,10 +12,11 @@ const CustomButton: React.FC<CustomButtonProps> = ({
 }) => {
   return (
     <Button disabled={loading} {...rest}>
-      {loading && (
+      {loading ? (
         <AiOutlineLoading3Quarters className="mr-2 animate-spin" size={15} />
+      ) : (
+        <>{children}</>
       )}
-      {children}
     </Button>
   );
 };

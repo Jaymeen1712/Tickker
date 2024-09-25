@@ -3,7 +3,7 @@
  * @type {string[]}
  */
 
-export const publicRoutes = ["/home"];
+export const publicRoutes = ["/", "/search", "/products", "/products/[productId]"];
 
 /**
  * Routes that starts with this prefix are used for API authentication purposes.
@@ -25,4 +25,4 @@ export const authRoutes = ["/signup", "/login"];
  * @type {string}
  */
 
-export const DEFAULT_LOGIN_REDIRECT = "/home";
+export const DEFAULT_LOGIN_REDIRECT = "/";

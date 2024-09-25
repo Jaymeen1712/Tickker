@@ -1,0 +1,52 @@
+/* Container for the entire carousel */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Ensures the slider container has proper overflow and spacing */
+.slider-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding: 20px 0;
+}
+
+/* Custom buttons for previous and next */
+.carousel-btn {
+  background-color: #000; /* Or any other color you prefer */
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* .carousel-prev {
+}
+
+.carousel-next {
+} */
+
+/* Slick slider specific styles */
+.slick-slide {
+  padding: 10px;
+}
+
+.slick-prev,
+.slick-next {
+  display: none; /* Hides default arrows */
+}
+
+.slick-dots {
+  display: none; /* Hides the dots */
+}
+
+/* Optional: Hide slick arrows at smaller screen sizes */
+@media (max-width: 600px) {
+  .carousel-btn {
+    padding: 6px 10px;
+  }
+}
