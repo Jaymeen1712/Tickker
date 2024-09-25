@@ -8,7 +8,9 @@ const OrdersPage = () => {
 
   return (
     <div className="container">
-      <h3 className="text-xl font-semibold">Orders</h3>
+      <h3 className="mb-8 border-b border-b-gray-400 pb-8 text-center text-2xl font-semibold">
+        Orders
+      </h3>
       {isLoading ? (
         <Spinner />
       ) : (
