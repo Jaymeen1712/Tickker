@@ -165,3 +165,24 @@ export const deleteAllCartItemsCartId = async ({
 
   return { errors, response };
 };
+
+export const removeCartItemById = async (cartItemId: string) => {
+  let response;
+  let errors;
+
+  try {
+    const deletedCartItem = await db.cartItem.delete({
+      where: {
+        id: cartItemId
+      }
+    });
+
+    if (deletedCartItem) {
+      response = deletedCartItem;
+    }
+  } catch (error) {
+    errors = error;
+  }
+
+  return { errors, response };
+};

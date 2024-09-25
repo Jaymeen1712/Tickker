@@ -4,6 +4,7 @@ import CarouselWithTitle from "./carousel-with-title";
 import { CustomErrorAlert, CustomSuccessAlert } from "./custom-alert";
 import CustomAvatar from "./custom-avatar";
 import CustomButton from "./custom-button";
+import CustomLabelValuePair from "./custom-label-value-pair";
 import CustomSlider from "./custom-slider";
 import DashboardComp from "./dashboard";
 import Header from "./header";
@@ -19,6 +20,7 @@ export {
   CustomAvatar,
   CustomButton,
   CustomErrorAlert,
+  CustomLabelValuePair,
   CustomSlider,
   CustomSuccessAlert,
   DashboardComp,

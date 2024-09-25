@@ -13,12 +13,12 @@ const useOrdersPageController = () => {
   const { profile, setIsLoading, isLoading } = useAppStore();
 
   const handleGetOrders = useCallback(async () => {
+    if (!profile) {
+      return;
+    }
+
     try {
       setIsLoading(true);
-      if (!profile) {
-        return;
-      }
-
       const { id: profileId } = profile;
 
       const { errors, response } = await fetchOrdersByProfileId({
@@ -33,7 +33,7 @@ const useOrdersPageController = () => {
     } finally {
       setIsLoading(false);
     }
-  }, [profile]);
+  }, [profile, setIsLoading]);
 
   useEffect(() => {
     handleGetOrders();

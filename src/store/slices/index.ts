@@ -1,3 +1,5 @@
+import { CommonSlice, createCommonSlice } from "./common-slice";
 import { UtilsSlice, createUtilsSlice } from "./utils-slice";
-export { createUtilsSlice };
-export type { UtilsSlice };
+
+export { createCommonSlice, createUtilsSlice };
+export type { CommonSlice, UtilsSlice };

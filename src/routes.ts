@@ -3,7 +3,7 @@
  * @type {string[]}
  */
 
-export const publicRoutes = ["/"];
+export const publicRoutes = ["/", "/search", "/products", "/products/[productId]"];
 
 /**
  * Routes that starts with this prefix are used for API authentication purposes.

@@ -1,8 +1,9 @@
 "use client";
 
-import { updateCartItemById } from "@/db/queries";
+import { removeCartItemById, updateCartItemById } from "@/db/queries";
 import { CartItemsIncludingProductType } from "@/types";
 import { handleAPIResponse } from "@/utils";
+import { useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
 
 interface CartShowcaseSingleProductCompControllerProps {
@@ -16,6 +17,9 @@ const useCartShowcaseProductCompController = ({
 }: CartShowcaseSingleProductCompControllerProps) => {
   const { id } = useMemo(() => cartItem, [cartItem]);
   const [isProdQuantityLoading, setIsProdQuantityLoading] = useState(false);
+  const [isRemoveCartItemLoading, setIsRemoveCartItemLoading] = useState(false);
+
+  const router = useRouter();
 
   const handleProductQuantityChange = async (quantity: number) => {
     try {
@@ -32,7 +36,29 @@ const useCartShowcaseProductCompController = ({
     }
   };
 
-  return { handleProductQuantityChange, isProdQuantityLoading };
+  const handleRemoveCartItem = async () => {
+    try {
+      setIsRemoveCartItemLoading(true);
+      await removeCartItemById(id);
+      handleGetCartItems();
+    } finally {
+      setIsRemoveCartItemLoading(false);
+    }
+  };
+
+  const handleRedirectToIndividualProductPage = () => {
+    const { product } = cartItem;
+    const { id } = product;
+    router.push(`/products/${id}`);
+  };
+
+  return {
+    handleProductQuantityChange,
+    isProdQuantityLoading,
+    handleRedirectToIndividualProductPage,
+    isRemoveCartItemLoading,
+    handleRemoveCartItem,
+  };
 };
 
 export default useCartShowcaseProductCompController;

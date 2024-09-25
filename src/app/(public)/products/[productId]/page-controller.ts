@@ -8,7 +8,12 @@ import {
   fetchSingleProductById,
 } from "@/db/queries";
 import { useAppStore } from "@/store";
-import { handleAPIResponse, handleShowError, handleShowSuccess } from "@/utils";
+import {
+  handleAPIResponse,
+  handleNoProfileInPublicTemplate,
+  handleShowError,
+  handleShowSuccess,
+} from "@/utils";
 import { Cart, Order, Product } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
@@ -57,8 +62,7 @@ const useSingleProductShowcasePageController = ({
   const handleAddToCartButtonClick = async () => {
     try {
       if (!profile) {
-        handleShowError(3);
-        window.location.reload();
+        handleNoProfileInPublicTemplate();
         return;
       }
 
@@ -93,7 +97,12 @@ const useSingleProductShowcasePageController = ({
   const handleBuyNowButtonClick = async () => {
     try {
       setIsBuyButtonLoading(true);
-      if (!profile || !product) {
+      if (!profile) {
+        handleNoProfileInPublicTemplate();
+        return;
+      }
+
+      if (!product) {
         handleShowError(3);
         return;
       }

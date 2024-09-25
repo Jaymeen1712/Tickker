@@ -1,5 +1,6 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import { ERRORS } from "@/enum";
 import { toast } from "sonner";
 
@@ -23,4 +24,17 @@ export const handleShowError = (errorIndex: number, customError?: string) => {
 
 export const handleShowSuccess = (successMessage: string) => {
   toast.success(successMessage);
+};
+
+export const handleNoProfileInPublicTemplate = () => {
+  toast.error("Login or register in order to perform this action", {
+    action: (
+      <Button
+        onClick={() => (window.location.href = "/login")}
+        className="ml-4"
+      >
+        Redirect to login
+      </Button>
+    ),
+  });
 };

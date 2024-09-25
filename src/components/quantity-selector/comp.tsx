@@ -1,5 +1,6 @@
 "use client";
 
+import { cn } from "@/lib/utils";
 import React, { useState } from "react";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
@@ -8,12 +9,18 @@ interface QuantitySelectorProps {
   initialQuantity?: number;
   onQuantityChange?: (quantity: number) => void;
   isBothButtonDisable?: boolean;
+  decreaseButtonClassName?: string;
+  increaseButtonClassName?: string;
+  inputClassName?: string;
 }
 
 const QuantitySelector: React.FC<QuantitySelectorProps> = ({
   initialQuantity = 1,
   onQuantityChange,
   isBothButtonDisable,
+  decreaseButtonClassName,
+  increaseButtonClassName,
+  inputClassName,
 }) => {
   const [quantity, setQuantity] = useState<number>(initialQuantity);
 
@@ -42,10 +49,11 @@ const QuantitySelector: React.FC<QuantitySelectorProps> = ({
   };
 
   return (
-    <div className="flex items-center space-x-4">
+    <div className="flex items-center justify-center">
       <Button
         onClick={decreaseQuantity}
         disabled={quantity <= 1 || isBothButtonDisable}
+        className={cn("rounded-r-none", decreaseButtonClassName)}
       >
         -
       </Button>
@@ -53,9 +61,16 @@ const QuantitySelector: React.FC<QuantitySelectorProps> = ({
         type="number"
         value={quantity}
         onChange={handleChange}
-        className="w-16 text-center"
+        className={cn(
+          "hide-input-number-arrows rounded-none text-center focus-visible:border-black focus-visible:ring-0",
+          inputClassName,
+        )}
       />
-      <Button onClick={increaseQuantity} disabled={isBothButtonDisable}>
+      <Button
+        onClick={increaseQuantity}
+        disabled={isBothButtonDisable}
+        className={cn("rounded-l-none", increaseButtonClassName)}
+      >
         +
       </Button>
     </div>
