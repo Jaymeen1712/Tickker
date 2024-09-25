@@ -11,10 +11,6 @@ import { useCallback, useEffect, useState } from "react";
 
 const useProductsDetailsCompController = () => {
   const [isCartItemsLoading, setIsCartItemsLoading] = useState(true);
-  console.log(
-    "🚀 ~ useProductsDetailsCompController ~ isCartItemsLoading:",
-    isCartItemsLoading,
-  );
   const [cartSubTotal, setCartSubTotal] = useState(0);
   const [cartItems, setCartItems] = useState<CartItemsIncludingProductType[]>(
     [],

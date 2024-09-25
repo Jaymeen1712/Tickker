@@ -9,6 +9,7 @@ import {
 import { cn } from "@/lib/utils";
 import { signOut } from "next-auth/react";
 import Link from "next/link";
+import { Suspense } from "react";
 import HeaderSearchWithSuggestionBox from "../header-search-with-suggestion-box";
 import useHeaderController from "./header-controller";
 
@@ -38,7 +39,9 @@ const Header: React.FC<HeaderProps> = ({ isSearchVisible = true }) => {
         </Link>
         {isSearchVisible && (
           <div className="flex-1 px-12">
-            <HeaderSearchWithSuggestionBox />
+            <Suspense>
+              <HeaderSearchWithSuggestionBox />
+            </Suspense>
           </div>
         )}
         <div className="pl-12">
