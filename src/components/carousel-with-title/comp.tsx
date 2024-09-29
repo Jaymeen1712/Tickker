@@ -28,37 +28,41 @@ const CarouselWithTitle: React.FC<CarouselWithTitleProps> = ({
 
   return (
     <div className="container">
-      <div className="my-6 flex items-center justify-between border-b border-b-gray-400 py-6 text-xl font-semibold">
-        {title}
-        <div className="flex gap-4">
-          <CustomButton
-            onClick={() => handlePrevClick()}
-            className="carousel-btn"
-            disabled={isPrevDisable}
+      <div className="bg-white px-8 py-6 shadow-md">
+        <div className="border-b-gray-3 flex items-center justify-between border-b pb-6">
+          <span className="text-gray-3 text-xl font-semibold">{title}</span>
+          <div className="flex gap-4">
+            <CustomButton
+              onClick={() => handlePrevClick()}
+              className="carousel-btn"
+              disabled={isPrevDisable}
+            >
+              <FaArrowLeft />
+            </CustomButton>
+            <CustomButton
+              onClick={() => handleNextClick()}
+              className="carousel-btn"
+              disabled={isNextDisable}
+            >
+              <FaArrowRight />
+            </CustomButton>
+          </div>
+        </div>
+
+        <div className="mt-6">
+          <CustomSlider
+            itemsLength={products.length}
+            setHandlePrevClick={setHandlePrevClick}
+            setHandleNextClick={setHandleNextClick}
+            setIsPrevDisable={setIsPrevDisable}
+            setIsNextDisable={setIsNextDisable}
           >
-            <FaArrowLeft />
-          </CustomButton>
-          <CustomButton
-            onClick={() => handleNextClick()}
-            className="carousel-btn"
-            disabled={isNextDisable}
-          >
-            <FaArrowRight />
-          </CustomButton>
+            {products.map((product, index) => (
+              <CarouselSingleContainer key={index} product={product} />
+            ))}
+          </CustomSlider>
         </div>
       </div>
-
-      <CustomSlider
-        itemsLength={products.length}
-        setHandlePrevClick={setHandlePrevClick}
-        setHandleNextClick={setHandleNextClick}
-        setIsPrevDisable={setIsPrevDisable}
-        setIsNextDisable={setIsNextDisable}
-      >
-        {products.map((product, index) => (
-          <CarouselSingleContainer key={index} product={product} />
-        ))}
-      </CustomSlider>
     </div>
   );
 };

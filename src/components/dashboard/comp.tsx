@@ -49,7 +49,12 @@ const DashboardComp = () => {
         </div>
       </div>
 
-      <CarouselWithTitle title={"Recent"} products={products} />
+      {/* Carousel container */}
+      <div className="flex flex-col space-y-8 py-8">
+        <CarouselWithTitle title={"Recent"} products={products} />
+        <CarouselWithTitle title={"Recent"} products={products} />
+        <CarouselWithTitle title={"Recent"} products={products} />
+      </div>
     </>
   );
 };

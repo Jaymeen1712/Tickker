@@ -1,22 +1,12 @@
-/* Container for the entire carousel */
-.container {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-}
-
 /* Ensures the slider container has proper overflow and spacing */
 .slider-container {
   position: relative;
   width: 100%;
   overflow: hidden;
-  padding: 20px 0;
 }
 
 /* Custom buttons for previous and next */
 .carousel-btn {
-  background-color: #000; /* Or any other color you prefer */
   color: white;
   border: none;
   padding: 8px 12px;
@@ -24,16 +14,15 @@
   cursor: pointer;
 }
 
+.slick-track > .slick-active + * {
+  padding-left: 16px;
+}
+
 /* .carousel-prev {
 }
 
 .carousel-next {
 } */
-
-/* Slick slider specific styles */
-.slick-slide {
-  padding: 10px;
-}
 
 .slick-prev,
 .slick-next {

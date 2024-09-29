@@ -18,22 +18,15 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ isSearchVisible = true }) => {
-  const { scrollY, isUserPopoverOpen, setIsUserPopoverOpen } =
-    useHeaderController();
+  const { isUserPopoverOpen, setIsUserPopoverOpen } = useHeaderController();
 
   return (
     <div
       className={cn(
         "container left-0 right-0 z-50 transition-all duration-500",
-        // scrollY < 10 ? "top-0 mx-0" : "top-8 mx-8",
       )}
     >
-      <div
-        className={cn(
-          "flex h-24 items-center justify-between",
-          // scrollY > 10 && "rounded-md",
-        )}
-      >
+      <div className={cn("flex h-24 items-center justify-between")}>
         <Link className="pr-12" href={"/"}>
           LOGO
         </Link>
