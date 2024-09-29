@@ -7,9 +7,9 @@ const ProductsPaymentComp = () => {
     useProductsPaymentCompController();
 
   return (
-    <div className="col-span-1 flex h-fit items-center">
+    <div className="mb-8 mt-4 flex h-fit items-center justify-center">
       <CustomButton
-        className="w-full rounded-full"
+        className="w-28 rounded-full"
         onClick={handleBuyButtonClick}
         loading={isBuyButtonLoading}
       >
