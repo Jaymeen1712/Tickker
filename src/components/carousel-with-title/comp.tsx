@@ -29,8 +29,8 @@ const CarouselWithTitle: React.FC<CarouselWithTitleProps> = ({
   return (
     <div className="container">
       <div className="bg-white px-8 py-6 shadow-md">
-        <div className="border-b-gray-3 flex items-center justify-between border-b pb-6">
-          <span className="text-gray-3 text-xl font-semibold">{title}</span>
+        <div className="flex items-center justify-between border-b border-b-gray-3 pb-6">
+          <span className="text-xl font-semibold">{title}</span>
           <div className="flex gap-4">
             <CustomButton
               onClick={() => handlePrevClick()}
