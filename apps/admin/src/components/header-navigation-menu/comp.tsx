@@ -24,7 +24,7 @@ export const HeaderNavigationMenu = () => {
             className={cn(
               navigationMenuTriggerStyle(),
               currSelectedItem === "overview" &&
-                "bg-accent text-accent-foreground",
+                "bg-white text-accent-foreground",
             )}
             href="/overview"
           >
@@ -36,7 +36,7 @@ export const HeaderNavigationMenu = () => {
             className={cn(
               navigationMenuTriggerStyle(),
               currSelectedItem === "customers" &&
-                "bg-accent text-accent-foreground",
+                "bg-white text-accent-foreground",
             )}
             href="/customers"
           >
@@ -48,7 +48,7 @@ export const HeaderNavigationMenu = () => {
             className={cn(
               navigationMenuTriggerStyle(),
               currSelectedItem === "products" &&
-                "bg-accent text-accent-foreground",
+                "bg-white text-accent-foreground",
             )}
             href="/products"
           >
@@ -60,7 +60,7 @@ export const HeaderNavigationMenu = () => {
             className={cn(
               navigationMenuTriggerStyle(),
               currSelectedItem === "orders" &&
-                "bg-accent text-accent-foreground",
+                "bg-white text-accent-foreground",
             )}
             href="/orders"
           >

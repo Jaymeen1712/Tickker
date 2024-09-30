@@ -1,3 +1,6 @@
+import { Product } from "@prisma/client";
+import { CommonOmitType } from ".";
+
 export interface CreateCartRequestObjType {
   profileId: string;
 }
@@ -11,3 +14,5 @@ export interface CreateCartItemRequestObjType {
 export interface FetchProfileByUserIdRequestObjType {
   userId: string;
 }
+
+export type CreateProductReqObjType = Omit<Product, CommonOmitType | "rating">;

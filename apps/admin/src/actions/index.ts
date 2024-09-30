@@ -1,3 +1,2 @@
-import { signUpAction } from "./authentication";
-
-export { signUpAction };
+export * from "./authentication";
+export * from "./products";

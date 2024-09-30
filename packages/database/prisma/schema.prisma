@@ -65,15 +65,16 @@ model User {
 }
 
 model Profile {
-  id           String  @id @default(cuid())
-  userId       String  @unique
+  id           String    @id @default(cuid())
+  userId       String    @unique
   name         String?
   lowResImage  String?
   highResImage String?
-  username     String? @unique
-  email        String? @unique
+  username     String?   @unique
+  email        String?   @unique
   Cart         Cart?
   Order        Order[]
+  Product      Product[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -97,18 +98,24 @@ model VerificationRequest {
 
 model Product {
   id          String      @id @default(cuid())
+  profileId   String
   name        String
   description String?
   price       Float
   images      String[]
   category    String
   brand       String?
-  createdAt   DateTime    @default(now())
-  updatedAt   DateTime    @updatedAt
   rating      Float?
+  stock       Int
+  isVisible   Boolean    @default(true)
   reviews     Review[]
   CartItem    CartItem[]
   OrderItem   OrderItem[]
+
+  profile Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@map("products")
 }
