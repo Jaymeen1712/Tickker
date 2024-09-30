@@ -59,7 +59,7 @@ const ProductsListingTableComp = () => {
   useProductsListingTableCompController();
 
   return (
-    <Table>
+    <Table className="my-8 bg-white">
       <TableCaption>A list of your recent invoices.</TableCaption>
       <TableHeader>
         <TableRow>

@@ -90,3 +90,17 @@
     @apply bg-background text-foreground;
   }
 }
+
+body {
+  color: #1c1c1c;
+}
+
+.hide-input-number-arrows::-webkit-inner-spin-button,
+.hide-input-number-arrows::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.hide-input-number-arrows {
+  -moz-appearance: textfield; /* For Firefox */
+}

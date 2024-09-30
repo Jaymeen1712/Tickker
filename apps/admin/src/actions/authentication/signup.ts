@@ -42,6 +42,7 @@ export const signUpAction = async (
         email,
         password: hashedPassword,
         name: `${first_name} ${last_name}`,
+        roles: ["ADMIN", "STANDARD"],
       },
     });
 

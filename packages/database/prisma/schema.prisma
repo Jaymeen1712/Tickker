@@ -40,16 +40,22 @@ model Session {
   user         User     @relation(fields: [userId], references: [id])
 }
 
+enum USER_ROLES {
+  STANDARD
+  ADMIN
+}
+
 model User {
-  id            String    @id @default(cuid())
+  id            String       @id @default(cuid())
   name          String?
-  email         String?   @unique
-  username      String?   @unique
+  email         String?      @unique
+  username      String?      @unique
   emailVerified DateTime?
   password      String?
   image         String?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+  roles         USER_ROLES[] @default([STANDARD])
   accounts      Account[]
   sessions      Session[]
   Profile       Profile?
@@ -198,3 +204,7 @@ enum PaymentStatus {
 //   transactionId String?                                  // Optional transaction ID from payment provider
 //   createdAt   DateTime   @default(now())                 // Payment creation timestamp
 // }
+
+// -------------------------------------------------------------------------------------------
+// Admin schemas
+// -------------------------------------------------------------------------------------------
