@@ -1,0 +1,24 @@
+{
+  "name": "@repo/database",
+  "version": "1.0.0",
+  "exports": {
+    ".": "./index.ts"
+  },
+  "scripts": {
+    "db:migrate:deploy": "prisma migrate deploy",
+    "db:migrate:dev": "prisma migrate dev",
+    "db:push": "prisma db push",
+    "generate": "prisma generate",
+    "prebuild": "npm run generate",
+    "predev": "npm run generate",
+    "studio": "prisma studio"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.12.1"
+  },
+  "devDependencies": {
+    "tsx": "^4.7.1",
+    "typescript": "^5.3.3",
+    "prisma": "^5.16.2"
+  }
+}
