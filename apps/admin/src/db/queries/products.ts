@@ -2,6 +2,7 @@
 
 import { db } from "@/db";
 import { CreateProductReqObjType } from "@/types";
+import { Product } from "@prisma/client";
 
 export const createProductByProfileId = async (
   reqObj: CreateProductReqObjType,
@@ -54,6 +55,34 @@ export const fetchProductById = async (productId: string) => {
       where: {
         id: productId,
       },
+    });
+
+    if (existingProduct) {
+      response = existingProduct;
+    }
+  } catch (error) {
+    errors = error;
+  }
+
+  return { errors, response };
+};
+
+export const UpdateProductById = async ({
+  productId,
+  data,
+}: {
+  productId: string;
+  data: Partial<Product>;
+}) => {
+  let response;
+  let errors;
+
+  try {
+    const existingProduct = await db.product.update({
+      where: {
+        id: productId,
+      },
+      data,
     });
 
     if (existingProduct) {

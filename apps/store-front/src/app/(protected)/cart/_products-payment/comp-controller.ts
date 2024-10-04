@@ -86,13 +86,14 @@ const useProductsPaymentCompController = () => {
         cartItemsResult as CartItemsIncludingProductType[]
       ).map(async (cartItem) => {
         const { quantity, product } = cartItem;
-        const { price, id: productId } = product;
+        const { price, id: productId, profileId: productOwnerId } = product;
 
         return createOrderItemsByOrderId({
           orderId,
           price,
           productId,
           quantity,
+          productOwnerId,
         });
       });
 

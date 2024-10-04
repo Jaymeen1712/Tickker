@@ -35,11 +35,13 @@ export const createOrderItemsByOrderId = async ({
   price,
   productId,
   quantity,
+  productOwnerId,
 }: {
   quantity: number;
   price: number;
   productId: string;
   orderId: string;
+  productOwnerId: string;
 }) => {
   let response;
   let errors;
@@ -51,6 +53,7 @@ export const createOrderItemsByOrderId = async ({
         productId,
         quantity,
         orderId,
+        productOwnerId,
       },
     });
 
