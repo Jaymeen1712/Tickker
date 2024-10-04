@@ -40,16 +40,22 @@ model Session {
   user         User     @relation(fields: [userId], references: [id])
 }
 
+enum USER_ROLES {
+  STANDARD
+  ADMIN
+}
+
 model User {
-  id            String    @id @default(cuid())
+  id            String       @id @default(cuid())
   name          String?
-  email         String?   @unique
-  username      String?   @unique
+  email         String?      @unique
+  username      String?      @unique
   emailVerified DateTime?
   password      String?
   image         String?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+  roles         USER_ROLES[] @default([STANDARD])
   accounts      Account[]
   sessions      Session[]
   Profile       Profile?
@@ -59,15 +65,16 @@ model User {
 }
 
 model Profile {
-  id           String  @id @default(cuid())
-  userId       String  @unique
+  id           String    @id @default(cuid())
+  userId       String    @unique
   name         String?
   lowResImage  String?
   highResImage String?
-  username     String? @unique
-  email        String? @unique
+  username     String?   @unique
+  email        String?   @unique
   Cart         Cart?
   Order        Order[]
+  Product      Product[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -91,18 +98,24 @@ model VerificationRequest {
 
 model Product {
   id          String      @id @default(cuid())
+  profileId   String
   name        String
   description String?
   price       Float
   images      String[]
   category    String
   brand       String?
-  createdAt   DateTime    @default(now())
-  updatedAt   DateTime    @updatedAt
   rating      Float?
+  stock       Int
+  isVisible   Boolean    @default(true)
   reviews     Review[]
   CartItem    CartItem[]
   OrderItem   OrderItem[]
+
+  profile Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@map("products")
 }
@@ -198,3 +211,7 @@ enum PaymentStatus {
 //   transactionId String?                                  // Optional transaction ID from payment provider
 //   createdAt   DateTime   @default(now())                 // Payment creation timestamp
 // }
+
+// -------------------------------------------------------------------------------------------
+// Admin schemas
+// -------------------------------------------------------------------------------------------

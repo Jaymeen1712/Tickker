@@ -12,9 +12,12 @@ const config = {
   theme: {
     container: {
       center: true,
-      padding: "2rem",
-      screens: {
-        "2xl": "1400px",
+      padding: {
+        DEFAULT: "1rem",
+        sm: "2rem",
+        lg: "4rem",
+        xl: "5rem",
+        "2xl": "6rem",
       },
     },
     extend: {
@@ -59,7 +62,21 @@ const config = {
         "blue-lightest": "var(--blue-1)",
         "blue-dark": "var(--blue-11)",
         // gray
-        "gray-primary": "var(--gray-4)",
+        "gray-primary": "#E5E4E2",
+        // "gray-primary": "#E6E9EB",
+        "red-contrast": "#FF4D4D",
+        "orange-contrast": "#FF8C42",
+        "yellow-contrast": "#FFDD57",
+        "green-contrast": "#4CAF50",
+        "blue-contrast": "#2196F3",
+        "indigo-contrast": "#3F51B5",
+        "violet-contrast": "#9C27B0",
+        "gray-1": "#4A4A4A",
+        "gray-2": "#2E2E2E",
+        "gray-3": "#1C1C1C",
+        "brown-1": "#4B2E2E",
+        "brown-2": "#3D2B1F",
+        "brown-3": "#2C1B14",
       },
       borderRadius: {
         lg: "var(--radius)",

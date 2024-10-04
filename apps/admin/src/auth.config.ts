@@ -32,6 +32,13 @@ export default {
             // Password does not match
             return null;
           }
+
+          const { roles } = user;
+
+          if (!roles.includes("ADMIN")) {
+            // User is not admin
+            return null;
+          }
         }
 
         // Convert user ID to string if it's a number

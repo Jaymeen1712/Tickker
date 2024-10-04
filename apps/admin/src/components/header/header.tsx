@@ -14,12 +14,12 @@ const Header = () => {
   const { isUserPopoverOpen, setIsUserPopoverOpen } = useHeaderController();
 
   return (
-    <div className="left-0 right-0 z-50 border-b border-b-gray-400 transition-all duration-500">
+    <div className="left-0 right-0 z-50 border-b border-b-gray-3 transition-all duration-500">
       <div className={"container"}>
         <div className={"flex h-24 items-center justify-between"}>
-          <div className="px-12">LOGO</div>
+          <div className="pr-12">LOGO</div>
           <CustomNavigationMenu />
-          <div className="px-12">
+          <div className="pl-12">
             <Popover
               open={isUserPopoverOpen}
               onOpenChange={(open) => {
