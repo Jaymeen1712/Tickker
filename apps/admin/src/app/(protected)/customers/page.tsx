@@ -1,5 +1,11 @@
+import CustomersListingTableComp from "./_customers-listing-table";
+
 const CustomersPage = () => {
-  return <div>CustomersPage</div>;
+  return (
+    <div className="container">
+      <CustomersListingTableComp />
+    </div>
+  );
 };
 
 export default CustomersPage;
