@@ -33,17 +33,21 @@ const ProductsListingTableComp = () => {
           <TableBody>
             {productsList.map((product) => (
               <TableRow key={product.id}>
-                {columns.map(({ key, bodyClassName, bodyOnClickHandler }) => (
-                  <TableCell
-                    className={bodyClassName}
-                    {...(bodyOnClickHandler && {
-                      onClick: () => bodyOnClickHandler(product.id),
-                    })}
-                    key={key}
-                  >
-                    {String(product[key])}
-                  </TableCell>
-                ))}
+                {columns.map(
+                  ({ key, bodyClassName, bodyOnClickHandler, customBody }) => (
+                    <TableCell
+                      className={bodyClassName}
+                      {...(bodyOnClickHandler && {
+                        onClick: () => bodyOnClickHandler(product.id),
+                      })}
+                      key={key}
+                    >
+                      {customBody
+                        ? customBody(product[key], product.id)
+                        : String(product[key])}
+                    </TableCell>
+                  ),
+                )}
               </TableRow>
             ))}
           </TableBody>

@@ -108,7 +108,7 @@ const useSingleProductShowcasePageController = ({
       }
 
       const { id: profileId } = profile;
-      const { price } = product;
+      const { price, profileId: productOwnerId } = product;
       const { quantity } = productModifications;
 
       const { errors, response } = await createOrderByProfileId({
@@ -126,6 +126,7 @@ const useSingleProductShowcasePageController = ({
           price,
           productId,
           quantity,
+          productOwnerId,
         });
 
         if (errors) {

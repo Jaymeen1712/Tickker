@@ -60,7 +60,7 @@ const SignUpPage = () => {
 
   return (
     <div className="flex h-screen w-screen items-center justify-center">
-      <AuthContainer title="Sign Up">
+      <AuthContainer title="Sign Up ADMIN">
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}

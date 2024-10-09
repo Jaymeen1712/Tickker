@@ -107,7 +107,7 @@ model Product {
   brand       String?
   rating      Float?
   stock       Int
-  isVisible   Boolean    @default(true)
+  isVisible   Boolean     @default(true)
   reviews     Review[]
   CartItem    CartItem[]
   OrderItem   OrderItem[]
@@ -171,15 +171,16 @@ model Order {
 }
 
 model OrderItem {
-  id        String          @id @default(uuid())
-  productId String
-  quantity  Int
-  orderId   String
-  price     Float
-  status    OrderItemStatus @default(PENDING)
-  createdAt DateTime        @default(now())
-  order     Order           @relation(fields: [orderId], references: [id], onDelete: Cascade)
-  product   Product         @relation(fields: [productId], references: [id], onDelete: Cascade)
+  id             String          @id @default(uuid())
+  productId      String
+  productOwnerId String
+  quantity       Int
+  orderId        String
+  price          Float
+  status         OrderItemStatus @default(PENDING)
+  createdAt      DateTime        @default(now())
+  order          Order           @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product        Product         @relation(fields: [productId], references: [id], onDelete: Cascade)
 
   @@map("orderItems")
 }
