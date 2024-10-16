@@ -17,7 +17,7 @@ const SingleOrderShowcaseComp: React.FC<SingleOrderShowcaseCompProps> = ({
   const { amount, id, orderItems, paymentStatus } = order;
 
   return (
-    <div className="rounded-lg border border-gray-400 p-4">
+    <div className="border-b border-b-black px-8 py-4 transition-all last:border-none hover:bg-white">
       <div className="flex flex-col">
         <CustomLabelValuePair label="OrderId" value={id} />
         <CustomLabelValuePair label="SubTotal" value={amount} />

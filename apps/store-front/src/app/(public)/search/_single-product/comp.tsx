@@ -16,7 +16,7 @@ const SingleProductShowcaseComp: React.FC<SingleProductShowcaseCompProps> = ({
     <Link href={`/products/${id}`}>
       <div className="relative col-span-1 h-[140px] w-full rounded-md">
         <Image
-          src="/wallhaven-m95x7k.jpg"
+          src={images?.[0]}
           alt="logo-maker"
           fill
           objectFit="cover"

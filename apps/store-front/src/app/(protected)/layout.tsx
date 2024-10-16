@@ -2,7 +2,7 @@
 import { Header } from "@/components";
 import { useProfile } from "@/hooks";
 
-export default function AuthenticationLayout({
+export default function ProtectedLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -10,7 +10,7 @@ export default function AuthenticationLayout({
   useProfile();
 
   return (
-    <div>
+    <div className="flex min-h-screen flex-col bg-gray-primary">
       <Header />
       {children}
     </div>

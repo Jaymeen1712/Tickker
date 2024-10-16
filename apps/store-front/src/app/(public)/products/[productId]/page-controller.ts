@@ -22,10 +22,19 @@ interface SingleProductShowcasePageControllerProps {
   productId: string;
 }
 
+interface CustomImageType {
+  image: string;
+  id: string;
+}
+
+interface UpdatedProductImage extends Omit<Product, "images"> {
+  images: CustomImageType[];
+}
+
 const useSingleProductShowcasePageController = ({
   productId,
 }: SingleProductShowcasePageControllerProps) => {
-  const [product, setProduct] = useState<Product>();
+  const [product, setProduct] = useState<UpdatedProductImage>();
   const [isGetProductLoading, setIsGetProductLoading] = useState(true);
   const [productModifications, setProductModifications] = useState<{
     quantity: number;
@@ -37,6 +46,10 @@ const useSingleProductShowcasePageController = ({
   const [handleNextClick, setHandleNextClick] = useState<() => void>(() => {});
   const [isPrevDisable, setIsPrevDisable] = useState(false);
   const [isNextDisable, setIsNextDisable] = useState(false);
+  const [heroImage, setHeroImage] = useState<CustomImageType>({
+    image: "",
+    id: Math.random().toString(36),
+  });
 
   const { profile } = useAppStore();
 
@@ -48,7 +61,15 @@ const useSingleProductShowcasePageController = ({
       const { errors, response } = await fetchSingleProductById(productId);
       const result = handleAPIResponse(errors, response);
       if (result) {
-        setProduct(result);
+        const { images } = result;
+        const updatedImages = images.map((image: string) => ({
+          id: Math.random().toString(36),
+          image,
+        }));
+        setProduct({
+          ...result,
+          images: updatedImages,
+        });
       }
     } finally {
       setIsGetProductLoading(false);
@@ -140,6 +161,16 @@ const useSingleProductShowcasePageController = ({
     }
   };
 
+  const handleProductImageClick = (image: CustomImageType) => {
+    setHeroImage(image);
+  };
+
+  useEffect(() => {
+    if (product) {
+      setHeroImage(product.images?.[0]);
+    }
+  }, [product]);
+
   useEffect(() => {
     handleGetProduct();
   }, [handleGetProduct]);
@@ -160,6 +191,8 @@ const useSingleProductShowcasePageController = ({
     setIsPrevDisable,
     isNextDisable,
     setIsNextDisable,
+    handleProductImageClick,
+    heroImage,
   };
 };
 

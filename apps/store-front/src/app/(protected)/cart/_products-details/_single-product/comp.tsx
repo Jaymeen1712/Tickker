@@ -22,6 +22,7 @@ const CartShowcaseSingleProductComp: React.FC<
     handleRedirectToIndividualProductPage,
     isRemoveCartItemLoading,
     handleRemoveCartItem,
+    handleRedirectToProductPage,
   } = useCartShowcaseProductCompController({
     cartItem,
     handleGetCartItems,
@@ -31,14 +32,15 @@ const CartShowcaseSingleProductComp: React.FC<
   const { brand, category, description, images, name, price } = product;
 
   return (
-    <div className="grid grid-cols-4 items-center gap-x-6 py-2">
+    <div className="grid grid-cols-4 items-center gap-x-6 border-b border-b-black px-8 py-4 transition-all last:border-none hover:bg-white">
       <div className="relative col-span-1 h-[120px] w-full rounded-md">
         <Image
-          src="/wallhaven-m95x7k.jpg"
+          src={images?.[0]}
           alt="logo-maker"
           fill
           objectFit="cover"
-          className="rounded-md"
+          className="cursor-pointer rounded-md"
+          onClick={handleRedirectToProductPage}
         />
       </div>
       <div className="col-span-3 grid grid-cols-4 gap-x-2">

@@ -23,7 +23,6 @@ export const fetchCustomersByProfileId = async (profileId: string) => {
     const orderIDs = Array.from(
       new Set(orderItems.map((orderItem) => orderItem.orderId)),
     );
-    console.log("🚀 ~ fetchCustomersByProfileId ~ orderIDs:", orderIDs);
 
     const orders = await db.order.findMany({
       where: {
@@ -43,7 +42,6 @@ export const fetchCustomersByProfileId = async (profileId: string) => {
     const customerIDs = Array.from(
       new Set(orders.map((order) => order.profileId)),
     );
-    console.log("🚀 ~ fetchCustomersByProfileId ~ customerIDs:", customerIDs);
 
     const customers = await db.profile.findMany({
       where: {

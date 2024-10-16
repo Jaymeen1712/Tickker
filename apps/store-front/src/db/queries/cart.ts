@@ -29,6 +29,11 @@ export const createCartByProfileId = async ({
   return { errors, response };
 };
 
+/*
+  1. Check if product already exist in cart by productId
+  2. If exist than change quantity
+  3 .If not than create cartItem
+*/
 export const createProductInCart = async ({
   cartId,
   productId,
@@ -38,16 +43,45 @@ export const createProductInCart = async ({
   let errors;
 
   try {
-    const existingProducts = await db.cartItem.create({
-      data: {
-        cartId,
+    // Check if product already exist in cart
+    const existingCartItem = await db.cartItem.findFirst({
+      where: {
         productId,
-        quantity,
+      },
+      select: {
+        id: true,
+        quantity: true,
       },
     });
 
-    if (existingProducts) {
-      response = existingProducts;
+    if (existingCartItem) {
+      const { id, quantity: existingProductQuantity } = existingCartItem;
+      // Change in quantity
+      const updatedCartItem = await db.cartItem.update({
+        where: {
+          id,
+        },
+        data: {
+          quantity: existingProductQuantity + quantity,
+        },
+      });
+
+      if (updatedCartItem) {
+        response = updatedCartItem;
+      }
+    } else {
+      // create cartItem
+      const createdCartItems = await db.cartItem.create({
+        data: {
+          cartId,
+          productId,
+          quantity,
+        },
+      });
+
+      if (createdCartItems) {
+        response = createdCartItems;
+      }
     }
   } catch (error) {
     errors = error;
@@ -173,8 +207,8 @@ export const removeCartItemById = async (cartItemId: string) => {
   try {
     const deletedCartItem = await db.cartItem.delete({
       where: {
-        id: cartItemId
-      }
+        id: cartItemId,
+      },
     });
 
     if (deletedCartItem) {
