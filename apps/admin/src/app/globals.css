@@ -104,3 +104,42 @@ body {
 .hide-input-number-arrows {
   -moz-appearance: textfield; /* For Firefox */
 }
+
+/* Custom styles for Recharts graphs */
+.recharts-responsive-container {
+  background-color: #f9f9f9; /* Light background */
+  border-radius: 8px; /* Rounded corners */
+}
+
+.recharts-wrapper {
+  padding: 25px 0px;
+}
+
+.recharts-surface {
+  fill: #fff; /* Set a white background for the graph surface */
+}
+
+.recharts-cartesian-grid line {
+  stroke: #e0e0e0; /* Light gray grid lines */
+}
+
+.recharts-x-axis .recharts-cartesian-axis-tick-value,
+.recharts-y-axis .recharts-cartesian-axis-tick-value {
+  font-size: 12px;
+  fill: #666; /* Darker tick text */
+}
+
+.recharts-line {
+  stroke-width: 2px; /* Thicker line */
+  stroke: #8884d8; /* Custom line color (green in this case) */
+}
+
+.recharts-tooltip-label {
+  font-weight: 500;
+  border-radius: 8px; /* Rounded corners for the tooltip */
+}
+
+.recharts-legend-item text {
+  font-size: 14px; /* Custom font size for legend text */
+  fill: #555; /* Darker text color for legend */
+}

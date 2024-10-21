@@ -33,6 +33,7 @@ interface SpinnerContentProps
     VariantProps<typeof loaderVariants> {
   className?: string;
   children?: React.ReactNode;
+  containerClassName?: string;
 }
 
 export default function Spinner({
@@ -40,11 +41,12 @@ export default function Spinner({
   show,
   children,
   className,
+  containerClassName,
 }: SpinnerContentProps) {
   return (
-    <span className={spinnerVariants({ show })}>
+    <div className={cn(spinnerVariants({ show }), containerClassName)}>
       <LuLoader2 className={cn(loaderVariants({ size }), className)} />
       {children}
-    </span>
+    </div>
   );
 }
