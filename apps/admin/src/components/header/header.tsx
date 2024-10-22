@@ -6,59 +6,67 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { capitalizeWords } from "@/utils";
 import { signOut } from "next-auth/react";
+import Link from "next/link";
 import CustomNavigationMenu from "../header-navigation-menu/comp";
 import useHeaderController from "./header-controller";
-import Link from "next/link";
 
 const Header = () => {
-  const { isUserPopoverOpen, setIsUserPopoverOpen } = useHeaderController();
+  const { isUserPopoverOpen, setIsUserPopoverOpen, profile } =
+    useHeaderController();
+
+  const splitName = profile?.name?.split(" ");
 
   return (
-    <div className="left-0 right-0 z-50 border-b border-b-gray-3 transition-all duration-500">
-      <div className={"container"}>
-        <div className={"flex h-24 items-center justify-between"}>
-          <div className="pr-12">LOGO</div>
+    <div className="left-0 right-0 z-50 h-full min-w-[250px] transition-all duration-500">
+      <div className={"flex h-full flex-col"}>
+        <div className="my-12 pl-8 font-semibold">LOGO</div>
+        <div className="flex-1 overflow-auto">
           <CustomNavigationMenu />
-          <div className="pl-12">
-            <Popover
-              open={isUserPopoverOpen}
-              onOpenChange={(open) => {
-                setIsUserPopoverOpen(open);
-              }}
+        </div>
+        <div className="my-4 pl-4">
+          <Popover
+            open={isUserPopoverOpen}
+            onOpenChange={(open) => {
+              setIsUserPopoverOpen(open);
+            }}
+          >
+            <PopoverTrigger className="flex w-full items-center gap-x-4 rounded-full px-4 py-2 transition-all hover:bg-white">
+              <Avatar>
+                <AvatarImage
+                  src="https://github.com/shadcn.png"
+                  alt="@shadcn"
+                />
+              </Avatar>
+              <div className="flex whitespace-nowrap text-base font-semibold">
+                {capitalizeWords(splitName?.[0])}{" "}
+                {capitalizeWords(splitName?.[1].split("")[0])}
+              </div>
+            </PopoverTrigger>
+            <PopoverContent
+              className={"mt-2 flex w-full flex-col space-y-2 px-0 py-1"}
+              align="end"
             >
-              <PopoverTrigger>
-                <Avatar>
-                  <AvatarImage
-                    src="https://github.com/shadcn.png"
-                    alt="@shadcn"
-                  />
-                </Avatar>
-              </PopoverTrigger>
-              <PopoverContent
-                className={"mt-2 flex w-full flex-col space-y-2 px-0 py-1"}
-                align="end"
+              <Link
+                href={`/profile`}
+                className="cursor-pointer px-4 py-1 leading-relaxed hover:bg-gray-100"
+                onClick={() => {
+                  setIsUserPopoverOpen(false);
+                }}
               >
-                <Link
-                  href={`/profile`}
-                  className="cursor-pointer px-4 py-1 leading-relaxed hover:bg-gray-100"
-                  onClick={() => {
-                    setIsUserPopoverOpen(false);
-                  }}
-                >
-                  Profile
-                </Link>
-                <div
-                  className="cursor-pointer px-4 py-1 leading-relaxed hover:bg-gray-100"
-                  onClick={() => {
-                    signOut({ callbackUrl: "/login" });
-                  }}
-                >
-                  Logout
-                </div>
-              </PopoverContent>
-            </Popover>
-          </div>
+                Profile
+              </Link>
+              <div
+                className="cursor-pointer px-4 py-1 leading-relaxed hover:bg-gray-100"
+                onClick={() => {
+                  signOut({ callbackUrl: "/login" });
+                }}
+              >
+                Logout
+              </div>
+            </PopoverContent>
+          </Popover>
         </div>
       </div>
     </div>

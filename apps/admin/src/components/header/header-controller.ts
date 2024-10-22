@@ -1,9 +1,12 @@
+import { useAppStore } from "@/store";
 import { useState } from "react";
 
 const useHeaderController = () => {
   const [isUserPopoverOpen, setIsUserPopoverOpen] = useState(false);
 
-  return { isUserPopoverOpen, setIsUserPopoverOpen };
+  const { profile } = useAppStore();
+
+  return { isUserPopoverOpen, setIsUserPopoverOpen, profile };
 };
 
 export default useHeaderController;

@@ -45,3 +45,24 @@ export const capitalizeFirstLetter = (
   if (!str) return "";
   return str.charAt(0).toUpperCase() + str.slice(1);
 };
+
+export const convertFileToBase64 = (file: File): Promise<string> => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      // Check if the result is a string (Base64)
+      if (typeof reader.result === "string") {
+        resolve(reader.result); // Only resolve if it's a string
+      } else {
+        reject(new Error("File could not be converted to a Base64 string"));
+      }
+    };
+
+    reader.onerror = (error) => {
+      reject(error);
+    };
+
+    reader.readAsDataURL(file); // Convert file to base64 string
+  });
+};

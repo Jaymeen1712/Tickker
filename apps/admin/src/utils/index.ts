@@ -32,7 +32,7 @@ export const handleShowWarning = (warningMessage: string) => {
 };
 
 export function capitalizeWords(input: string | undefined) {
-  if (!input) return "-";
+  if (!input) return "";
 
   const words = input.replace(/_/g, " ").split(" ");
 

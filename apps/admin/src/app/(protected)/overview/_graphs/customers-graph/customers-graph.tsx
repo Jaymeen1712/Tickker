@@ -40,8 +40,8 @@ const CustomersGraph = () => {
             <Area
               type="monotone"
               dataKey="customers"
-              stroke="#8884d8"
-              fill="#8884d8"
+              stroke="#1d4ed8"
+              fill="#1d4ed8"
             />
           </AreaChart>
         )}
