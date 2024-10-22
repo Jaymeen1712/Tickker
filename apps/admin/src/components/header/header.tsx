@@ -9,6 +9,7 @@ import {
 import { signOut } from "next-auth/react";
 import CustomNavigationMenu from "../header-navigation-menu/comp";
 import useHeaderController from "./header-controller";
+import Link from "next/link";
 
 const Header = () => {
   const { isUserPopoverOpen, setIsUserPopoverOpen } = useHeaderController();
@@ -38,6 +39,15 @@ const Header = () => {
                 className={"mt-2 flex w-full flex-col space-y-2 px-0 py-1"}
                 align="end"
               >
+                <Link
+                  href={`/profile`}
+                  className="cursor-pointer px-4 py-1 leading-relaxed hover:bg-gray-100"
+                  onClick={() => {
+                    setIsUserPopoverOpen(false);
+                  }}
+                >
+                  Profile
+                </Link>
                 <div
                   className="cursor-pointer px-4 py-1 leading-relaxed hover:bg-gray-100"
                   onClick={() => {
