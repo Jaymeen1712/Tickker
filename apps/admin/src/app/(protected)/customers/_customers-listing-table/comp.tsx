@@ -1,5 +1,5 @@
 "use client";
-import { Spinner } from "@/components";
+import { CustomHeaderWithTooltip, Spinner } from "@/components";
 import {
   Table,
   TableBody,
@@ -16,11 +16,12 @@ const CustomersListingTableComp = () => {
     useCustomersListingTableCompController();
 
   return (
-    <>
+    <div className="box-shadow-container my-4 flex flex-1 flex-col">
+      <CustomHeaderWithTooltip content="List of customers" header="Customers" />
       {isFetchCustomersLoading ? (
-        <Spinner />
+        <Spinner containerClassName="flex-1" />
       ) : (
-        <Table className="my-8 bg-white">
+        <Table className="mt-2">
           {/* <TableCaption>A list of your recent invoices.</TableCaption> */}
           <TableHeader>
             <TableRow>
@@ -54,7 +55,7 @@ const CustomersListingTableComp = () => {
           </TableBody>
         </Table>
       )}
-    </>
+    </div>
   );
 };
 

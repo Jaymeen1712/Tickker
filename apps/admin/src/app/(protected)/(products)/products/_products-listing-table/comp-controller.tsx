@@ -120,7 +120,7 @@ const useProductsListingTableCompController = () => {
     handleGetProducts();
   }, [handleGetProducts]);
 
-  return { isFetchAllProductsLoading, productsList, columns };
+  return { isFetchAllProductsLoading, productsList, columns, router };
 };
 
 export default useProductsListingTableCompController;

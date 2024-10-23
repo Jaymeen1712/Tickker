@@ -20,7 +20,7 @@ const CustomTooltip: React.FC<CustomTooltipProps> = ({
     <TooltipProvider>
       <Tooltip>
         <TooltipTrigger asChild className="ml-2">
-          <div className="flex h-6 w-6 items-center justify-center rounded-full bg-gray-200">
+          <div className="flex h-6 w-6 items-center justify-center rounded-full">
             {customIcon ? (
               <>{customIcon}</>
             ) : (

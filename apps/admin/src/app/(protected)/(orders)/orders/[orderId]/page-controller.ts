@@ -2,6 +2,7 @@
 import { fetchOrderItemById, UpdateOrderItemById } from "@/db/queries";
 import { handleAPIResponse } from "@/utils";
 import { OrderItem, OrderItemStatus } from "@prisma/client";
+import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 
 interface SingleOrderPageControllerProps {
@@ -14,6 +15,8 @@ const useSingleOrderPageController = ({
   const [order, setOrder] = useState<Partial<OrderItem>>();
   const [isFetchOrderLoading, setIsFetchOrderLoading] = useState(true);
   const [isSaveButtonLoading, setIsSaveButtonLoading] = useState(false);
+
+  const router = useRouter();
 
   const handleGetSingleOrder = useCallback(async () => {
     try {
@@ -53,7 +56,7 @@ const useSingleOrderPageController = ({
       const result = handleAPIResponse(errors, response);
 
       if (result) {
-        handleGetSingleOrder();
+        router.push("/orders");
       }
     } finally {
       setIsSaveButtonLoading(false);

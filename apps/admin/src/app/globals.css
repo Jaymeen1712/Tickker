@@ -155,3 +155,46 @@ body {
     width: 100%;
   }
 }
+
+/* General table styles */
+table {
+  background-color: white; /* Gray background */
+  border-radius: 16px;
+}
+
+/* Table header styles */
+table th {
+  color: #e5e4e2; /* White text color for headers */
+  padding: 12px 20px !important; /* Padding for table headers */
+  text-align: left; /* Align text to the left */
+}
+
+/* Table body styles */
+table td {
+  padding: 12px 20px !important; /* Padding for table cells */
+}
+
+/* Table row hover effect */
+table tr:hover {
+  background-color: rgba(29, 78, 216, 0.1); /* Light blue background on hover */
+}
+
+/* Table footer styles */
+table tfoot {
+  background-color: #1d4ed8; /* Blue footer background */
+  color: #ffffff; /* White text color for footer */
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+  table {
+    font-size: 14px; /* Smaller font size on mobile */
+  }
+}
+
+.box-shadow-container {
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+  padding: 24px 18px;
+  border: transparent;
+  border-radius: 16px;
+}
