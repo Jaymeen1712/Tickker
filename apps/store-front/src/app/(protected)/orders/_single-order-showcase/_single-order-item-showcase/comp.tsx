@@ -22,7 +22,7 @@ const SingleOrderItemShowcaseComp: React.FC<
     <div className="grid grid-cols-4 items-center gap-x-6 px-8 py-2">
       <div className="relative col-span-1 h-[120px] w-full rounded-md">
         <Image
-          src="/wallhaven-m95x7k.jpg"
+          src={images?.[0]}
           alt="logo-maker"
           fill
           objectFit="cover"

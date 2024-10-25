@@ -1,7 +1,6 @@
 "use client";
 import { Header } from "@/components";
 import { useProfile } from "@/hooks";
-import { useSession } from "next-auth/react";
 
 export default function AuthenticationLayout({
   children,
@@ -9,16 +8,14 @@ export default function AuthenticationLayout({
   children: React.ReactNode;
 }>) {
   useProfile();
-  const session = useSession();
 
   return (
-    <div>
+    <div className="flex h-screen">
       <Header />
-      <div className="my-4 flex w-full justify-center space-x-4">
-        <span>{session.data?.user?.name}</span>
-        <span>{session.data?.user?.email}</span>
+      {/* Add gradient below bg-gradient-to-b from-transparent from-90% to-gray-400/50  */}
+      <div className="hide-scrollbar shadow-l m-4 flex w-full flex-col overflow-auto rounded-3xl border-transparent bg-[#F7F7F7] p-4">
+        {children}
       </div>
-      {children}
     </div>
   );
 }

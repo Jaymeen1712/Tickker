@@ -14,7 +14,7 @@
   cursor: pointer;
 }
 
-.slick-track > .slick-active + * {
+.slick-track > .slick-active {
   padding-left: 16px;
 }
 
@@ -38,4 +38,16 @@
   .carousel-btn {
     padding: 6px 10px;
   }
+}
+
+/* Single product images carousel */
+.single-product-carousel,
+.slick-list {
+  margin-right: 50px;
+  margin-left: 50px;
+}
+
+.single-product-carousel,
+.slick-track > .slick-active {
+  padding-left: 22px;
 }

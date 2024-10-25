@@ -10,9 +10,9 @@ export default function AuthenticationLayout({
   useProfile();
 
   return (
-    <div>
+    <>
       <Header />
       {children}
-    </div>
+    </>
   );
 }

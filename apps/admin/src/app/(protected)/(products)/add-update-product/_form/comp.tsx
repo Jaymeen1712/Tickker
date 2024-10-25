@@ -44,217 +44,216 @@ const AddUpdateProductFormComp: React.FC<AddUpdateProductFormCompProps> = ({
   } = useAddUpdateProductFormCompController({ productId });
 
   return (
-    <div className="flex items-center justify-center py-8">
-      <div className="w-fit rounded-md bg-white p-12 shadow-md">
-        <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(onSubmit)}
-            className="w-[650px] space-y-8"
-          >
+    <div className="flex flex-1 items-center justify-center">
+      <Form {...form}>
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="box-shadow-container w-[650px] space-y-8 !p-8"
+        >
+          <div className="flex w-full justify-center text-xl font-semibold">
+            Add product
+          </div>
+          <FormField
+            control={form.control}
+            name="name"
+            render={({ field }) => (
+              <FormItem className="flex items-center space-x-4 space-y-0">
+                <FormLabel>Name:</FormLabel>
+                <FormControl>
+                  <Input placeholder="Enter name" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <div>
             <FormField
               control={form.control}
-              name="name"
+              name="description"
               render={({ field }) => (
-                <FormItem className="flex items-center space-x-4 space-y-0">
-                  <FormLabel>Name:</FormLabel>
+                <FormItem>
+                  <FormLabel>Description: </FormLabel>
                   <FormControl>
-                    <Input placeholder="Enter name" {...field} />
+                    <Textarea
+                      {...field}
+                      placeholder="Enter description"
+                      maxLength={1200}
+                      className="resize-none bg-white"
+                      onChange={(e) => {
+                        field.onChange(e);
+                        handleDescriptionOnChange(e);
+                      }}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <div className="mt-2 text-end text-xs text-zinc-500">
+              <span>{descriptionLength}</span>
+              <span>/ 1200 Characters</span>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-x-4">
+            <FormField
+              control={form.control}
+              name="brand"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Brand:</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Enter brand" type="string" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
 
-            <div>
-              <FormField
-                control={form.control}
-                name="description"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Description: </FormLabel>
+            <FormField
+              control={form.control}
+              name="category"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Category:</FormLabel>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
                     <FormControl>
-                      <Textarea
-                        {...field}
-                        placeholder="Enter description"
-                        maxLength={1200}
-                        className="resize-none"
-                        onChange={(e) => {
-                          field.onChange(e);
-                          handleDescriptionOnChange(e);
-                        }}
-                      />
+                      <SelectTrigger className="bg-white">
+                        <SelectValue placeholder="Select category" />
+                      </SelectTrigger>
                     </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <div className="mt-2 text-end text-xs text-zinc-500">
-                <span>{descriptionLength}</span>
-                <span>/ 1200 Characters</span>
-              </div>
-            </div>
+                    <SelectContent>
+                      {PRODUCT_CATEGORIES.map((category) => (
+                        <SelectItem value={category} key={category}>
+                          {capitalizeWords(category)}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
 
-            <div className="grid grid-cols-2 gap-x-4">
-              <FormField
-                control={form.control}
-                name="brand"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Brand:</FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder="Enter brand"
-                        type="string"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+          <div className="grid grid-cols-2 gap-x-4">
+            <FormField
+              control={form.control}
+              name="price"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Price:</FormLabel>
+                  <FormControl>
+                    <Input
+                      {...field}
+                      placeholder="Enter price"
+                      type="number"
+                      className="hide-input-number-arrows"
+                      value={field.value ?? undefined}
+                      onChange={(e) =>
+                        field.onChange(parseFloat(e.target.value))
+                      }
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
-              <FormField
-                control={form.control}
-                name="category"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Category:</FormLabel>
-                    <Select
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}
-                    >
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select category" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        {PRODUCT_CATEGORIES.map((category) => (
-                          <SelectItem value={category} key={category}>
-                            {capitalizeWords(category)}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
+            <FormField
+              control={form.control}
+              name="stock"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Stock:</FormLabel>
+                  <FormControl>
+                    <Input
+                      {...field}
+                      placeholder="Enter stock"
+                      type="number"
+                      className="hide-input-number-arrows"
+                      value={field.value ?? undefined}
+                      onChange={(e) =>
+                        field.onChange(parseFloat(e.target.value))
+                      }
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
 
-            <div className="grid grid-cols-2 gap-x-4">
-              <FormField
-                control={form.control}
-                name="price"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Price:</FormLabel>
-                    <FormControl>
-                      <Input
-                        {...field}
-                        placeholder="Enter price"
-                        type="number"
-                        className="hide-input-number-arrows"
-                        value={field.value ?? undefined}
-                        onChange={(e) =>
-                          field.onChange(parseFloat(e.target.value))
-                        }
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="stock"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Stock:</FormLabel>
-                    <FormControl>
-                      <Input
-                        {...field}
-                        placeholder="Enter stock"
-                        type="number"
-                        className="hide-input-number-arrows"
-                        value={field.value ?? undefined}
-                        onChange={(e) =>
-                          field.onChange(parseFloat(e.target.value))
-                        }
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-
-            <div className="flex space-x-8">
-              <FormField
-                control={form.control}
-                name="images"
-                render={({ field }) => (
-                  <FormItem className="flex-1">
-                    <FormLabel>Images:</FormLabel>
-                    <FormControl>
-                      <div className="flex w-full items-center justify-center">
-                        <label
-                          htmlFor="dropzone-file"
-                          className="h-62 flex w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:border-gray-500 dark:hover:bg-gray-800"
-                        >
-                          <div className="flex flex-col items-center justify-center pb-6 pt-5">
-                            <UploadIcon />
-                            <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                              <span className="font-semibold">
-                                Click to upload
-                              </span>{" "}
-                              or drag and drop
-                            </p>
-                          </div>
-                          <Input
-                            {...field}
-                            type="file"
-                            accept="image/*"
-                            multiple
-                            onChange={(e) => {
-                              handleImageOnChange(e);
-                              field.onChange(e);
-                            }}
-                            disabled={images.size >= 3}
-                            id="dropzone-file"
-                            className="hidden"
-                          />
-                        </label>
-                      </div>
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="isVisible"
-                render={({ field }) => (
-                  <FormItem className="flex flex-col">
-                    <FormLabel>isVisible:</FormLabel>
-                    <FormControl>
-                      <div>
-                        <Switch
-                          className="mt-4"
-                          checked={field.value}
-                          onCheckedChange={field.onChange}
+          <div className="flex space-x-8">
+            <FormField
+              control={form.control}
+              name="images"
+              render={({ field }) => (
+                <FormItem className="flex-1">
+                  <FormLabel>Images:</FormLabel>
+                  <FormControl>
+                    <div className="flex w-full items-center justify-center">
+                      <label
+                        htmlFor="dropzone-file"
+                        className="h-62 flex w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:border-gray-500 dark:hover:bg-gray-800"
+                      >
+                        <div className="flex flex-col items-center justify-center pb-6 pt-5">
+                          <UploadIcon />
+                          <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                            <span className="font-semibold">
+                              Click to upload
+                            </span>{" "}
+                            or drag and drop
+                          </p>
+                        </div>
+                        <Input
+                          {...field}
+                          type="file"
+                          accept="image/*"
+                          multiple
+                          onChange={(e) => {
+                            handleImageOnChange(e);
+                            field.onChange(e);
+                          }}
+                          disabled={images.size >= 3}
+                          id="dropzone-file"
+                          className="hidden"
                         />
-                      </div>
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
+                      </label>
+                    </div>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
-            {/* Images container */}
+            <FormField
+              control={form.control}
+              name="isVisible"
+              render={({ field }) => (
+                <FormItem className="flex flex-col">
+                  <FormLabel>isVisible:</FormLabel>
+                  <FormControl>
+                    <div>
+                      <Switch
+                        className="mt-4 data-[state=checked]:bg-blue-primary"
+                        checked={field.value}
+                        onCheckedChange={field.onChange}
+                      />
+                    </div>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+
+          {/* Images container */}
+          {images.size ? (
             <div className="grid grid-cols-3 gap-x-4">
               {Array.from(images.entries()).map(([id, base64Image]) => (
                 <div className="group relative col-span-1 h-[120px]" key={id}>
@@ -275,19 +274,21 @@ const AddUpdateProductFormComp: React.FC<AddUpdateProductFormCompProps> = ({
                 </div>
               ))}
             </div>
+          ) : (
+            ""
+          )}
 
-            {error && <CustomErrorAlert desc={error} />}
+          {error && <CustomErrorAlert desc={error} />}
 
-            <CustomButton
-              type="submit"
-              className="w-full bg-blue-contrast hover:bg-blue-contrast/90"
-              loading={isAddProductLoading}
-            >
-              {productId ? "Update" : "Add"}
-            </CustomButton>
-          </form>
-        </Form>
-      </div>
+          <CustomButton
+            type="submit"
+            className="w-full bg-blue-primary hover:bg-blue-700/90"
+            loading={isAddProductLoading}
+          >
+            {productId ? "Update" : "Add"}
+          </CustomButton>
+        </form>
+      </Form>
     </div>
   );
 };

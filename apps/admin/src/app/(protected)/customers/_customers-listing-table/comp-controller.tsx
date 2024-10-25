@@ -2,9 +2,9 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { fetchCustomersByProfileId } from "@/db/queries";
 import { useAppStore } from "@/store";
-import { handleAPIResponse } from "@/utils";
+import { handleAPIResponse, handleGetInitials } from "@/utils";
 import { Profile } from "@prisma/client";
-import router from "next/router";
+import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 
 const useCustomersListingTableCompController = () => {
@@ -12,6 +12,8 @@ const useCustomersListingTableCompController = () => {
   const [isFetchCustomersLoading, setIsFetchCustomersLoading] = useState(true);
 
   const { profile } = useAppStore();
+
+  const router = useRouter();
 
   const handleGetAllCustomers = useCallback(async () => {
     if (!profile) {
@@ -55,17 +57,23 @@ const useCustomersListingTableCompController = () => {
       key: "name",
     },
     {
-      key: "highResImage",
-      label: "",
-      customBody: () => (
-        <Avatar>
-          <AvatarImage src="https://github.com/shadcn.png" />
-          <AvatarFallback>CN</AvatarFallback>
-        </Avatar>
-      ),
+      key: "email",
     },
     {
-      key: "email",
+      key: "highResImage",
+      label: "",
+      customBody: (value, id) => {
+        const initials = handleGetInitials(
+          customers.find((customer) => customer.id === id)?.name,
+        );
+
+        return (
+          <Avatar className="h-8 w-8">
+            <AvatarImage src={value as string} />
+            <AvatarFallback>{initials}</AvatarFallback>
+          </Avatar>
+        );
+      },
     },
   ];
 

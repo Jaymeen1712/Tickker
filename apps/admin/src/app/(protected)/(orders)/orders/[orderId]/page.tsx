@@ -32,12 +32,12 @@ const SingleOrderPage: React.FC<SingleOrderPageProps> = ({ params }) => {
   });
 
   return (
-    <div className="container">
+    <div className="container flex flex-1 flex-col">
       {isFetchOrderLoading ? (
-        <Spinner />
+        <Spinner containerClassName="flex-1" />
       ) : (
         <div className="flex justify-center">
-          <div className="flex flex-col gap-4 rounded-md bg-gray-100 p-4">
+          <div className="box-shadow-container flex flex-col gap-4 p-4">
             <CustomLabelValuePair label="ID" value={order?.id} />
             <CustomLabelValuePair label="Product ID" value={order?.productId} />
             <CustomLabelValuePair label="Quantity" value={order?.quantity} />
@@ -70,7 +70,11 @@ const SingleOrderPage: React.FC<SingleOrderPageProps> = ({ params }) => {
               </Select>
             </div>
 
-            <CustomButton loading={isSaveButtonLoading} onClick={handleSubmit}>
+            <CustomButton
+              loading={isSaveButtonLoading}
+              onClick={handleSubmit}
+              className="bg-blue-primary hover:bg-blue-700/90"
+            >
               Save
             </CustomButton>
           </div>

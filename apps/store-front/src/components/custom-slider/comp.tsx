@@ -16,6 +16,7 @@ interface CustomSliderProps extends Settings {
     1024: number;
     any: number;
   };
+  customClassName?: string;
 }
 
 const CustomSlider: React.FC<CustomSliderProps> = ({
@@ -26,6 +27,7 @@ const CustomSlider: React.FC<CustomSliderProps> = ({
   setIsNextDisable,
   setIsPrevDisable,
   responsiveConfig,
+  customClassName,
   ...rest
 }) => {
   const { settings, sliderRef } = useCustomSliderController({
@@ -38,7 +40,7 @@ const CustomSlider: React.FC<CustomSliderProps> = ({
   });
 
   return (
-    <div className="slider-container">
+    <div className={`slider-container ${customClassName}`}>
       <Slider {...settings} ref={sliderRef} {...rest}>
         {children}
       </Slider>

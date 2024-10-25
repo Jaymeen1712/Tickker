@@ -15,7 +15,7 @@ const useCartShowcaseProductCompController = ({
   cartItem,
   handleGetCartItems,
 }: CartShowcaseSingleProductCompControllerProps) => {
-  const { id } = useMemo(() => cartItem, [cartItem]);
+  const { id, productId } = useMemo(() => cartItem, [cartItem]);
   const [isProdQuantityLoading, setIsProdQuantityLoading] = useState(false);
   const [isRemoveCartItemLoading, setIsRemoveCartItemLoading] = useState(false);
 
@@ -52,12 +52,16 @@ const useCartShowcaseProductCompController = ({
     router.push(`/products/${id}`);
   };
 
+  const handleRedirectToProductPage = () => {
+    router.push(`/products/${productId}`);
+  };
   return {
     handleProductQuantityChange,
     isProdQuantityLoading,
     handleRedirectToIndividualProductPage,
     isRemoveCartItemLoading,
     handleRemoveCartItem,
+    handleRedirectToProductPage,
   };
 };
 

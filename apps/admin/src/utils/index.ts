@@ -32,7 +32,7 @@ export const handleShowWarning = (warningMessage: string) => {
 };
 
 export function capitalizeWords(input: string | undefined) {
-  if (!input) return "-";
+  if (!input) return "";
 
   const words = input.replace(/_/g, " ").split(" ");
 
@@ -83,3 +83,13 @@ export function convertBase64ToFile(base64: string, filename: string) {
 
   return new File([u8arr], filename, { type: mime });
 }
+
+export const handleGetInitials = (name: string | null | undefined) => {
+  if (!name) return "";
+
+  const splitName = name.split(" ");
+  const firstName = splitName[0].split("")[0].toUpperCase();
+  const lastName = splitName[1].split("")[0].toUpperCase();
+
+  return firstName + lastName;
+};

@@ -19,7 +19,7 @@ const SingleProductComp: React.FC<SingleProductCompProps> = ({ product }) => {
     >
       <div className="relative col-span-1 h-[80px] w-full rounded-md">
         <Image
-          src="/wallhaven-m95x7k.jpg"
+          src={images?.[0]}
           alt="logo-maker"
           fill
           objectFit="cover"

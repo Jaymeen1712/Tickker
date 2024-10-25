@@ -7,6 +7,7 @@ import {
   Rating,
   Spinner,
 } from "@/components";
+import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import useSingleProductShowcasePageController from "./page-controller";
@@ -38,6 +39,8 @@ const SingleProductShowcasePage: React.FC<SingleProductShowcasePageProps> = ({
     setIsPrevDisable,
     isNextDisable,
     setIsNextDisable,
+    handleProductImageClick,
+    heroImage,
   } = useSingleProductShowcasePageController({
     productId,
   });
@@ -54,7 +57,7 @@ const SingleProductShowcasePage: React.FC<SingleProductShowcasePageProps> = ({
               {/* Main Product Image */}
               <div className="relative h-[440px] w-full rounded-md">
                 <Image
-                  src="/wallhaven-m95x7k.jpg"
+                  src={heroImage.image}
                   alt="logo-maker"
                   fill
                   objectFit="cover"
@@ -63,7 +66,7 @@ const SingleProductShowcasePage: React.FC<SingleProductShowcasePageProps> = ({
               </div>
 
               {/* Carousel Controls and Slider */}
-              <div className="relative my-4 flex items-center">
+              <div className="relative my-8 flex items-center">
                 <CustomButton
                   onClick={() => handlePrevClick()}
                   className="carousel-btn absolute z-20 cursor-pointer"
@@ -82,16 +85,21 @@ const SingleProductShowcasePage: React.FC<SingleProductShowcasePageProps> = ({
                     "1024": 5,
                     "480": 3,
                     "600": 4,
-                    any: 1,
+                    any: 3,
                   }}
+                  customClassName={"single-product-carousel"}
                 >
-                  {product?.images.map((image, index) => (
+                  {product?.images.map((image) => (
                     <div
-                      className="relative h-[80px] rounded-md border bg-gray-100"
-                      key={index}
+                      className={cn(
+                        "relative h-[80px] cursor-pointer rounded-md border bg-gray-100 outline-none transition-all hover:scale-110",
+                        image.id === heroImage.id && "scale-110 shadow-md",
+                      )}
+                      key={image.id}
+                      onClick={() => handleProductImageClick(image)}
                     >
                       <Image
-                        src="/wallhaven-m95x7k.jpg"
+                        src={image.image}
                         alt="logo-maker"
                         fill
                         objectFit="contain"
