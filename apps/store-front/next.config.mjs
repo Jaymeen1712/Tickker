@@ -3,9 +3,6 @@ const nextConfig = {
   reactStrictMode: false,
   experimental: {
     missingSuspenseWithCSRBailout: false,
-    serverActions: {
-      bodySizeLimit: '2mb',
-    },
   },
 };
 

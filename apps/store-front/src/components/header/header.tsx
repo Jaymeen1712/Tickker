@@ -36,6 +36,7 @@ const Header: React.FC<HeaderProps> = ({ isSearchVisible = true }) => {
             <Link
               className="text-sm font-medium opacity-50 hover:opacity-100"
               href={`/${label}`}
+              key={label}
             >
               {label.toUpperCase()}
             </Link>

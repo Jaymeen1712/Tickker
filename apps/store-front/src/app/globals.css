@@ -92,7 +92,7 @@
 }
 
 body {
-  color: #F6E7D2;
+  color: #f6e7d2;
 }
 
 .hide-input-number-arrows::-webkit-inner-spin-button,
@@ -103,4 +103,37 @@ body {
 
 .hide-input-number-arrows {
   -moz-appearance: textfield; /* For Firefox */
+}
+
+.hero-image-gradient-container {
+  background-size: 100% 100%;
+  background-image: radial-gradient(
+      21% 37% at 43% 0%,
+      #705b4c8c 24%,
+      /* Dark charcoal brown */ #1a1a1a00 100% /* Transparent black */
+    ),
+    radial-gradient(
+      31% 50% at 0% 50%,
+      #705b4c8c 24%,
+      /* Dark charcoal brown */ #1a1a1a00 100% /* Transparent black */
+    ),
+    radial-gradient(
+      74% 60% at 50% 0%,
+      #3b2e27f5 24%,
+      /* Deep blackish brown */ #1a1a1a00 100% /* Transparent black */
+    ),
+    linear-gradient(
+      90deg,
+      rgb(21, 20, 20) 1%,
+      /* Very dark brown close to black */ #0f0f0fff 100% /* Pure black */
+    );
+}
+
+.remaining-dashboard-gradient-container {
+  background-size: 100% 100%;
+  background-image: linear-gradient(
+    90deg,
+    rgb(21, 20, 20) 1%,
+    /* Very dark brown close to black */ #0f0f0fff 100% /* Pure black */
+  );
 }

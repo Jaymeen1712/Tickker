@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { InputProps } from "../ui/input";
 
-const useDashboardController = () => {
+const useRemainingDashboardContainerController = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>();
 
@@ -37,4 +37,4 @@ const useDashboardController = () => {
   return { products, handleSearchInputChange, handleSearchInputClick };
 };
 
-export default useDashboardController;
+export default useRemainingDashboardContainerController;

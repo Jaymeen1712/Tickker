@@ -10,8 +10,10 @@ import CustomSlider from "./custom-slider";
 import DashboardComp from "./dashboard";
 import Header from "./header";
 import SearchWithSuggestionBox from "./header-search-with-suggestion-box";
+import ProductsContainerWithTitle from "./products-container-with-title";
 import QuantitySelector from "./quantity-selector";
 import Rating from "./rating";
+import SingleProductCard from "./single-product-card";
 import Spinner from "./spinner";
 
 export {
@@ -27,8 +29,10 @@ export {
   CustomSuccessAlert,
   DashboardComp,
   Header,
+  ProductsContainerWithTitle,
   QuantitySelector,
   Rating,
   SearchWithSuggestionBox,
+  SingleProductCard,
   Spinner,
 };
