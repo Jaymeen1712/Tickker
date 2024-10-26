@@ -10,7 +10,7 @@ export default function ProtectedLayout({
   useProfile();
 
   return (
-    <div className="flex min-h-screen flex-col bg-gray-primary">
+    <div className="flex min-h-screen flex-col bg-black-primary">
       <Header />
       {children}
     </div>

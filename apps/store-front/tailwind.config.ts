@@ -15,9 +15,9 @@ const config = {
       padding: {
         DEFAULT: "1rem",
         sm: "2rem",
-        lg: "4rem",
-        xl: "5rem",
-        "2xl": "6rem",
+        lg: "3rem",
+        xl: "4rem",
+        "2xl": "5rem",
       },
     },
     extend: {
@@ -77,6 +77,8 @@ const config = {
         "brown-1": "#4B2E2E",
         "brown-2": "#3D2B1F",
         "brown-3": "#2C1B14",
+        // Black
+        "black-primary": "#343434",
       },
       borderRadius: {
         lg: "var(--radius)",

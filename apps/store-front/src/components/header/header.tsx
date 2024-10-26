@@ -1,15 +1,10 @@
 "use client";
 
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import { cn } from "@/lib/utils";
-import { signOut } from "next-auth/react";
 import Link from "next/link";
 import { Suspense } from "react";
+import { LiaUserCircle } from "react-icons/lia";
+import { LuHeart } from "react-icons/lu";
+import { PiHandbagSimpleBold } from "react-icons/pi";
 import HeaderSearchWithSuggestionBox from "../header-search-with-suggestion-box";
 import useHeaderController from "./header-controller";
 
@@ -18,17 +13,13 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ isSearchVisible = true }) => {
-  const { isUserPopoverOpen, setIsUserPopoverOpen, profile } =
+  const { isUserPopoverOpen, setIsUserPopoverOpen, profile, headerMenuItems } =
     useHeaderController();
 
   return (
-    <div
-      className={cn(
-        "container left-0 right-0 z-50 transition-all duration-500",
-      )}
-    >
-      <div className={cn("flex h-24 items-center justify-between")}>
-        <Link className="pr-12" href={"/"}>
+    <div className="container">
+      <div className="flex items-center justify-between pb-12 pt-16">
+        <Link className="pr-12 text-2xl font-semibold" href={"/"}>
           LOGO
         </Link>
         {isSearchVisible && (
@@ -38,7 +29,32 @@ const Header: React.FC<HeaderProps> = ({ isSearchVisible = true }) => {
             </Suspense>
           </div>
         )}
-        <div className="pl-12 flex items-center">
+
+        {/* Menu items */}
+        <div className="flex gap-16 transition-all">
+          {headerMenuItems.map(({ label }) => (
+            <Link
+              className="text-sm font-medium opacity-50 hover:opacity-100"
+              href={`/${label}`}
+            >
+              {label.toUpperCase()}
+            </Link>
+          ))}
+        </div>
+
+        <div className="flex items-center gap-8 transition-all">
+          <Link href={"/wishlist"}>
+            <LuHeart className="text-2xl hover:text-red-600" />
+          </Link>
+          <Link href={"/profile"}>
+            <LiaUserCircle className="text-3xl" />
+          </Link>
+          <Link href={"/cart"}>
+            <PiHandbagSimpleBold className="text-2xl" />
+          </Link>
+        </div>
+
+        {/* <div className="flex items-center pl-12">
           <Popover
             open={isUserPopoverOpen}
             onOpenChange={(open) => {
@@ -94,7 +110,7 @@ const Header: React.FC<HeaderProps> = ({ isSearchVisible = true }) => {
               </div>
             </PopoverContent>
           </Popover>
-        </div>
+        </div> */}
       </div>
     </div>
   );

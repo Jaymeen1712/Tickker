@@ -1,9 +1,6 @@
 "use client";
 
-import { CarouselWithTitle } from "@/components";
-import Image from "next/image";
-import { LuSearch } from "react-icons/lu";
-import { Input } from "../ui/input";
+import { CarouselWithTitle, CustomButton } from "@/components";
 import useDashboardController from "./comp-controller";
 
 const DashboardComp = () => {
@@ -11,40 +8,31 @@ const DashboardComp = () => {
     useDashboardController();
 
   return (
-    <>
-      <div className="relative h-[80vh] w-full">
-        <div className="absolute inset-0">
-          <Image
-            src="/img-dashboard.jpg"
-            layout="fill"
-            alt="everything"
-            objectFit="cover"
-          />
-        </div>
-        <div className="container h-full w-full">
-          <div className="z-20 flex h-full items-center justify-center">
-            <div className="flex w-full items-center">
-              <div className="relative w-full">
-                <Input
-                  className="rounded-full border-none bg-gray-100/20 p-8 pr-12 text-xl text-white focus-visible:ring focus-visible:ring-gray-100/80"
-                  onChange={handleSearchInputChange}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter") {
-                      handleSearchInputClick();
-                    }
-                  }}
-                  placeholder="Search..."
-                />
-                {/* Search button */}
-                <div className="absolute right-8 top-1/2 -translate-y-1/2 transform">
-                  <LuSearch
-                    color="white"
-                    className="cursor-pointer text-xl"
-                    onClick={handleSearchInputClick}
-                  />
-                </div>
+    <div className="container">
+      <div className="h-[70vh]">
+        <div className="flex h-full flex-col gap-y-8">
+          <div className="flex justify-between text-sm font-semibold">
+            <div className="rounded-full bg-brown-2/50 px-4 py-2">
+              Limited to 50 pieces
+            </div>
+            <div className="uppercase">Available</div>
+          </div>
+          <div className="flex-1 uppercase">
+            <div className="grid h-full flex-1 grid-cols-1 place-content-center gap-y-4 text-6xl">
+              <span className="text-sm font-semibold opacity-50">
+                CH-9342.2-CUBK
+              </span>
+              <div>
+                {"Space timer jupiter".split(" ").map((word) => (
+                  <div className="tracking-tighter">{word}</div>
+                ))}
               </div>
             </div>
+          </div>
+          <div>
+            <CustomButton className="rounded-full bg-brown-2/50 uppercase">
+              Find out more
+            </CustomButton>
           </div>
         </div>
       </div>
@@ -55,7 +43,7 @@ const DashboardComp = () => {
         <CarouselWithTitle title={"Recent"} products={products} />
         <CarouselWithTitle title={"Recent"} products={products} />
       </div>
-    </>
+    </div>
   );
 };
 
