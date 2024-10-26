@@ -18,7 +18,8 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ isSearchVisible = true }) => {
-  const { isUserPopoverOpen, setIsUserPopoverOpen } = useHeaderController();
+  const { isUserPopoverOpen, setIsUserPopoverOpen, profile } =
+    useHeaderController();
 
   return (
     <div
@@ -37,7 +38,7 @@ const Header: React.FC<HeaderProps> = ({ isSearchVisible = true }) => {
             </Suspense>
           </div>
         )}
-        <div className="pl-12">
+        <div className="pl-12 flex items-center">
           <Popover
             open={isUserPopoverOpen}
             onOpenChange={(open) => {
@@ -47,8 +48,8 @@ const Header: React.FC<HeaderProps> = ({ isSearchVisible = true }) => {
             <PopoverTrigger>
               <Avatar>
                 <AvatarImage
-                  src="https://github.com/shadcn.png"
-                  alt="@shadcn"
+                  src={profile?.highResImage ?? ""}
+                  alt="Profile img"
                 />
               </Avatar>
             </PopoverTrigger>

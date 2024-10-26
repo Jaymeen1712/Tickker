@@ -1,6 +1,6 @@
 "use client";
 
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import {
   Popover,
   PopoverContent,
@@ -9,6 +9,7 @@ import {
 import { capitalizeWords } from "@/utils";
 import { signOut } from "next-auth/react";
 import Link from "next/link";
+import { useMemo } from "react";
 import CustomNavigationMenu from "../header-navigation-menu/comp";
 import useHeaderController from "./header-controller";
 
@@ -17,6 +18,12 @@ const Header = () => {
     useHeaderController();
 
   const splitName = profile?.name?.split(" ");
+
+  const initials = useMemo(() => {
+    if (!profile?.name) return "";
+    const [firstName = "", lastName = ""] = profile.name.split(" ");
+    return `${firstName[0]?.toUpperCase() || ""}${lastName[0]?.toUpperCase() || ""}`;
+  }, [profile]);
 
   return (
     <div className="left-0 right-0 z-50 h-full min-w-[250px] transition-all duration-500">
@@ -34,10 +41,9 @@ const Header = () => {
           >
             <PopoverTrigger className="flex w-full items-center gap-x-4 rounded-full px-4 py-2 transition-all hover:bg-white">
               <Avatar>
-                <AvatarImage
-                  src="https://github.com/shadcn.png"
-                  alt="@shadcn"
-                />
+                <AvatarFallback className="border-2 border-gray-300 bg-white">
+                  {initials}
+                </AvatarFallback>
               </Avatar>
               <div className="flex whitespace-nowrap text-base font-semibold">
                 {capitalizeWords(splitName?.[0])}{" "}
