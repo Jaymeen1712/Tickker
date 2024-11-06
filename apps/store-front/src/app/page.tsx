@@ -8,7 +8,7 @@ export default function HomePage() {
   return (
     <div className="relative">
       <div className="hero-image-gradient-container">
-        <Header isSearchVisible={false} />
+        <Header />
         <DashboardHeroImageContainer />
       </div>
       <div className="remaining-dashboard-gradient-container">

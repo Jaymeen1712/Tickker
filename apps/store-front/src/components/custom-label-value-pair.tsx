@@ -13,7 +13,7 @@ const CustomLabelValuePair: React.FC<CustomKeyValuePairProps> = ({
 }) => {
   return (
     <div className={cn("flex items-center space-x-2", className)}>
-      <div className="font-semibold">{label}:</div>
+      <div className="font-semibold opacity-50">{label} - </div>
       <div>{value}</div>
     </div>
   );

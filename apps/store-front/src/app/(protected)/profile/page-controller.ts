@@ -10,6 +10,7 @@ import { useCallback, useEffect, useState } from "react";
 const useProfilePageController = () => {
   const [profile, setProfile] = useState<Profile>();
   const [isProfileLoading, setIsProfileLoading] = useState(true);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   const { data: session } = useSession();
 
@@ -86,10 +87,28 @@ const useProfilePageController = () => {
   };
 
   useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 0);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  useEffect(() => {
     handleGetProfile();
   }, [handleGetProfile]);
 
-  return { profile, handleImageOnChange, isProfileLoading, handleDeleteImage };
+  return {
+    profile,
+    handleImageOnChange,
+    isProfileLoading,
+    handleDeleteImage,
+    isScrolled,
+  };
 };
 
 export default useProfilePageController;

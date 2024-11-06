@@ -1,5 +1,4 @@
 "use client";
-import { Header } from "@/components";
 import { useProfile } from "@/hooks";
 
 export default function ProtectedLayout({
@@ -9,10 +8,5 @@ export default function ProtectedLayout({
 }>) {
   useProfile();
 
-  return (
-    <div className="flex min-h-screen flex-col bg-black-primary">
-      <Header />
-      {children}
-    </div>
-  );
+  return <div>{children}</div>;
 }

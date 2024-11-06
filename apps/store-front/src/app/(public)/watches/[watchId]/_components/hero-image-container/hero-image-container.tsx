@@ -1,25 +1,17 @@
 "use client";
+import { CustomButton } from "@/components";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import CustomButton from "../custom-button";
-import useDashboardHeroImageController from "./dashboard-hero-image-controller";
+import { LuHeart } from "react-icons/lu";
+import useSingleProductHeroImageContainerController from "./hero-image-container-controller";
 
-const DashboardHeroImageContainer = () => {
-  const {
-    currentImg,
-    heroImageHorizontalVariants,
-    heroRemainingVariants,
-    heroImageVerticalVariants,
-  } = useDashboardHeroImageController();
+const SingleProductHeroImageContainer = () => {
+  const { heroImageHorizontalVariants } =
+    useSingleProductHeroImageContainerController();
 
   return (
     <div className="container relative h-[70vh] pb-16">
-      <motion.div
-        className="flex h-full flex-col gap-y-8"
-        variants={heroRemainingVariants}
-        initial="hidden"
-        animate="visible"
-      >
+      <div className="flex h-full flex-col gap-y-8">
         <div className="flex justify-between text-sm font-semibold">
           <div className="rounded-full bg-brown-2/50 px-4 py-2">
             Limited to 50 pieces
@@ -40,37 +32,33 @@ const DashboardHeroImageContainer = () => {
             </div>
           </div>
         </div>
-        <div>
+        <div className="flex items-end justify-between">
           <CustomButton className="rounded-full bg-brown-2/50 uppercase">
-            Find out more
+            Buy now
           </CustomButton>
+          <div className="flex flex-col gap-y-4 text-xl opacity-50 transition-all">
+            <LuHeart className="cursor-pointer" />
+          </div>
         </div>
-      </motion.div>
+      </div>
 
       <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 mix-blend-darken">
         <motion.div
-          variants={heroImageVerticalVariants}
+          variants={heroImageHorizontalVariants}
           initial="hidden"
           animate="visible"
+          className="h-[550px] w-[550px]"
         >
-          <motion.div
-            key={currentImg}
-            variants={heroImageHorizontalVariants}
-            initial="hidden"
-            animate="visible"
-            className="h-[550px] w-[550px]"
-          >
-            <Image
-              src={`/watches/${currentImg}`}
-              alt="logo-maker"
-              fill
-              objectFit="cover"
-            />
-          </motion.div>
+          <Image
+            src={`/watches/28000253_fr.jpg`}
+            alt="logo-maker"
+            fill
+            objectFit="cover"
+          />
         </motion.div>
       </div>
     </div>
   );
 };
 
-export default DashboardHeroImageContainer;
+export default SingleProductHeroImageContainer;

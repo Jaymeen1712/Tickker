@@ -2,7 +2,6 @@
 
 import { Product } from "@prisma/client";
 import Image from "next/image";
-import { LuHeart } from "react-icons/lu";
 import useSingleProductCardController from "./single-product-card-controller";
 
 interface SingleProductCardProps {
@@ -10,35 +9,34 @@ interface SingleProductCardProps {
 }
 
 const SingleProductCard: React.FC<SingleProductCardProps> = ({ product }) => {
-  const { imageColor, handleAddToWishlist } = useSingleProductCardController({
-    product,
-  });
+  const { imageColor, handleAddToWishlist, handleRedirectToProductPage } =
+    useSingleProductCardController({
+      product,
+    });
 
   return (
-    <div className="w-fit">
-      <div className="relative overflow-hidden rounded-xl bg-white-primary">
-        <div className="relative mx-auto flex h-72 w-72 cursor-pointer items-center justify-center transition-all hover:scale-110">
-          <Image
-            src={product?.images[0]}
-            alt="watch-image"
-            fill
-            objectFit="contain"
-          />
-        </div>
-        <div className="absolute inset-0 right-4 top-4 flex h-fit justify-end">
-          <LuHeart
-            className="cursor-pointer text-xl text-black transition-all hover:fill-black"
-            onClick={handleAddToWishlist}
-          />
-        </div>
+    <div
+      className="single-product-card-gradient-container relative flex h-96 w-96 cursor-pointer flex-col justify-between rounded-3xl p-6 transition-all hover:scale-105"
+      onClick={handleRedirectToProductPage}
+    >
+      <div className="z-10 w-fit rounded-3xl bg-white/5 px-4 py-2 text-sm backdrop-blur-3xl">
+        Limited to 60 pieces
       </div>
-      <div className="mt-2 flex flex-col gap-y-2">
-        <div className="flex items-center justify-between">
-          <div className="font-semibold">{product?.name}</div>
-          <div className="font-bold">{product?.price}</div>
-        </div>
-        <div className="line-clamp-1 text-ellipsis text-sm">
-          {product?.description}
+
+      <div className="z-10 flex flex-col gap-y-2 pb-4 pl-4 uppercase">
+        <span className="text-xs opacity-50">CH-9356M.2-GREEK</span>
+        <span className="text-sm">Space timer black hole</span>
+      </div>
+
+      {/* Image container */}
+      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 mix-blend-multiply">
+        <div className="h-[240px] w-[240px]">
+          <Image
+            src={`/watches/28000253_s.jpg`}
+            alt="logo-maker"
+            fill
+            objectFit="cover"
+          />
         </div>
       </div>
     </div>

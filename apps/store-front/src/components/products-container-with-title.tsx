@@ -14,7 +14,7 @@ const ProductsContainerWithTitle: React.FC<ProductsContainerWithTitleProps> = ({
       <h1 className="text-5xl font-light tracking-tighter">
         {title.toUpperCase()}
       </h1>
-      <div className="flex flex-wrap gap-x-4 gap-y-8 py-8">{children}</div>
+      <div className="flex flex-wrap gap-x-12 gap-y-8 py-8">{children}</div>
     </div>
   );
 };

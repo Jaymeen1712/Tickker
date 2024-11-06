@@ -93,6 +93,7 @@
 
 body {
   color: #f6e7d2;
+  @apply font-medium;
 }
 
 .hide-input-number-arrows::-webkit-inner-spin-button,
@@ -136,4 +137,65 @@ body {
     rgb(21, 20, 20) 1%,
     /* Very dark brown close to black */ #0f0f0fff 100% /* Pure black */
   );
+}
+
+.single-product-hero-image-gradient-container {
+  border-bottom-left-radius: 40px;
+  border-bottom-right-radius: 40px;
+  padding-bottom: 20px;
+  background-size: 100% 100%;
+  background-image: radial-gradient(
+      80% 80% at 0% 10%,
+      #ffffff0d,
+      /* Very faint white at ~5% opacity */ #0f0f0fff 100%
+        /* Near-black at 90% opacity */
+    ),
+    radial-gradient(32% 47% at 29% 5%, transparent, #8065528c 60%, transparent),
+    linear-gradient(
+      90deg,
+      rgb(21, 20, 20) 1%,
+      /* Very dark brown close to black */ #0f0f0fff 100% /* Pure black */
+    );
+  z-index: 10;
+  position: relative;
+}
+
+.single-product-remaining-gradient-container {
+  margin-top: -40px;
+  padding-top: 40px;
+  z-index: 0;
+  background-size: 100% 100%;
+  background-image: linear-gradient(
+    90deg,
+    rgb(45, 42, 42) 1%,
+    /* Slightly lighter dark brown */ #605656 100%
+      /* Dark grey instead of pure black */
+  );
+  position: relative;
+}
+
+.single-product-card-gradient-container {
+  background-size: 100% 100%;
+  background-image: radial-gradient(
+      100% 100% at 20% 20%,
+      #ffffff0d,
+      /* Very faint white at ~5% opacity */ #000000e6 80%
+        /* Near-black at 90% opacity */
+    ),
+    radial-gradient(
+      65% 65% at 50% 50%,
+      #ffffff1a,
+      /* Semi-transparent white at 20% opacity */ #000000e6 80%
+        /* Near-black at 90% opacity */
+    ),
+    linear-gradient(135deg, #151414 10%, #0f0f0f 100%);
+}
+
+.single-cart-product-card-remaining-container-gradient {
+  background-size: 100% 100%;
+  background-image: linear-gradient(135deg, #151414 10%, #0f0f0f 100%);
+}
+
+.hide-scrollbar {
+  scrollbar-width: 0;
 }

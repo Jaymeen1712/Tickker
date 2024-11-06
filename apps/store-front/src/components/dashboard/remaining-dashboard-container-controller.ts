@@ -2,9 +2,25 @@
 import { fetchAllProducts } from "@/db/queries";
 import { handleAPIResponse } from "@/utils";
 import { Product } from "@prisma/client";
+import { Variants } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { InputProps } from "../ui/input";
+
+const heroRemainingVariants: Variants = {
+  hidden: {
+    opacity: 0,
+    y: 30,
+  },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      type: "easeOut",
+      delay: 0.3,
+    },
+  },
+};
 
 const useRemainingDashboardContainerController = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -34,7 +50,12 @@ const useRemainingDashboardContainerController = () => {
     handleGetAllProducts();
   }, [handleGetAllProducts]);
 
-  return { products, handleSearchInputChange, handleSearchInputClick };
+  return {
+    products,
+    handleSearchInputChange,
+    handleSearchInputClick,
+    heroRemainingVariants,
+  };
 };
 
 export default useRemainingDashboardContainerController;

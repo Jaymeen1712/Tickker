@@ -1,41 +1,27 @@
 "use client";
 
 import Link from "next/link";
-import { Suspense } from "react";
 import { LiaUserCircle } from "react-icons/lia";
-import { LuHeart } from "react-icons/lu";
 import { PiHandbagSimpleBold } from "react-icons/pi";
-import HeaderSearchWithSuggestionBox from "../header-search-with-suggestion-box";
 import useHeaderController from "./header-controller";
 
-interface HeaderProps {
-  isSearchVisible?: boolean;
-}
-
-const Header: React.FC<HeaderProps> = ({ isSearchVisible = true }) => {
+const Header = () => {
   const { isUserPopoverOpen, setIsUserPopoverOpen, profile, headerMenuItems } =
     useHeaderController();
 
   return (
     <div className="container">
-      <div className="flex items-center justify-between pb-12 pt-16">
-        <Link className="pr-12 text-2xl font-semibold" href={"/"}>
+      <div className="flex items-center justify-between gap-x-8 pb-12 pt-16">
+        <Link className="text-2xl font-semibold" href={"/"}>
           LOGO
         </Link>
-        {isSearchVisible && (
-          <div className="flex-1 px-12">
-            <Suspense>
-              <HeaderSearchWithSuggestionBox />
-            </Suspense>
-          </div>
-        )}
 
         {/* Menu items */}
         <div className="flex gap-16 transition-all">
           {headerMenuItems.map(({ label }) => (
             <Link
               className="text-sm font-medium opacity-50 hover:opacity-100"
-              href={`/${label}`}
+              href={`/${label.toLowerCase()}`}
               key={label}
             >
               {label.toUpperCase()}
@@ -44,9 +30,6 @@ const Header: React.FC<HeaderProps> = ({ isSearchVisible = true }) => {
         </div>
 
         <div className="flex items-center gap-8 transition-all">
-          <Link href={"/wishlist"}>
-            <LuHeart className="text-2xl hover:text-red-600" />
-          </Link>
           <Link href={"/profile"}>
             <LiaUserCircle className="text-3xl" />
           </Link>
