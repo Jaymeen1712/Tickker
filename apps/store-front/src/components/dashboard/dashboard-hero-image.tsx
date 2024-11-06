@@ -1,10 +1,11 @@
 "use client";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import CustomButton from "../custom-button";
 import useDashboardHeroImageController from "./dashboard-hero-image-controller";
 
 const DashboardHeroImageContainer = () => {
-  const { currentImg } = useDashboardHeroImageController();
+  const { currentImg, variants } = useDashboardHeroImageController();
 
   return (
     <div className="container relative h-[70vh] pb-16">
@@ -36,18 +37,21 @@ const DashboardHeroImageContainer = () => {
         </div>
       </div>
 
-      <div
-        className="absolute inset-0 left-1/2 top-1/2 h-[550px] w-[550px] -translate-x-1/2 -translate-y-1/2"
-        style={{
-          mixBlendMode: "darken",
-        }}
-      >
-        <Image
-          src={`/watches/${currentImg}`}
-          alt="logo-maker"
-          fill
-          objectFit="cover"
-        />
+      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 mix-blend-darken">
+        <motion.div
+          key={currentImg}
+          variants={variants}
+          initial="hidden"
+          animate="visible"
+          className="h-[550px] w-[550px]"
+        >
+          <Image
+            src={`/watches/${currentImg}`}
+            alt="logo-maker"
+            fill
+            objectFit="cover"
+          />
+        </motion.div>
       </div>
     </div>
   );
