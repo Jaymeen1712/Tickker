@@ -9,8 +9,7 @@ interface SingleProductShowcaseCompProps {
 const SingleProductShowcaseComp: React.FC<SingleProductShowcaseCompProps> = ({
   product,
 }) => {
-  const { brand, category, description, images, name, price, rating, id } =
-    product;
+  const { brand, category, description, images, name, price, id } = product;
 
   return (
     <Link href={`/products/${id}`}>
@@ -29,7 +28,6 @@ const SingleProductShowcaseComp: React.FC<SingleProductShowcaseCompProps> = ({
           <span>{description}</span>
           <span>{brand}</span>
           <span>{category}</span>
-          <span>{rating}</span>
         </div>
         <div className="col-span-1">{price}</div>
       </div>

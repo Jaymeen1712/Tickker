@@ -1,6 +1,12 @@
 "use client";
 
-import { CustomInputAvatar, CustomLabelValuePair, Header } from "@/components";
+import {
+  CustomButton,
+  CustomInputAvatar,
+  CustomLabelValuePair,
+  Header,
+} from "@/components";
+import { signOut } from "next-auth/react";
 import useProfilePageController from "./page-controller";
 
 const ProfilePage = () => {
@@ -32,6 +38,15 @@ const ProfilePage = () => {
             <CustomLabelValuePair label="Name" value={profile?.name} />
             <CustomLabelValuePair label="Email" value={profile?.email} />
           </div>
+
+          <CustomButton
+            className="mt-8"
+            onClick={() => {
+              signOut({ callbackUrl: "/login" });
+            }}
+          >
+            Logout
+          </CustomButton>
         </div>
       </div>
     </div>

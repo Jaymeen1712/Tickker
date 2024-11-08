@@ -7,7 +7,6 @@ import CustomButton from "./custom-button";
 import CustomInputAvatar from "./custom-input-avatar";
 import CustomLabelValuePair from "./custom-label-value-pair";
 import CustomSlider from "./custom-slider";
-import DashboardComp from "./dashboard";
 import Header from "./header";
 import SearchWithSuggestionBox from "./header-search-with-suggestion-box";
 import ProductsContainerWithTitle from "./products-container-with-title";
@@ -27,7 +26,6 @@ export {
   CustomLabelValuePair,
   CustomSlider,
   CustomSuccessAlert,
-  DashboardComp,
   Header,
   ProductsContainerWithTitle,
   QuantitySelector,

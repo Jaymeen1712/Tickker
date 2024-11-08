@@ -4,7 +4,6 @@ import {
   CustomButton,
   CustomSlider,
   QuantitySelector,
-  Rating,
   Spinner,
 } from "@/components";
 import { cn } from "@/lib/utils";
@@ -137,12 +136,6 @@ const SingleProductShowcasePage: React.FC<SingleProductShowcasePageProps> = ({
                 <div className="space-x-2">
                   <span className="font-semibold">Brand:</span>
                   <span>{product?.brand}</span>
-                </div>
-              )}
-              {product?.rating && (
-                <div className="flex items-center space-x-2">
-                  <span className="font-semibold">Rating:</span>
-                  <Rating stop={product?.rating} />
                 </div>
               )}
             </div>

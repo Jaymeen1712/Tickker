@@ -9,8 +9,10 @@ interface SingleProductCompProps {
 }
 
 const SingleProductComp: React.FC<SingleProductCompProps> = ({ product }) => {
-  const { brand, category, description, images, name, price, rating, id } =
-    useMemo(() => product, [product]);
+  const { brand, category, description, images, name, price, id } = useMemo(
+    () => product,
+    [product],
+  );
 
   return (
     <Link
