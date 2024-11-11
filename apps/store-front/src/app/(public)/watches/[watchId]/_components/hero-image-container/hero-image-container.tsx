@@ -1,30 +1,38 @@
 "use client";
 import { CustomButton } from "@/components";
+import { Product } from "@prisma/client";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { LuHeart } from "react-icons/lu";
 import useSingleProductHeroImageContainerController from "./hero-image-container-controller";
 
-const SingleProductHeroImageContainer = () => {
-  const { heroImageHorizontalVariants } =
-    useSingleProductHeroImageContainerController();
+interface SingleProductHeroImageContainerProps {
+  product: Product | undefined;
+}
+
+const SingleProductHeroImageContainer: React.FC<
+  SingleProductHeroImageContainerProps
+> = ({ product }) => {
+  const { currentImg, heroImageHorizontalVariants } =
+    useSingleProductHeroImageContainerController({
+      images: product?.images ?? [],
+    });
 
   return (
     <div className="container relative h-[70vh] pb-16">
       <div className="flex h-full flex-col gap-y-8">
         <div className="flex justify-between text-sm font-semibold">
           <div className="rounded-full bg-brown-2/50 px-4 py-2">
-            Limited to 50 pieces
+            Limited to {product?.stock} pieces
           </div>
           <div className="uppercase">Available</div>
         </div>
         <div className="flex-1 uppercase">
           <div className="grid h-full flex-1 grid-cols-1 place-content-center gap-y-4 text-6xl">
             <span className="text-sm font-semibold opacity-50">
-              CH-9342.2-CUBK
+              {product?.model}
             </span>
             <div>
-              {"Space timer jupiter".split(" ").map((word) => (
+              {product?.category.split(" ").map((word) => (
                 <div className="tracking-tighter" key={word}>
                   {word}
                 </div>
@@ -32,13 +40,10 @@ const SingleProductHeroImageContainer = () => {
             </div>
           </div>
         </div>
-        <div className="flex items-end justify-between">
+        <div>
           <CustomButton className="rounded-full bg-brown-2/50 uppercase">
             Buy now
           </CustomButton>
-          <div className="flex flex-col gap-y-4 text-xl opacity-50 transition-all">
-            <LuHeart className="cursor-pointer" />
-          </div>
         </div>
       </div>
 
@@ -49,12 +54,7 @@ const SingleProductHeroImageContainer = () => {
           animate="visible"
           className="h-[550px] w-[550px]"
         >
-          <Image
-            src={`/watches/28000253_fr.jpg`}
-            alt="logo-maker"
-            fill
-            objectFit="cover"
-          />
+          <Image src={currentImg} alt="logo-maker" fill objectFit="cover" />
         </motion.div>
       </div>
     </div>

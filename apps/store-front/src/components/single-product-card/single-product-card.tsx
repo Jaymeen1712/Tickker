@@ -2,6 +2,7 @@
 
 import { Product } from "@prisma/client";
 import Image from "next/image";
+import { useMemo } from "react";
 import useSingleProductCardController from "./single-product-card-controller";
 
 interface SingleProductCardProps {
@@ -9,10 +10,11 @@ interface SingleProductCardProps {
 }
 
 const SingleProductCard: React.FC<SingleProductCardProps> = ({ product }) => {
-  const { imageColor, handleAddToWishlist, handleRedirectToProductPage } =
-    useSingleProductCardController({
-      product,
-    });
+  const { handleRedirectToProductPage } = useSingleProductCardController({
+    product,
+  });
+
+  const { model, name, stock, images } = useMemo(() => product, [product]);
 
   return (
     <div
@@ -20,22 +22,22 @@ const SingleProductCard: React.FC<SingleProductCardProps> = ({ product }) => {
       onClick={handleRedirectToProductPage}
     >
       <div className="z-10 w-fit rounded-3xl bg-white/5 px-4 py-2 text-sm backdrop-blur-3xl">
-        Limited to 60 pieces
+        Limited to {stock} pieces
       </div>
 
       <div className="z-10 flex flex-col gap-y-2 pb-4 pl-4 uppercase">
-        <span className="text-xs opacity-50">CH-9356M.2-GREEK</span>
-        <span className="text-sm">Space timer black hole</span>
+        <span className="text-xs opacity-50">{model}</span>
+        <span className="text-sm">{name}</span>
       </div>
 
       {/* Image container */}
       <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 mix-blend-multiply">
-        <div className="h-[240px] w-[240px]">
+        <div className="relative h-[240px] w-[240px]">
           <Image
-            src={`/watches/28000253_s.jpg`}
+            src={images[1]}
             alt="logo-maker"
             fill
-            objectFit="cover"
+            className="object-cover"
           />
         </div>
       </div>

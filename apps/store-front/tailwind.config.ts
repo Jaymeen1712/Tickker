@@ -80,6 +80,7 @@ const config = {
         // Black
         "black-primary": "#343434",
         "white-primary": "#f6e7d2",
+        "brown-primary": "#d39571",
       },
       borderRadius: {
         lg: "var(--radius)",

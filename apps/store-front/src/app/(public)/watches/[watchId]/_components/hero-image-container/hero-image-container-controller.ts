@@ -1,5 +1,6 @@
 "use client";
 import { Variants } from "framer-motion";
+import { useEffect, useState } from "react";
 
 const heroImageHorizontalVariants: Variants = {
   // hidden: {
@@ -24,8 +25,35 @@ const heroImageHorizontalVariants: Variants = {
   },
 };
 
-const useSingleProductHeroImageContainerController = () => {
-  return { heroImageHorizontalVariants };
+interface SingleProductHeroImageContainerControllerProps {
+  images: string[];
+}
+
+const useSingleProductHeroImageContainerController = ({
+  images,
+}: SingleProductHeroImageContainerControllerProps) => {
+  const [currentImg, setCurrentImg] = useState("");
+  const [imgArr, setImgArr] = useState<string[]>([]);
+
+  useEffect(() => {
+    setImgArr(images);
+  }, [images]);
+
+  useEffect(() => {
+    const imgTimer = setInterval(() => {
+      setCurrentImg((prev) => {
+        const imgIndex = imgArr.findIndex((img) => img === prev);
+        const nextIndex = (imgIndex + 1) % imgArr.length;
+        return imgArr[nextIndex];
+      });
+    }, 2000);
+
+    return () => {
+      clearInterval(imgTimer);
+    };
+  }, [imgArr]);
+
+  return { currentImg, heroImageHorizontalVariants };
 };
 
 export default useSingleProductHeroImageContainerController;

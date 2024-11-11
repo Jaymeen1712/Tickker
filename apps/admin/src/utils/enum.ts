@@ -92,7 +92,6 @@ export const WATCH_STRAP_SIZES = [
   "32mm",
 ];
 
-
 export const WATCH_MOVEMENTS = [
   "Automatic",
   "Manual Wind",
@@ -163,9 +162,4 @@ export const DIAL_COLORS = [
   "Orange",
   "Yellow",
   "Gold",
-  "Mother of Pearl",
-  "Champagne",
-  "Carbon Fiber",
-  "Sunburst",
-  "Luminous/Glow",
 ];

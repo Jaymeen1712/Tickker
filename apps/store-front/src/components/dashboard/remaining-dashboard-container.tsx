@@ -20,8 +20,8 @@ const RemainingDashboardContainer = () => {
         animate="visible"
       >
         <ProductsContainerWithTitle title={"Space timer"}>
-          {Array.from({ length: 6 }).map((_, index) => (
-            <SingleProductCard product={products[0]} key={index} />
+          {products.map((product, index) => (
+            <SingleProductCard product={product} key={index} />
           ))}
         </ProductsContainerWithTitle>
       </motion.div>

@@ -66,3 +66,21 @@ export const convertFileToBase64 = (file: File): Promise<string> => {
     reader.readAsDataURL(file); // Convert file to base64 string
   });
 };
+
+export function capitalizeWords(input: string | undefined) {
+  if (!input) return "";
+
+  const words = input.replace(/_/g, " ").split(" ");
+
+  const capitalizedWords = words.map(
+    (word) => word.charAt(0).toUpperCase() + word.slice(1),
+  );
+
+  if (capitalizedWords.length > 1) {
+    capitalizedWords[1] =
+      capitalizedWords[1].charAt(0).toUpperCase() +
+      capitalizedWords[1].slice(1);
+  }
+
+  return capitalizedWords.join(" ");
+}

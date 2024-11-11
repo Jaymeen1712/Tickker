@@ -9,7 +9,7 @@ import { WatchesFilter } from "./_components";
 import useWatchesPageController from "./page-controller";
 
 const WatchesPage = () => {
-  const { isScrolled } = useWatchesPageController();
+  const { isScrolled, categorizedProducts } = useWatchesPageController();
 
   return (
     <>
@@ -21,13 +21,14 @@ const WatchesPage = () => {
           <WatchesFilter />
         </div>
 
-        <div className="hide-scrollbar container relative h-screen overflow-y-auto">
-          <ProductsContainerWithTitle title="Space timer">
-            {[...Array(3)].map((_, index) => (
-              // @ts-ignore
-              <SingleProductCard key={index} />
-            ))}
-          </ProductsContainerWithTitle>
+        <div className="hide-scrollbar container relative overflow-y-auto">
+          {Object.entries(categorizedProducts).map(([key, products]) => (
+            <ProductsContainerWithTitle title={key} key={key}>
+              {products.map((product, index) => (
+                <SingleProductCard key={index} product={product} />
+              ))}
+            </ProductsContainerWithTitle>
+          ))}
         </div>
       </div>
     </>

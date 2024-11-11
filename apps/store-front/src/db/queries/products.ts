@@ -1,12 +1,21 @@
 "use server";
 import { db } from "@/db";
+import { WatchSpecificProductFieldsType } from "@/types";
 
-export const fetchAllProducts = async () => {
+export const fetchAllProducts = async ({
+  filters,
+}: {
+  filters?: WatchSpecificProductFieldsType;
+}) => {
   let response;
   let errors;
 
   try {
-    const existingProducts = await db.product.findMany();
+    const existingProducts = await db.product.findMany({
+      where: {
+        ...filters,
+      },
+    });
 
     if (existingProducts) {
       response = existingProducts;
