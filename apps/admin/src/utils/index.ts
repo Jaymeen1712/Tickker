@@ -93,3 +93,15 @@ export const handleGetInitials = (name: string | null | undefined) => {
 
   return firstName + lastName;
 };
+
+export const convertBlobToBase64 = (blob: Blob): Promise<string> => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      const base64data = reader.result as string;
+      resolve(base64data);
+    };
+    reader.onerror = reject;
+    reader.readAsDataURL(blob);
+  });
+};

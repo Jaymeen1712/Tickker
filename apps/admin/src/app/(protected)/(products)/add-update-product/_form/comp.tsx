@@ -53,6 +53,7 @@ const AddUpdateProductFormComp: React.FC<AddUpdateProductFormCompProps> = ({
     handleImageOnChange,
     handleDeleteImage,
     images,
+    isAddImageLoading,
   } = useAddUpdateProductFormCompController({ productId });
 
   return (
@@ -512,7 +513,7 @@ const AddUpdateProductFormComp: React.FC<AddUpdateProductFormCompProps> = ({
                   render={({ field }) => (
                     <FormItem className="flex-1">
                       <FormControl>
-                        <div className="flex w-full items-center justify-center">
+                        <div className="relative flex w-full items-center justify-center">
                           <label
                             htmlFor="dropzone-file"
                             className={`h-62 flex w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed ${
@@ -521,7 +522,12 @@ const AddUpdateProductFormComp: React.FC<AddUpdateProductFormCompProps> = ({
                                 : "border-gray-300 bg-gray-50 hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:border-gray-500 dark:hover:bg-gray-800"
                             }`}
                           >
-                            <div className="flex flex-col items-center justify-center pb-6 pt-5">
+                            <div className="relative flex flex-col items-center justify-center pb-6 pt-5">
+                              {isAddImageLoading && (
+                                <div className="absolute inset-0 flex items-center justify-center rounded-lg bg-gray-100 bg-opacity-75">
+                                  <div className="h-10 w-10 animate-spin rounded-full border-b-2 border-t-2 border-gray-500"></div>
+                                </div>
+                              )}
                               <UploadIcon />
                               <p
                                 className={`mb-2 text-sm ${
@@ -572,8 +578,7 @@ const AddUpdateProductFormComp: React.FC<AddUpdateProductFormCompProps> = ({
                           src={base64Image}
                           alt={`Image ${id}`}
                           fill
-                          objectFit="cover"
-                          className="rounded-md transition duration-300 group-hover:brightness-50"
+                          className="rounded-md transition duration-300 group-hover:brightness-50 object-cover"
                         />
 
                         {/* Delete Icon */}
