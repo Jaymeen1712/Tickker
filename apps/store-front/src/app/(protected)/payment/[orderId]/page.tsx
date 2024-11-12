@@ -1,6 +1,6 @@
 "use client";
 
-import { CustomButton, Spinner } from "@/components";
+import { CustomButton, Header } from "@/components";
 import usePaymentPageController from "./page-controller";
 
 interface PaymentPageProps {
@@ -10,30 +10,43 @@ interface PaymentPageProps {
 }
 
 const PaymentPage: React.FC<PaymentPageProps> = ({ params }) => {
-  const {
-    order,
-    isOrderLoading,
-    handlePaymentButtonClick,
-    isPaymentButtonLoading,
-  } = usePaymentPageController({
-    orderId: params.orderId,
-  });
+  const { handlePaymentButtonClick, isPaymentButtonLoading, total } =
+    usePaymentPageController({
+      orderId: params.orderId,
+    });
 
   return (
-    <div className="container">
-      {isOrderLoading ? (
-        <Spinner />
-      ) : (
+    <div className="hero-image-gradient-container min-h-screen">
+      <Header />
+      <div className="container">
+        <h3 className="pb-14 text-4xl font-normal uppercase tracking-tighter">
+          Payments
+        </h3>
+
         <div className="flex flex-col justify-center">
-          <span>Amount: {order?.amount}</span>
+          <div className="flex flex-col gap-y-6 pb-14">
+            <div className="flex items-center justify-between">
+              <span className="opacity-50">Vat (18%)</span>
+              <span>{total?.weightedTotal}</span>
+            </div>
+            <div className="flex items-center justify-between">
+              <span className="opacity-50">Total excl. Vat</span>
+              <span>{total?.excludeWeightedTotal}</span>
+            </div>
+            <div className="flex items-center justify-between text-lg font-medium">
+              <span>Total incl. Vat</span>
+              <span>{total?.includeWeightedTotal}</span>
+            </div>
+          </div>
           <CustomButton
             onClick={handlePaymentButtonClick}
             loading={isPaymentButtonLoading}
+            className="bg-brown-2/100 uppercase hover:bg-brown-2/50"
           >
             Make payment
           </CustomButton>
         </div>
-      )}
+      </div>
     </div>
   );
 };

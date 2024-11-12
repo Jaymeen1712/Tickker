@@ -41,7 +41,13 @@ import { MdClose } from "react-icons/md";
 import { TiFilter } from "react-icons/ti";
 import useWatchesFilterController from "./filter-controller";
 
-const WatchesFilter = () => {
+interface WatchesFilterProps {
+  isGetProductsLoading: boolean;
+}
+
+const WatchesFilter: React.FC<WatchesFilterProps> = ({
+  isGetProductsLoading,
+}) => {
   const {
     form,
     onSubmit,
@@ -57,21 +63,6 @@ const WatchesFilter = () => {
     <>
       <div className="container flex items-end gap-x-8 pb-4">
         <div className="grid flex-1 grid-cols-2 gap-x-8">
-          {/* Function Regulator Section */}
-          {/* <div className="flex flex-col gap-y-4">
-          <h1 className="text-sm uppercase">Function regulator</h1>
-          <div className="flex items-center gap-x-2">
-            {[...Array(3)].map((_, idx) => (
-              <div
-                key={idx}
-                className="flex h-10 w-10 items-center justify-center rounded-full bg-slate-400"
-              >
-                <BiSquareRounded />
-              </div>
-            ))}
-          </div>
-        </div> */}
-
           {/* Sizes Section */}
           <div className="hide-scrollbar flex cursor-pointer flex-col gap-y-4 overflow-x-auto">
             <h1 className="text-sm uppercase">Sizes</h1>
@@ -79,8 +70,13 @@ const WatchesFilter = () => {
               {CASE_DIAMETERS.map((size) => (
                 <div
                   key={size}
-                  className="border-brown-primary group rounded-full border border-dashed p-[5px]"
+                  className={cn(
+                    "group rounded-full border border-dashed border-brown-primary p-[5px]",
+                    isGetProductsLoading &&
+                      "z-30 cursor-not-allowed bg-white/30",
+                  )}
                   onClick={() =>
+                    !isGetProductsLoading &&
                     handlePrimaryFilterClick({
                       caseDiameter:
                         productAdvanceFilters?.caseDiameter === size
@@ -91,7 +87,7 @@ const WatchesFilter = () => {
                 >
                   <div
                     className={cn(
-                      "bg-brown-primary flex h-7 w-7 items-center justify-center rounded-full text-sm transition-all group-hover:scale-125",
+                      "flex h-7 w-7 items-center justify-center rounded-full bg-brown-primary text-sm transition-all group-hover:scale-125",
                       productAdvanceFilters?.caseDiameter === size &&
                         "scale-125",
                     )}
@@ -109,8 +105,13 @@ const WatchesFilter = () => {
             <div className="flex items-center gap-x-2">
               {DIAL_COLORS.map((color) => (
                 <div
-                  className="group flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-white/30 p-[5px] backdrop-blur-lg"
+                  className={cn(
+                    "group flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-white/30 p-[5px] backdrop-blur-lg",
+                    isGetProductsLoading &&
+                      "z-30 cursor-not-allowed bg-white/30",
+                  )}
                   onClick={() =>
+                    !isGetProductsLoading &&
                     handlePrimaryFilterClick({
                       dialColor:
                         productAdvanceFilters?.dialColor === color
@@ -535,12 +536,15 @@ const WatchesFilter = () => {
                 </div>
 
                 <SheetFooter className="flex gap-x-4">
-                  <Button className="flex-grow" onClick={handleResetFilters}>
+                  <Button
+                    className="flex-grow bg-brown-2/100 uppercase hover:bg-brown-2/50"
+                    onClick={handleResetFilters}
+                  >
                     Reset
                   </Button>
                   <Button
                     onClick={form.handleSubmit(onSubmit)}
-                    className="flex-grow"
+                    className="flex-grow bg-brown-2/100 uppercase hover:bg-brown-2/50"
                   >
                     Apply
                   </Button>

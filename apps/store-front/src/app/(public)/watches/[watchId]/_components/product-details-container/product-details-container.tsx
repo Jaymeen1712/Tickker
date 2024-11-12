@@ -60,10 +60,7 @@ const ProductDetailsContainer: React.FC<ProductDetailsContainerProps> = ({
           </div>
         </div>
       </div>
-      <div className="flex flex-col gap-y-2">
-        <h1 className="text-base uppercase">Various models</h1>
-        <div className="text-sm">Description</div>
-      </div>
+
       <div className="flex gap-x-6">
         {Array.from({ length: 3 }).map((_, index) => (
           <div
@@ -74,7 +71,7 @@ const ProductDetailsContainer: React.FC<ProductDetailsContainerProps> = ({
               src={`/watches/28000253_fr.jpg`}
               alt="logo-maker"
               fill
-              objectFit="cover"
+              className="object-cover"
             />
           </div>
         ))}

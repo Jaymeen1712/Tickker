@@ -22,8 +22,7 @@ const CarouselSingleContainer: React.FC<CarouselSingleContainerProps> = ({
           src={images?.[0]}
           alt="logo-maker"
           fill
-          objectFit="cover"
-          className="rounded-md"
+          className="rounded-md object-cover"
         />
       </div>
       <div className="my-2">

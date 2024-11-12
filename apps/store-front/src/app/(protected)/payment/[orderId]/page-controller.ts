@@ -16,14 +16,20 @@ interface PaymentPageController {
 
 const usePaymentPageController = ({ orderId }: PaymentPageController) => {
   const [order, setOrder] = useState<Order>();
-  const [isOrderLoading, setIsOrderLoading] = useState(true);
   const [isPaymentButtonLoading, setIsPaymentButtonLoading] = useState(false);
+  const [total, setTotal] = useState<
+    | {
+        weightedTotal: string;
+        excludeWeightedTotal: string;
+        includeWeightedTotal: string;
+      }
+    | undefined
+  >();
 
   const router = useRouter();
 
   const handleGetOrder = useCallback(async () => {
     try {
-      setIsOrderLoading(true);
       const { errors, response } = await fetchOrderById({
         orderId,
       });
@@ -34,7 +40,6 @@ const usePaymentPageController = ({ orderId }: PaymentPageController) => {
         setOrder(result);
       }
     } finally {
-      setIsOrderLoading(false);
     }
   }, [orderId]);
 
@@ -64,14 +69,32 @@ const usePaymentPageController = ({ orderId }: PaymentPageController) => {
   };
 
   useEffect(() => {
+    if (order && order.amount) {
+      const amount = order.amount;
+      const weightedTotal = amount && (amount * 18) / 100;
+
+      setTotal({
+        excludeWeightedTotal: `${amount}.00 ₹`,
+        includeWeightedTotal: `${weightedTotal + amount} ₹`,
+        weightedTotal: `${weightedTotal} ₹`,
+      });
+    } else {
+      setTotal({
+        excludeWeightedTotal: `0`,
+        includeWeightedTotal: `0`,
+        weightedTotal: `0`,
+      });
+    }
+  }, [order]);
+
+  useEffect(() => {
     handleGetOrder();
   }, [handleGetOrder]);
 
   return {
-    order,
-    isOrderLoading,
     handlePaymentButtonClick,
     isPaymentButtonLoading,
+    total,
   };
 };
 

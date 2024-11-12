@@ -25,6 +25,9 @@ const heroRemainingVariants: Variants = {
 const useRemainingDashboardContainerController = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>();
+  const [categorizedProducts, setCategorizedProducts] = useState<
+    Record<string, Product[]>
+  >({});
 
   const router = useRouter();
 
@@ -37,7 +40,13 @@ const useRemainingDashboardContainerController = () => {
   };
 
   const handleGetAllProducts = useCallback(async () => {
-    const { errors, response } = await fetchAllProducts();
+    const { errors, response } = await fetchAllProducts({
+      filters: {
+        category: {
+          in: ["Space timer jupiter", "Ceramics"],
+        },
+      },
+    });
 
     const result = handleAPIResponse(errors, response);
 
@@ -45,6 +54,23 @@ const useRemainingDashboardContainerController = () => {
       setProducts(result);
     }
   }, []);
+
+  useEffect(() => {
+    if (products) {
+      const categorizedProducts = products.reduce(
+        (acc: Record<string, Product[]>, cur: Product) => {
+          if (!acc[cur.category]) {
+            acc[cur.category] = [];
+          }
+          acc[cur.category].push(cur);
+          return acc;
+        },
+        {},
+      );
+
+      setCategorizedProducts(categorizedProducts);
+    }
+  }, [products]);
 
   useEffect(() => {
     handleGetAllProducts();
@@ -55,6 +81,7 @@ const useRemainingDashboardContainerController = () => {
     handleSearchInputChange,
     handleSearchInputClick,
     heroRemainingVariants,
+    categorizedProducts,
   };
 };
 

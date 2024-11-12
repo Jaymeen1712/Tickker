@@ -24,8 +24,7 @@ const SingleProductComp: React.FC<SingleProductCompProps> = ({ product }) => {
           src={images?.[0]}
           alt="logo-maker"
           fill
-          objectFit="cover"
-          className="rounded-md"
+          className="rounded-md object-cover"
         />
       </div>
       <div className="col-span-3 flex">

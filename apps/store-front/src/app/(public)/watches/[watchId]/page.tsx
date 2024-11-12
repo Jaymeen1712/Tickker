@@ -14,7 +14,7 @@ interface SingleWatchPageProps {
 
 const SingleWatchPage: React.FC<SingleWatchPageProps> = ({ params }) => {
   const { watchId } = params;
-  const { product, isGetProductLoading } = useSingleWatchPageController({
+  const { product } = useSingleWatchPageController({
     productId: watchId,
   });
 
@@ -22,7 +22,10 @@ const SingleWatchPage: React.FC<SingleWatchPageProps> = ({ params }) => {
     <>
       <div className="single-product-hero-image-gradient-container">
         <Header />
-        <SingleProductHeroImageContainer product={product} />
+        <SingleProductHeroImageContainer
+          product={product}
+          productId={watchId}
+        />
       </div>
       <div className="single-product-remaining-gradient-container">
         <ProductDetailsContainer product={product} />

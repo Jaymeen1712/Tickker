@@ -9,7 +9,8 @@ import { WatchesFilter } from "./_components";
 import useWatchesPageController from "./page-controller";
 
 const WatchesPage = () => {
-  const { isScrolled, categorizedProducts } = useWatchesPageController();
+  const { isScrolled, categorizedProducts, isGetProductsLoading } =
+    useWatchesPageController();
 
   return (
     <>
@@ -18,17 +19,31 @@ const WatchesPage = () => {
           className={`sticky top-0 z-20 transition-all ${isScrolled ? "backdrop-blur-3xl" : ""}`}
         >
           <Header />
-          <WatchesFilter />
+          <WatchesFilter isGetProductsLoading={isGetProductsLoading} />
         </div>
 
         <div className="hide-scrollbar container relative overflow-y-auto">
-          {Object.entries(categorizedProducts).map(([key, products]) => (
-            <ProductsContainerWithTitle title={key} key={key}>
-              {products.map((product, index) => (
-                <SingleProductCard key={index} product={product} />
-              ))}
-            </ProductsContainerWithTitle>
-          ))}
+          {categorizedProducts && (
+            <>
+              {!Object.keys(categorizedProducts).length ? (
+                <div className="flex w-full justify-center py-20 text-xl uppercase">
+                  No results found
+                </div>
+              ) : (
+                <>
+                  {Object.entries(categorizedProducts).map(
+                    ([key, products]) => (
+                      <ProductsContainerWithTitle title={key} key={key}>
+                        {products.map((product, index) => (
+                          <SingleProductCard key={index} product={product} />
+                        ))}
+                      </ProductsContainerWithTitle>
+                    ),
+                  )}
+                </>
+              )}
+            </>
+          )}
         </div>
       </div>
     </>

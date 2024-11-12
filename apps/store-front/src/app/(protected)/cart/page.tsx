@@ -5,7 +5,8 @@ import ProductsPaymentComp from "./_products-payment";
 import useCartPageController from "./page-controller";
 
 const CartPage = () => {
-  const { isScrolled } = useCartPageController();
+  const { cartItems, cartSubTotal, handleGetCartItems, isScrolled } =
+    useCartPageController();
 
   return (
     <div className="hero-image-gradient-container min-h-screen">
@@ -19,11 +20,14 @@ const CartPage = () => {
           Shopping cart
         </h3>
         <div className="flex gap-x-12">
-          <div className="relative">
-            <ProductsDetailsComp />
+          <div className="relative flex-1">
+            <ProductsDetailsComp
+              cartItems={cartItems}
+              handleGetCartItems={handleGetCartItems}
+            />
           </div>
           <div className="sticky top-44 h-max">
-            <ProductsPaymentComp />
+            <ProductsPaymentComp cartSubTotal={cartSubTotal} />
           </div>
         </div>
       </div>

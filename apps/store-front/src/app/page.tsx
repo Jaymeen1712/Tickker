@@ -6,12 +6,12 @@ import {
 
 export default function HomePage() {
   return (
-    <div className="relative">
+    <div className="relative flex min-h-screen flex-col">
       <div className="hero-image-gradient-container">
         <Header />
         <DashboardHeroImageContainer />
       </div>
-      <div className="remaining-dashboard-gradient-container">
+      <div className="remaining-dashboard-gradient-container flex-1">
         <RemainingDashboardContainer />
       </div>
     </div>

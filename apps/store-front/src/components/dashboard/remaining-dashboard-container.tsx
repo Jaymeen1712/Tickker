@@ -10,6 +10,7 @@ const RemainingDashboardContainer = () => {
     handleSearchInputChange,
     handleSearchInputClick,
     heroRemainingVariants,
+    categorizedProducts,
   } = useRemainingDashboardContainerController();
 
   return (
@@ -19,11 +20,13 @@ const RemainingDashboardContainer = () => {
         initial={"hidden"}
         animate="visible"
       >
-        <ProductsContainerWithTitle title={"Space timer"}>
-          {products.map((product, index) => (
-            <SingleProductCard product={product} key={index} />
-          ))}
-        </ProductsContainerWithTitle>
+        {Object.entries(categorizedProducts).map(([key, products]) => (
+          <ProductsContainerWithTitle title={key} key={key}>
+            {products.map((product, index) => (
+              <SingleProductCard key={index} product={product} />
+            ))}
+          </ProductsContainerWithTitle>
+        ))}
       </motion.div>
     </div>
   );

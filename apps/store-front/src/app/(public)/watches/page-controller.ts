@@ -8,27 +8,36 @@ import { useCallback, useEffect, useState } from "react";
 
 const useWatchesPageController = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [products, setProducts] = useState<Product[]>([]);
+  const [products, setProducts] = useState<Product[] | undefined>(undefined);
   const [categorizedProducts, setCategorizedProducts] = useState<
-    Record<string, Product[]>
-  >({});
-
+    Record<string, Product[]> | undefined
+  >(undefined);
+  const [isGetProductsLoading, setIsGetProductsLoading] = useState(false);
   const { productAdvanceFilters, resetProductAdvanceFilters } = useAppStore();
 
   const handleGetAllProducts = useCallback(async () => {
-    const { errors, response } = await fetchAllProducts({
-      filters: productAdvanceFilters,
-    });
+    try {
+      setIsGetProductsLoading(true);
+      const { errors, response } = await fetchAllProducts({
+        filters: productAdvanceFilters,
+      });
 
-    const result = handleAPIResponse(errors, response);
+      const result = handleAPIResponse(errors, response);
 
-    if (result) {
-      setProducts(result);
+      if (result) {
+        setProducts(result);
+      }
+    } finally {
+      setIsGetProductsLoading(false);
     }
   }, [productAdvanceFilters]);
 
   useEffect(() => {
-    if (products) {
+    if(!products) {
+      return
+    }
+
+    if (products.length) {
       const categorizedProducts = products.reduce(
         (acc: Record<string, Product[]>, cur: Product) => {
           if (!acc[cur.category]) {
@@ -41,6 +50,8 @@ const useWatchesPageController = () => {
       );
 
       setCategorizedProducts(categorizedProducts);
+    } else {
+      setCategorizedProducts({});
     }
   }, [products]);
 
@@ -66,7 +77,7 @@ const useWatchesPageController = () => {
     };
   }, [resetProductAdvanceFilters]);
 
-  return { isScrolled, categorizedProducts };
+  return { isScrolled, categorizedProducts, isGetProductsLoading };
 };
 
 export default useWatchesPageController;

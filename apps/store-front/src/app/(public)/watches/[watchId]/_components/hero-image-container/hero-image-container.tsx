@@ -7,15 +7,22 @@ import useSingleProductHeroImageContainerController from "./hero-image-container
 
 interface SingleProductHeroImageContainerProps {
   product: Product | undefined;
+  productId: string;
 }
 
 const SingleProductHeroImageContainer: React.FC<
   SingleProductHeroImageContainerProps
-> = ({ product }) => {
-  const { currentImg, heroImageHorizontalVariants } =
-    useSingleProductHeroImageContainerController({
-      images: product?.images ?? [],
-    });
+> = ({ product, productId }) => {
+  const {
+    currentImg,
+    heroImageHorizontalVariants,
+    handleAddToCartButtonClick,
+    handleBuyNowButtonClick,
+    isBuyButtonLoading,
+  } = useSingleProductHeroImageContainerController({
+    productId,
+    product,
+  });
 
   return (
     <div className="container relative h-[70vh] pb-16">
@@ -41,20 +48,34 @@ const SingleProductHeroImageContainer: React.FC<
           </div>
         </div>
         <div>
-          <CustomButton className="rounded-full bg-brown-2/50 uppercase">
-            Buy now
-          </CustomButton>
+          <div className="flex w-fit gap-x-4">
+            <CustomButton
+              className="rounded-full bg-brown-2/100 uppercase hover:bg-brown-2/50"
+              onClick={handleBuyNowButtonClick}
+              loading={isBuyButtonLoading}
+            >
+              Buy now
+            </CustomButton>
+            <CustomButton
+              className="rounded-full bg-brown-2/100 uppercase hover:bg-brown-2/50"
+              onClick={handleAddToCartButtonClick}
+            >
+              Add to cart
+            </CustomButton>
+          </div>
         </div>
       </div>
 
-      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 mix-blend-darken">
+      <div className="absolute left-1/2 top-1/2 -z-10 -translate-x-1/2 -translate-y-1/2">
         <motion.div
           variants={heroImageHorizontalVariants}
           initial="hidden"
           animate="visible"
-          className="h-[550px] w-[550px]"
+          className="relative h-[550px] w-[550px]"
         >
-          <Image src={currentImg} alt="logo-maker" fill objectFit="cover" />
+          {currentImg && (
+            <Image src={currentImg} alt="img" fill className="object-cover" />
+          )}
         </motion.div>
       </div>
     </div>

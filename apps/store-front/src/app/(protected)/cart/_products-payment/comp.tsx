@@ -2,9 +2,15 @@
 import { CustomButton } from "@/components";
 import useProductsPaymentCompController from "./comp-controller";
 
-const ProductsPaymentComp = () => {
-  const { handleBuyButtonClick, isBuyButtonLoading } =
-    useProductsPaymentCompController();
+interface ProductsDetailsCompProps {
+  cartSubTotal: number | undefined;
+}
+
+const ProductsPaymentComp: React.FC<ProductsDetailsCompProps> = ({
+  cartSubTotal,
+}) => {
+  const { handleBuyButtonClick, isBuyButtonLoading, total } =
+    useProductsPaymentCompController({ cartSubTotal });
 
   return (
     <div className="flex min-w-[350px] flex-col items-end text-base uppercase">
@@ -12,22 +18,23 @@ const ProductsPaymentComp = () => {
 
       <div className="my-24 flex w-full flex-col gap-y-6">
         <div className="flex items-center justify-between">
-          <span className="opacity-50">Vat (19%)</span>
-          <span>4534.45 ₹</span>
+          <span className="opacity-50">Vat (18%)</span>
+          <span>{total?.weightedTotal}</span>
         </div>
         <div className="flex items-center justify-between">
           <span className="opacity-50">Total excl. Vat</span>
-          <span>23865.55 ₹</span>
+          <span>{total?.excludeWeightedTotal}</span>
         </div>
         <div className="flex items-center justify-between text-lg font-medium">
           <span>Total incl. Vat</span>
-          <span>28400.00 ₹</span>
+          <span>{total?.includeWeightedTotal}</span>
         </div>
       </div>
       <CustomButton
-        className="rounded-full px-4 py-2"
+        className="rounded-full bg-brown-2/100 px-4 py-2 uppercase transition-all hover:bg-brown-2/50"
         onClick={handleBuyButtonClick}
         loading={isBuyButtonLoading}
+        disabled={cartSubTotal === 0}
       >
         Checkout
       </CustomButton>

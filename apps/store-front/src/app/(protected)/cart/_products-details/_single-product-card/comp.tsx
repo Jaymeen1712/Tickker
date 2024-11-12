@@ -1,15 +1,7 @@
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { CartItemsIncludingProductType } from "@/types";
 import Image from "next/image";
 import { IoCloseOutline } from "react-icons/io5";
+import useCartShowcaseProductCompController from "./comp-controller";
 
 interface CartShowcaseSingleProductCompProps {
   cartItem: CartItemsIncludingProductType;
@@ -19,48 +11,49 @@ interface CartShowcaseSingleProductCompProps {
 const CartShowcaseSingleProductComp: React.FC<
   CartShowcaseSingleProductCompProps
 > = ({ cartItem, handleGetCartItems }) => {
-  // const {
-  //   handleProductQuantityChange,
-  //   isProdQuantityLoading,
-  //   handleRedirectToIndividualProductPage,
-  //   isRemoveCartItemLoading,
-  //   handleRemoveCartItem,
-  //   handleRedirectToProductPage,
-  // } = useCartShowcaseProductCompController({
-  //   cartItem,
-  //   handleGetCartItems,
-  // });
+  const { handleRemoveCartItem, handleRedirectToProductPage } =
+    useCartShowcaseProductCompController({
+      cartItem,
+      handleGetCartItems,
+    });
 
-  // const { product, quantity } = cartItem;
-  // const { brand, category, description, images, name, price } = product;
+  const { product } = cartItem;
+  const { category, images, price, model, strap, buckle, strapSize, stock } =
+    product;
 
   return (
     <div className="flex flex-col">
       <div
-        className="single-product-card-gradient-container relative flex h-96 w-96 flex-col justify-between rounded-3xl p-6"
-        // onClick={handleRedirectToProductPage}
+        className="single-product-card-gradient-container relative flex h-96 w-96 cursor-pointer flex-col justify-between rounded-3xl p-6"
+        onClick={handleRedirectToProductPage}
       >
         <div className="z-10 flex items-center justify-between">
           <span className="w-fit rounded-3xl bg-white/5 px-4 py-2 text-sm backdrop-blur-3xl">
-            Limited to 60 pieces
+            Limited to {stock} pieces
           </span>
 
-          <IoCloseOutline className="cursor-pointer text-2xl opacity-50" />
+          <IoCloseOutline
+            className="cursor-pointer text-2xl opacity-50"
+            onClick={(e) => {
+              e.stopPropagation();
+              handleRemoveCartItem();
+            }}
+          />
         </div>
 
         <div className="z-10 flex flex-col gap-y-2 pb-4 pl-4 uppercase">
-          <span className="text-xs opacity-50">CH-9356M.2-GREEK</span>
-          <span className="text-sm">Space timer black hole</span>
+          <span className="text-xs opacity-50">{model}</span>
+          <span className="text-sm">{category}</span>
         </div>
 
         {/* Image container */}
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 mix-blend-multiply">
-          <div className="h-[240px] w-[240px]">
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+          <div className="relative h-[240px] w-[240px]">
             <Image
-              src={`/watches/28000253_s.jpg`}
+              src={images[0]}
               alt="logo-maker"
               fill
-              objectFit="cover"
+              className="object-cover"
             />
           </div>
         </div>
@@ -70,35 +63,24 @@ const CartShowcaseSingleProductComp: React.FC<
         <div className="grid grid-cols-2 gap-x-4">
           <div className="flex flex-col gap-y-2 text-sm">
             <h1 className="opacity-50">Strap</h1>
-            <span>Louisiana leather</span>
+            <span>{strap}</span>
           </div>
 
           <div className="flex flex-col gap-y-2 text-sm">
             <h1 className="opacity-50">Buckle</h1>
-            <span>Folding clasp</span>
+            <span>{buckle}</span>
           </div>
         </div>
 
         <div className="grid grid-cols-2 gap-x-4">
           <div className="flex flex-col gap-y-2 text-sm">
             <h1 className="opacity-50">Strap size</h1>
-            <Select>
-              <SelectTrigger className="rounded-3xl border-none bg-white/10 backdrop-blur-3xl">
-                <SelectValue placeholder="Select a fruit" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  <SelectLabel>Fruits</SelectLabel>
-                  <SelectItem value="apple">Apple</SelectItem>
-                  <SelectItem value="banana">Banana</SelectItem>
-                </SelectGroup>
-              </SelectContent>
-            </Select>
+            <span>{strapSize}</span>
           </div>
           <div />
         </div>
 
-        <div className="font-semibold text-[#705b4c8c]">14,200 ₹</div>
+        <div className="text-xl font-bold opacity-50">{price} ₹</div>
       </div>
     </div>
   );

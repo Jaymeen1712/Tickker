@@ -1,11 +1,11 @@
 "use server";
 import { db } from "@/db";
-import { WatchSpecificProductFieldsType } from "@/types";
+import { Prisma } from "@prisma/client";
 
 export const fetchAllProducts = async ({
   filters,
 }: {
-  filters?: WatchSpecificProductFieldsType;
+  filters?: Prisma.ProductWhereInput;
 }) => {
   let response;
   let errors;

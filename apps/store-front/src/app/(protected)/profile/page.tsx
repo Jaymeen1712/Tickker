@@ -40,7 +40,7 @@ const ProfilePage = () => {
           </div>
 
           <CustomButton
-            className="mt-8"
+            className="mt-8 bg-brown-2/100 uppercase hover:bg-brown-2/50"
             onClick={() => {
               signOut({ callbackUrl: "/login" });
             }}

@@ -58,13 +58,13 @@ const DashboardHeroImageContainer = () => {
             variants={heroImageHorizontalVariants}
             initial="hidden"
             animate="visible"
-            className="h-[550px] w-[550px]"
+            className="h-[550px] w-[550px] relative"
           >
             <Image
               src={`/watches/${currentImg}`}
               alt="logo-maker"
               fill
-              objectFit="cover"
+              className="object-cover"
             />
           </motion.div>
         </motion.div>

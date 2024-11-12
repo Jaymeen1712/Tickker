@@ -1,4 +1,3 @@
-import { CustomLabelValuePair } from "@/components";
 import { OrderItemIncludingProductType } from "@/types";
 import Image from "next/image";
 import useSingleOrderItemShowcaseCompController from "./comp-controller";
@@ -10,42 +9,41 @@ interface SingleOrderItemShowcaseCompProps {
 const SingleOrderItemShowcaseComp: React.FC<
   SingleOrderItemShowcaseCompProps
 > = ({ orderItem }) => {
-  const { handleRedirectToIndividualProductPage } =
+  const { handleRedirectToProductPage } =
     useSingleOrderItemShowcaseCompController({
       productId: orderItem.product.id,
     });
 
-  const { price, quantity, product, status } = orderItem;
-  const { brand, category, description, images, name } = product;
+  const { product } = orderItem;
+  const { category, images, stock, model } = product;
 
   return (
-    <div className="grid grid-cols-4 items-center gap-x-6 px-8 py-2">
-      <div className="relative col-span-1 h-[120px] w-full rounded-md">
-        <Image
-          src={images?.[0]}
-          alt="logo-maker"
-          fill
-          objectFit="cover"
-          className="rounded-md"
-        />
-      </div>
-
-      {/* Product details container */}
-      <div className="col-span-3 flex space-y-2">
-        <div className="flex flex-1 flex-col">
-          <span
-            className="cursor-pointer text-base font-semibold"
-            onClick={handleRedirectToIndividualProductPage}
-          >
-            {name}
+    <div className="flex flex-col">
+      <div
+        className="single-product-card-gradient-container relative flex h-96 w-96 cursor-pointer flex-col justify-between rounded-3xl p-6"
+        onClick={handleRedirectToProductPage}
+      >
+        <div className="z-10">
+          <span className="w-fit rounded-3xl bg-white/5 px-4 py-2 text-sm backdrop-blur-3xl">
+            Limited to {stock} pieces
           </span>
-          <span className="line-clamp-4 text-ellipsis">{description}</span>
         </div>
-        <div className="flex flex-col justify-center">
-          <CustomLabelValuePair label="Brand" value={brand} />
-          <CustomLabelValuePair label="Category" value={category} />
-          <CustomLabelValuePair label="Quantity" value={quantity} />
-          <CustomLabelValuePair label="Status" value={status} />
+
+        <div className="z-10 flex flex-col gap-y-2 pb-4 pl-4 uppercase">
+          <span className="text-xs opacity-50">{model}</span>
+          <span className="text-sm">{category}</span>
+        </div>
+
+        {/* Image container */}
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+          <div className="relative h-[240px] w-[240px]">
+            <Image
+              src={images[0]}
+              alt="logo-maker"
+              fill
+              className="object-cover"
+            />
+          </div>
         </div>
       </div>
     </div>
