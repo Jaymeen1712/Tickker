@@ -7,10 +7,11 @@ import { useCallback, useEffect, useState } from "react";
 
 const useOrdersPageController = () => {
   const [orders, setOrders] = useState<
-    OrderIncludingOrderItemsIncludingProductType[]
-  >([]);
+    OrderIncludingOrderItemsIncludingProductType[] | undefined
+  >();
+  const [isScrolled, setIsScrolled] = useState(false);
 
-  const { profile, setIsLoading, isLoading } = useAppStore();
+  const { profile } = useAppStore();
 
   const handleGetOrders = useCallback(async () => {
     if (!profile) {
@@ -18,7 +19,6 @@ const useOrdersPageController = () => {
     }
 
     try {
-      setIsLoading(true);
       const { id: profileId } = profile;
 
       const { errors, response } = await fetchOrdersByProfileId({
@@ -31,21 +31,26 @@ const useOrdersPageController = () => {
         setOrders(result);
       }
     } finally {
-      setIsLoading(false);
     }
-  }, [profile, setIsLoading]);
+  }, [profile]);
 
   useEffect(() => {
     handleGetOrders();
   }, [handleGetOrders]);
 
   useEffect(() => {
-    return () => {
-      setIsLoading(true);
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 0);
     };
-  }, [setIsLoading]);
 
-  return { orders, isLoading };
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  return { orders, isScrolled };
 };
 
 export default useOrdersPageController;

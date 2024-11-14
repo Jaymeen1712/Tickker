@@ -11,10 +11,24 @@ import { CartItemsIncludingProductType } from "@/types";
 import { handleAPIResponse, handleShowError } from "@/utils";
 import { Cart, Order } from "@prisma/client";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-const useProductsPaymentCompController = () => {
+interface ProductsPaymentCompControllerProps {
+  cartSubTotal: number | undefined;
+}
+
+const useProductsPaymentCompController = ({
+  cartSubTotal,
+}: ProductsPaymentCompControllerProps) => {
   const [isBuyButtonLoading, setIsBuyButtonLoading] = useState(false);
+  const [total, setTotal] = useState<
+    | {
+        weightedTotal: string;
+        excludeWeightedTotal: string;
+        includeWeightedTotal: string;
+      }
+    | undefined
+  >();
 
   const { profile } = useAppStore();
 
@@ -112,9 +126,28 @@ const useProductsPaymentCompController = () => {
     }
   };
 
+  useEffect(() => {
+    if (cartSubTotal && cartSubTotal !== 0) {
+      const weightedTotal = cartSubTotal && (cartSubTotal * 18) / 100;
+
+      setTotal({
+        excludeWeightedTotal: `${cartSubTotal}.00 ₹`,
+        includeWeightedTotal: `${weightedTotal + cartSubTotal} ₹`,
+        weightedTotal: `${weightedTotal} ₹`,
+      });
+    } else {
+      setTotal({
+        excludeWeightedTotal: `0`,
+        includeWeightedTotal: `0`,
+        weightedTotal: `0`,
+      });
+    }
+  }, [cartSubTotal]);
+
   return {
     handleBuyButtonClick,
     isBuyButtonLoading,
+    total,
   };
 };
 

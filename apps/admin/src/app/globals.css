@@ -93,6 +93,7 @@
 
 body {
   color: #1c1c1c;
+  @apply font-medium;
 }
 
 .hide-input-number-arrows::-webkit-inner-spin-button,

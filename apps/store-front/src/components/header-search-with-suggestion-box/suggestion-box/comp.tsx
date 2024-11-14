@@ -55,8 +55,7 @@ const SearchSuggestionBox: React.FC<SearchSuggestionBoxProps> = ({
                       src="/img-no-product-found.png"
                       alt="logo-maker"
                       fill
-                      objectFit="cover"
-                      className="rounded-md"
+                      className="rounded-md object-cover"
                     />
                   </div>
                   <div className="text-center text-xl font-bold">

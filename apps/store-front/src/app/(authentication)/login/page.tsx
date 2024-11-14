@@ -49,67 +49,69 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="flex h-screen w-screen items-center justify-center">
-      <AuthContainer title="Login">
-        <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(onSubmit)}
-            className="w-80 space-y-8"
-          >
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Email</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Enter email" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="password"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Password</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="Enter password"
-                      type="password"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            {error && <CustomErrorAlert desc={error} />}
-
-            <CustomButton
-              type="submit"
-              className="w-full bg-blue-primary hover:bg-blue-secondary"
-              loading={isLoginButtonLoading}
+    <div className="hero-image-gradient-container min-h-screen">
+      <div className="flex h-screen w-screen items-center justify-center">
+        <AuthContainer title="Login">
+          <Form {...form}>
+            <form
+              onSubmit={form.handleSubmit(onSubmit)}
+              className="w-80 space-y-8"
             >
-              Login
-            </CustomButton>
-          </form>
-        </Form>
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Email</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Enter email" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-        <div className="mt-4 flex w-full justify-center space-x-2 text-sm">
-          <p>no account, </p>
-          <span
-            className="cursor-pointer font-semibold text-blue-primary"
-            onClick={handleRedirectToSignUp}
-          >
-            Sign up
-          </span>
-        </div>
-      </AuthContainer>
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Password</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Enter password"
+                        type="password"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              {error && <CustomErrorAlert desc={error} />}
+
+              <CustomButton
+                type="submit"
+                className="w-full bg-black uppercase hover:bg-black/50"
+                loading={isLoginButtonLoading}
+              >
+                Login
+              </CustomButton>
+            </form>
+          </Form>
+
+          <div className="mt-4 flex w-full justify-center space-x-2 text-sm">
+            <p>no account, </p>
+            <span
+              className="cursor-pointer font-semibold"
+              onClick={handleRedirectToSignUp}
+            >
+              Sign up
+            </span>
+          </div>
+        </AuthContainer>
+      </div>
     </div>
   );
 };

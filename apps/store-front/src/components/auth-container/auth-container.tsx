@@ -7,8 +7,8 @@ interface AuthContainerProps {
 
 const AuthContainer: React.FC<AuthContainerProps> = ({ children, title }) => {
   return (
-    <div className="bg-blue-lightest border-blue-light rounded-3xl border p-12">
-      <h1 className="flex w-full justify-center pb-6 text-3xl font-semibold text-blue-primary">
+    <div className="rounded-3xl bg-white/10 p-12">
+      <h1 className="flex w-full justify-center pb-6 text-4xl font-semibold uppercase tracking-tighter">
         {title}
       </h1>
 

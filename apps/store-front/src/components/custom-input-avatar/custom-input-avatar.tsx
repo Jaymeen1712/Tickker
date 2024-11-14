@@ -34,8 +34,7 @@ const CustomInputAvatar: React.FC<CustomInputAvatarProps> = ({
           <Image
             src={imgSrc}
             alt=""
-            objectFit="cover"
-            className="rounded-full"
+            className="rounded-full object-cover"
             fill
           />
         ) : (

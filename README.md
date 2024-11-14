@@ -84,3 +84,5 @@ Learn more about the power of Turborepo:
 
 1. Admin: https://dribbble.com/shots/22092501-Clothes-Search-Admin-Dashboard-Analytics-UX-UI
 2. Storefront: https://dribbble.com/shots/23365393-E-commerce-Watches-Web-Design
+
+Check for text mask fading: https://pqina.nl/blog/fade-out-overflow-using-css-mask-image/

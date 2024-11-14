@@ -1,18 +1,12 @@
 "use client";
-import { Header } from "@/components";
 import { useProfile } from "@/hooks";
 
-export default function AuthenticationLayout({
+export default function ProtectedLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   useProfile();
 
-  return (
-    <>
-      <Header />
-      {children}
-    </>
-  );
+  return <div>{children}</div>;
 }

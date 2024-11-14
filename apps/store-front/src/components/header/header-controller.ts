@@ -1,17 +1,37 @@
 "use client";
 
-import { useAppStore } from "@/store";
-import { useState } from "react";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
+
+const headerMenuItems: {
+  label: string;
+  redirectURL?: string;
+}[] = [
+  {
+    label: "Watches",
+  },
+  {
+    label: "Warranty & Service",
+    redirectURL: "warranty-and-service",
+  },
+  {
+    label: "Stores",
+  },
+];
 
 const useHeaderController = () => {
-  const [isUserPopoverOpen, setIsUserPopoverOpen] = useState(false);
+  const pathname = usePathname();
 
-  const { profile } = useAppStore();
+  const [currentActiveHeaderItem, setCurrentActiveHeaderItem] = useState("");
+
+  useEffect(() => {
+    const headerItem = pathname.split("/")[1];
+    setCurrentActiveHeaderItem(headerItem);
+  }, [pathname]);
 
   return {
-    isUserPopoverOpen,
-    setIsUserPopoverOpen,
-    profile,
+    headerMenuItems,
+    currentActiveHeaderItem,
   };
 };
 

@@ -97,20 +97,31 @@ model VerificationRequest {
 }
 
 model Product {
-  id          String      @id @default(cuid())
+  id          String   @id @default(cuid())
   profileId   String
   name        String
-  description String?
   price       Float
+  model       String
+  description String
   images      String[]
-  category    String
-  brand       String?
-  rating      Float?
   stock       Int
-  isVisible   Boolean     @default(true)
-  reviews     Review[]
-  CartItem    CartItem[]
-  OrderItem   OrderItem[]
+  isVisible   Boolean  @default(true)
+
+  // Watch-specific attributes
+  brand           String
+  category        String
+  strap           String
+  buckle          String
+  strapSize       String
+  movement        String
+  waterResistance String
+  caseMaterial    String
+  caseDiameter    String
+  dialColor       String
+
+  reviews   Review[]
+  CartItem  CartItem[]
+  OrderItem OrderItem[]
 
   profile Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
 

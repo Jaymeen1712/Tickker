@@ -59,94 +59,96 @@ const SignUpPage = () => {
   };
 
   return (
-    <div className="flex h-screen w-screen items-center justify-center">
-      <AuthContainer title="Sign Up">
-        <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(onSubmit)}
-            className="w-80 space-y-8"
-          >
-            <FormField
-              control={form.control}
-              name="first_name"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>First name</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Enter first name" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="last_name"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Last name</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Enter last name" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Email</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Enter email" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="password"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Password</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="Enter password"
-                      type="password"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            {error && <CustomErrorAlert desc={error} />}
-
-            <CustomButton
-              type="submit"
-              className="w-full bg-blue-primary hover:bg-blue-secondary"
-              loading={isRegisterButtonLoading}
+    <div className="hero-image-gradient-container min-h-screen">
+      <div className="flex h-screen w-screen items-center justify-center">
+        <AuthContainer title="Sign Up">
+          <Form {...form}>
+            <form
+              onSubmit={form.handleSubmit(onSubmit)}
+              className="w-80 space-y-8"
             >
-              Register
-            </CustomButton>
-          </form>
-        </Form>
+              <FormField
+                control={form.control}
+                name="first_name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>First name</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Enter first name" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="last_name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Last name</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Enter last name" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-        <div className="mt-4 flex w-full justify-center space-x-2 text-sm">
-          <p>have account? </p>
-          <span
-            className="cursor-pointer font-semibold text-blue-primary"
-            onClick={handleRedirectToLogin}
-          >
-            Login
-          </span>
-        </div>
-      </AuthContainer>
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Email</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Enter email" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Password</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Enter password"
+                        type="password"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              {error && <CustomErrorAlert desc={error} />}
+
+              <CustomButton
+                type="submit"
+                className="w-full bg-black uppercase hover:bg-black/50"
+                loading={isRegisterButtonLoading}
+              >
+                Register
+              </CustomButton>
+            </form>
+          </Form>
+
+          <div className="mt-4 flex w-full justify-center space-x-2 text-sm">
+            <p>have account? </p>
+            <span
+              className="cursor-pointer font-semibold"
+              onClick={handleRedirectToLogin}
+            >
+              Login
+            </span>
+          </div>
+        </AuthContainer>
+      </div>
     </div>
   );
 };

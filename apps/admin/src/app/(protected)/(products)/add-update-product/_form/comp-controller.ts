@@ -1,5 +1,5 @@
 "use client";
-import { AddUpdateProductAction } from "@/actions";
+import { AddUpdateProductAction, RemoveBackgroundAction } from "@/actions";
 import { InputProps } from "@/components/ui/input";
 import { TextareaProps } from "@/components/ui/textarea";
 import { fetchProductById } from "@/db/queries";
@@ -31,6 +31,7 @@ const useAddUpdateProductFormCompController = ({
   const [isAddProductLoading, setIsAddProductLoading] = useState(false);
   const [images, setImages] = useState<Map<string, string>>(new Map());
   const [product, setProduct] = useState<Product | undefined>();
+  const [isAddImageLoading, setIsAddImageLoading] = useState(false);
 
   const { profile } = useAppStore();
 
@@ -95,28 +96,53 @@ const useAddUpdateProductFormCompController = ({
     setDescriptionLength(e.target.value.length);
   };
 
+  // Remove background and convert them into base64
   const handleImageOnChange: InputProps["onChange"] = async (e) => {
-    const files = e.target.files;
+    try {
+      setIsAddImageLoading(true);
+      const files = e.target.files;
 
-    if (files) {
-      const filesLength = files.length;
+      if (files) {
+        const filesLength = files.length;
 
-      if (filesLength > 3) {
-        handleShowWarning("Only 3 images are allowed.");
+        if (filesLength > 3) {
+          handleShowWarning("Only 3 images are allowed.");
+        }
+
+        const newImages = new Map(images);
+        const maxFiles = filesLength > 3 ? 3 : filesLength; // Maximum number of files to process
+
+        for (let i = 0; i < maxFiles; i++) {
+          const file = files[i];
+
+          try {
+            // Remove background
+            // Create FormData for file upload
+            const formData = new FormData();
+            formData.append(
+              "image_file",
+              file,
+              `${Math.random().toString(36).substr(2, 9)}.png`,
+            );
+            const { noBackgroundImage, error } =
+              await RemoveBackgroundAction(formData);
+
+            const randomId = Math.random().toString(36).substr(2, 9);
+            if (noBackgroundImage && !error) {
+              newImages.set(randomId, noBackgroundImage);
+            } else {
+              const base64File = await convertFileToBase64(file);
+              newImages.set(randomId, base64File);
+            }
+          } catch (e) {
+            console.error(e);
+          }
+        }
+
+        setImages(newImages);
       }
-
-      const newImages = new Map(images);
-
-      const maxFiles = 3; // Maximum number of files to process
-
-      for (let i = 0; i < maxFiles; i++) {
-        const file = files[i];
-        const base64File = await convertFileToBase64(file);
-        const randomId = Math.random().toString(36).substr(2, 9);
-        newImages.set(randomId, base64File);
-      }
-
-      setImages(newImages);
+    } finally {
+      setIsAddImageLoading(false);
     }
   };
 
@@ -150,6 +176,15 @@ const useAddUpdateProductFormCompController = ({
         price,
         stock,
         images,
+        buckle,
+        caseDiameter,
+        caseMaterial,
+        dialColor,
+        model,
+        movement,
+        strap,
+        strapSize,
+        waterResistance,
       } = product;
       form.reset({
         category,
@@ -157,6 +192,17 @@ const useAddUpdateProductFormCompController = ({
         name,
         price,
         stock,
+        brand,
+        buckle,
+        caseDiameter,
+        caseMaterial,
+        description,
+        dialColor,
+        model,
+        movement,
+        strap,
+        strapSize,
+        waterResistance,
         ...(brand && { brand }),
         ...(description && { description }),
       });
@@ -186,6 +232,7 @@ const useAddUpdateProductFormCompController = ({
     handleImageOnChange,
     images,
     handleDeleteImage,
+    isAddImageLoading,
   };
 };
 

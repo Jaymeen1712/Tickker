@@ -21,3 +21,14 @@ export const LoginFormSchema = z.object({
     .string()
     .min(6, { message: "Password must be at least 6 characters long" }),
 });
+
+export const ProductFilterSchema = z.object({
+  category: z.string().optional(),
+  brand: z.string().optional(),
+  strap: z.string().optional(),
+  buckle: z.string().optional(),
+  strapSize: z.string().optional(),
+  movement: z.string().optional(),
+  waterResistance: z.string().optional(),
+  caseMaterial: z.string().optional(),
+});

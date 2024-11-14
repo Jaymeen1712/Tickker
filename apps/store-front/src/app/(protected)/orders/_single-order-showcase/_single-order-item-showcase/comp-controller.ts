@@ -9,11 +9,11 @@ const useSingleOrderItemShowcaseCompController = ({
 }: SingleOrderItemShowcaseCompControllerProps) => {
   const router = useRouter();
 
-  const handleRedirectToIndividualProductPage = () => {
-    router.push(`/products/${productId}`);
+  const handleRedirectToProductPage = () => {
+    router.push(`/watches/${productId}`);
   };
 
-  return { handleRedirectToIndividualProductPage };
+  return { handleRedirectToProductPage };
 };
 
 export default useSingleOrderItemShowcaseCompController;

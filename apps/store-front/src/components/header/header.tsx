@@ -1,99 +1,49 @@
 "use client";
 
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
-import { signOut } from "next-auth/react";
 import Link from "next/link";
-import { Suspense } from "react";
-import HeaderSearchWithSuggestionBox from "../header-search-with-suggestion-box";
+import { BiPackage } from "react-icons/bi";
+import { LuUserCircle2 } from "react-icons/lu";
+import { PiHandbagSimpleBold } from "react-icons/pi";
 import useHeaderController from "./header-controller";
 
-interface HeaderProps {
-  isSearchVisible?: boolean;
-}
-
-const Header: React.FC<HeaderProps> = ({ isSearchVisible = true }) => {
-  const { isUserPopoverOpen, setIsUserPopoverOpen, profile } =
-    useHeaderController();
+const Header = () => {
+  const { headerMenuItems, currentActiveHeaderItem } = useHeaderController();
 
   return (
-    <div
-      className={cn(
-        "container left-0 right-0 z-50 transition-all duration-500",
-      )}
-    >
-      <div className={cn("flex h-24 items-center justify-between")}>
-        <Link className="pr-12" href={"/"}>
+    <div className="container">
+      <div className="flex items-center justify-between gap-x-8 pb-12 pt-16">
+        <Link className="text-2xl font-semibold" href={"/"}>
           LOGO
         </Link>
-        {isSearchVisible && (
-          <div className="flex-1 px-12">
-            <Suspense>
-              <HeaderSearchWithSuggestionBox />
-            </Suspense>
-          </div>
-        )}
-        <div className="pl-12 flex items-center">
-          <Popover
-            open={isUserPopoverOpen}
-            onOpenChange={(open) => {
-              setIsUserPopoverOpen(open);
-            }}
-          >
-            <PopoverTrigger>
-              <Avatar>
-                <AvatarImage
-                  src={profile?.highResImage ?? ""}
-                  alt="Profile img"
-                />
-              </Avatar>
-            </PopoverTrigger>
-            <PopoverContent
-              className={"mt-2 flex w-full flex-col space-y-2 px-0 py-1"}
-              align="end"
+
+        {/* Menu items */}
+        <div className="flex gap-16 transition-all">
+          {headerMenuItems.map(({ label, redirectURL }) => (
+            <Link
+              className={cn(
+                "text-sm font-medium opacity-50 hover:opacity-100",
+                currentActiveHeaderItem.toLowerCase() ===
+                  (redirectURL || label).toLowerCase() && "opacity-100",
+              )}
+              href={`/${redirectURL || label.toLowerCase()}`}
+              key={label}
             >
-              <Link
-                href={`/profile`}
-                className="cursor-pointer px-4 py-1 leading-relaxed hover:bg-gray-100"
-                onClick={() => {
-                  setIsUserPopoverOpen(false);
-                }}
-              >
-                Profile
-              </Link>
-              <Link
-                href={`/cart`}
-                className="cursor-pointer px-4 py-1 leading-relaxed hover:bg-gray-100"
-                onClick={() => {
-                  setIsUserPopoverOpen(false);
-                }}
-              >
-                Cart
-              </Link>
-              <Link
-                href={`/orders`}
-                className="cursor-pointer px-4 py-1 leading-relaxed hover:bg-gray-100"
-                onClick={() => {
-                  setIsUserPopoverOpen(false);
-                }}
-              >
-                Orders
-              </Link>
-              <div
-                className="cursor-pointer px-4 py-1 leading-relaxed hover:bg-gray-100"
-                onClick={() => {
-                  signOut({ callbackUrl: "/login" });
-                }}
-              >
-                Logout
-              </div>
-            </PopoverContent>
-          </Popover>
+              {label.toUpperCase()}
+            </Link>
+          ))}
+        </div>
+
+        <div className="flex items-center gap-8 transition-all">
+          <Link href={"/cart"}>
+            <PiHandbagSimpleBold className="text-2xl" />
+          </Link>
+          <Link href={"/orders"}>
+            <BiPackage className="text-2xl" />
+          </Link>
+          <Link href={"/profile"}>
+            <LuUserCircle2 className="text-2xl" />
+          </Link>
         </div>
       </div>
     </div>
