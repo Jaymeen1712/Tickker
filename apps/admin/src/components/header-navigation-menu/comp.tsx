@@ -45,7 +45,7 @@ export const HeaderNavigationMenu = () => {
             ? matchURL.includes(currSelectedItem)
             : currSelectedItem === key;
           return (
-            <NavigationMenuItem value="overview" className={`w-full`}>
+            <NavigationMenuItem value="overview" className={`w-full`} key={key}>
               <Link
                 className={cn(
                   navigationMenuTriggerStyle(),

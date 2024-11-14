@@ -3,14 +3,27 @@
   "globalDependencies": ["**/.env.*local"],
   "tasks": {
     "build": {
-      "dependsOn": ["^build"],
+      "env": ["AUTH_SECRET"],
+      "dependsOn": ["^build", "^prisma"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
       "outputs": [".next/**", "!.next/cache/**"]
     },
+    "store-front#build": {
+      "dependsOn": ["^build"],
+      "env": ["AUTH_SECRET", "AUTH_TRUST_HOST", "NEXTAUTH_URL"],
+      "outputs": [".next/**", "!.next/cache/**"]
+    },
+    "admin#build": {
+      "dependsOn": ["^build"],
+      "env": ["AUTH_SECRET"],
+      "outputs": [".next/**", "!.next/cache/**"]
+    },
     "prisma": {
+      "cache": false,
       "outputs": ["node_modules/.prisma/client"]
     },
     "lint": {
+      "cache": true,
       "dependsOn": ["^lint"]
     },
     "dev": {
