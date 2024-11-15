@@ -31,7 +31,7 @@ const SingleProductCard: React.FC<SingleProductCardProps> = ({ product }) => {
       </div>
 
       {/* Image container */}
-      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 mix-blend-multiply">
+      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
         <div className="relative h-[240px] w-[240px]">
           <Image
             src={images[1]}

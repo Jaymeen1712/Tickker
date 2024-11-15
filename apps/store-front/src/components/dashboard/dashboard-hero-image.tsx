@@ -47,7 +47,7 @@ const DashboardHeroImageContainer = () => {
         </div>
       </motion.div>
 
-      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 mix-blend-darken">
+      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
         <motion.div
           variants={heroImageVerticalVariants}
           initial="hidden"
@@ -58,7 +58,7 @@ const DashboardHeroImageContainer = () => {
             variants={heroImageHorizontalVariants}
             initial="hidden"
             animate="visible"
-            className="h-[550px] w-[550px] relative"
+            className="relative h-[550px] w-[550px]"
           >
             <Image
               src={`/watches/${currentImg}`}

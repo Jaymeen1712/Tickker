@@ -3,7 +3,13 @@
  * @type {string[]}
  */
 
-export const publicRoutes = ["/", "/search", "/products", "/products/[productId]"];
+export const publicRoutes = [
+  "/",
+  "/watches",
+  "/watches/[watchId]",
+  "/warranty-and-service",
+  "/stores",
+];
 
 /**
  * Routes that starts with this prefix are used for API authentication purposes.

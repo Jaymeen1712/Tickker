@@ -1,6 +1,7 @@
 "use client";
 
-import { usePathname } from "next/navigation";
+import { useSession } from "next-auth/react";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const headerMenuItems: {
@@ -24,6 +25,10 @@ const useHeaderController = () => {
 
   const [currentActiveHeaderItem, setCurrentActiveHeaderItem] = useState("");
 
+  const { data: session } = useSession();
+
+  const router = useRouter();
+
   useEffect(() => {
     const headerItem = pathname.split("/")[1];
     setCurrentActiveHeaderItem(headerItem);
@@ -32,6 +37,8 @@ const useHeaderController = () => {
   return {
     headerMenuItems,
     currentActiveHeaderItem,
+    session,
+    router,
   };
 };
 

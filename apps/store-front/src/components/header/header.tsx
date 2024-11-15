@@ -5,10 +5,12 @@ import Link from "next/link";
 import { BiPackage } from "react-icons/bi";
 import { LuUserCircle2 } from "react-icons/lu";
 import { PiHandbagSimpleBold } from "react-icons/pi";
+import CustomButton from "../custom-button";
 import useHeaderController from "./header-controller";
 
 const Header = () => {
-  const { headerMenuItems, currentActiveHeaderItem } = useHeaderController();
+  const { headerMenuItems, currentActiveHeaderItem, session, router } =
+    useHeaderController();
 
   return (
     <div className="container">
@@ -34,17 +36,36 @@ const Header = () => {
           ))}
         </div>
 
-        <div className="flex items-center gap-8 transition-all">
-          <Link href={"/cart"}>
-            <PiHandbagSimpleBold className="text-2xl" />
-          </Link>
-          <Link href={"/orders"}>
-            <BiPackage className="text-2xl" />
-          </Link>
-          <Link href={"/profile"}>
-            <LuUserCircle2 className="text-2xl" />
-          </Link>
-        </div>
+        {session ? (
+          <div className="flex items-center gap-8 transition-all">
+            <Link href={"/cart"}>
+              <PiHandbagSimpleBold className="text-2xl" />
+            </Link>
+            <Link href={"/orders"}>
+              <BiPackage className="text-2xl" />
+            </Link>
+            <Link href={"/profile"}>
+              <LuUserCircle2 className="text-2xl" />
+            </Link>
+          </div>
+        ) : (
+          <div className="flex gap-x-8">
+            <CustomButton
+              variant={"link"}
+              className="rounded-none border-none p-0 uppercase text-white-primary"
+              onClick={() => router.replace("/login")}
+            >
+              Login
+            </CustomButton>
+            <CustomButton
+              variant={"link"}
+              className="rounded-none border-none p-0 uppercase text-white-primary"
+              onClick={() => router.replace("/signup")}
+            >
+              Sign up
+            </CustomButton>
+          </div>
+        )}
       </div>
     </div>
   );

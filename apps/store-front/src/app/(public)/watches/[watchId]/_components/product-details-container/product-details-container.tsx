@@ -63,10 +63,7 @@ const ProductDetailsContainer: React.FC<ProductDetailsContainerProps> = ({
 
       <div className="flex gap-x-6">
         {Array.from({ length: 3 }).map((_, index) => (
-          <div
-            className="relative h-[140px] w-[140px] mix-blend-darken"
-            key={index}
-          >
+          <div className="relative h-[140px] w-[140px]" key={index}>
             <Image
               src={`/watches/28000253_fr.jpg`}
               alt="logo-maker"
