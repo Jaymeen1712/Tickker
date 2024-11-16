@@ -9,6 +9,7 @@ import CustomLabelValuePair from "./custom-label-value-pair";
 import CustomSlider from "./custom-slider";
 import Header from "./header";
 import SearchWithSuggestionBox from "./header-search-with-suggestion-box";
+import LogoIcon from "./logo";
 import ProductsContainerWithTitle from "./products-container-with-title";
 import QuantitySelector from "./quantity-selector";
 import Rating from "./rating";
@@ -27,6 +28,7 @@ export {
   CustomSlider,
   CustomSuccessAlert,
   Header,
+  LogoIcon,
   ProductsContainerWithTitle,
   QuantitySelector,
   Rating,

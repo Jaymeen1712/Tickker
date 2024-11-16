@@ -6,6 +6,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { LogoIcon } from "@/images";
 import { capitalizeWords } from "@/utils";
 import { signOut } from "next-auth/react";
 import Link from "next/link";
@@ -28,7 +29,9 @@ const Header = () => {
   return (
     <div className="left-0 right-0 z-50 h-full min-w-[250px] transition-all duration-500">
       <div className={"flex h-full flex-col"}>
-        <div className="my-12 pl-8 font-semibold">LOGO</div>
+        <div className="my-12 pl-8">
+          <LogoIcon />
+        </div>
         <div className="flex-1 overflow-auto">
           <CustomNavigationMenu />
         </div>

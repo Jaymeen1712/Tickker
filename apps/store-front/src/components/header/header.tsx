@@ -6,6 +6,7 @@ import { BiPackage } from "react-icons/bi";
 import { LuUserCircle2 } from "react-icons/lu";
 import { PiHandbagSimpleBold } from "react-icons/pi";
 import CustomButton from "../custom-button";
+import LogoIcon from "../logo";
 import useHeaderController from "./header-controller";
 
 const Header = () => {
@@ -15,8 +16,8 @@ const Header = () => {
   return (
     <div className="container">
       <div className="flex items-center justify-between gap-x-8 pb-12 pt-16">
-        <Link className="text-2xl font-semibold" href={"/"}>
-          LOGO
+        <Link href={"/"}>
+          <LogoIcon />
         </Link>
 
         {/* Menu items */}
