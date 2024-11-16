@@ -39,6 +39,8 @@ const LoginPage = () => {
       if (response?.error) {
         setError(response?.error);
       }
+
+      window.location.href = "/";
     } finally {
       setIsLoginButtonLoading(false);
     }
@@ -64,7 +66,11 @@ const LoginPage = () => {
                   <FormItem>
                     <FormLabel>Email</FormLabel>
                     <FormControl>
-                      <Input placeholder="Enter email" {...field} />
+                      <Input
+                        placeholder="Enter email"
+                        {...field}
+                        className="text-black"
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -81,6 +87,7 @@ const LoginPage = () => {
                       <Input
                         placeholder="Enter password"
                         type="password"
+                        className="text-black"
                         {...field}
                       />
                     </FormControl>

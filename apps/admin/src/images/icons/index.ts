@@ -1,3 +1,4 @@
+import LogoIcon from "./logo";
 import UploadIcon from "./upload-icon";
 
-export { UploadIcon };
+export { LogoIcon, UploadIcon };

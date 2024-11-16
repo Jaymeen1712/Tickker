@@ -74,7 +74,11 @@ const SignUpPage = () => {
                   <FormItem>
                     <FormLabel>First name</FormLabel>
                     <FormControl>
-                      <Input placeholder="Enter first name" {...field} />
+                      <Input
+                        placeholder="Enter first name"
+                        {...field}
+                        className="text-black"
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -87,7 +91,11 @@ const SignUpPage = () => {
                   <FormItem>
                     <FormLabel>Last name</FormLabel>
                     <FormControl>
-                      <Input placeholder="Enter last name" {...field} />
+                      <Input
+                        className="text-black"
+                        placeholder="Enter last name"
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -101,7 +109,11 @@ const SignUpPage = () => {
                   <FormItem>
                     <FormLabel>Email</FormLabel>
                     <FormControl>
-                      <Input placeholder="Enter email" {...field} />
+                      <Input
+                        className="text-black"
+                        placeholder="Enter email"
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -118,6 +130,7 @@ const SignUpPage = () => {
                       <Input
                         placeholder="Enter password"
                         type="password"
+                        className="text-black"
                         {...field}
                       />
                     </FormControl>

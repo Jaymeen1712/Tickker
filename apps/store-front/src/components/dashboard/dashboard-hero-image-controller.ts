@@ -1,6 +1,9 @@
 "use client";
 
+import { STATIC_DASHBOARD_PRODUCT } from "@/enum";
+import { Product } from "@prisma/client";
 import { Variants } from "framer-motion";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const heroImageHorizontalVariants: Variants = {
@@ -57,12 +60,15 @@ const heroRemainingVariants: Variants = {
 };
 
 const useDashboardHeroImageController = () => {
-  const [currentImg, setCurrentImg] = useState("28000253_fr.jpg");
-  const [imgArr, setImgArr] = useState<string[]>([
-    "28000253_fr.jpg",
-    "28000253_s.jpg",
-    "28000253_b.jpg",
-  ]);
+  const [currentImg, setCurrentImg] = useState(
+    STATIC_DASHBOARD_PRODUCT.images[0],
+  );
+  const [imgArr] = useState<string[]>(STATIC_DASHBOARD_PRODUCT.images);
+  const [heroProduct] = useState<Omit<Product, "createdAt" | "updatedAt">>(
+    STATIC_DASHBOARD_PRODUCT,
+  );
+
+  const router = useRouter();
 
   useEffect(() => {
     const imgTimer = setInterval(() => {
@@ -83,6 +89,8 @@ const useDashboardHeroImageController = () => {
     heroImageHorizontalVariants,
     heroRemainingVariants,
     heroImageVerticalVariants,
+    heroProduct,
+    router,
   };
 };
 

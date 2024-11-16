@@ -81,3 +81,53 @@ export const fetchProductsBySearchQuery = async (
 
   return { errors, response };
 };
+
+export const fetchSimilarProductsByCategory = async (category: string) => {
+  let response;
+  let errors;
+
+  try {
+    const similarProducts = await db.product.findMany({
+      where: {
+        category,
+      },
+      select: {
+        id: true,
+        images: true,
+      },
+    });
+
+    if (similarProducts) {
+      response = similarProducts;
+    } else {
+      errors = ["Products are not available!"];
+    }
+  } catch (error) {
+    errors = error;
+  }
+
+  return { errors, response };
+};
+
+export const fetchDashboardProduct = async () => {
+  let response;
+  let errors;
+
+  try {
+    const existingProduct = await db.product.findUnique({
+      where: {
+        id: "cm3ih8tyu00012gvdupdywack",
+      },
+    });
+
+    if (existingProduct) {
+      response = existingProduct;
+    } else {
+      errors = ["Product is not available!"];
+    }
+  } catch (error) {
+    errors = error;
+  }
+
+  return { errors, response };
+};

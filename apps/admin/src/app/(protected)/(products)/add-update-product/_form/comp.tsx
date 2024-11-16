@@ -522,7 +522,7 @@ const AddUpdateProductFormComp: React.FC<AddUpdateProductFormCompProps> = ({
                                 : "border-gray-300 bg-gray-50 hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:border-gray-500 dark:hover:bg-gray-800"
                             }`}
                           >
-                            <div className="relative flex flex-col items-center justify-center pb-6 pt-5">
+                            <div className="flex flex-col items-center justify-center pb-6 pt-5">
                               {isAddImageLoading && (
                                 <div className="absolute inset-0 flex items-center justify-center rounded-lg bg-gray-100 bg-opacity-75">
                                   <div className="h-10 w-10 animate-spin rounded-full border-b-2 border-t-2 border-gray-500"></div>
@@ -578,7 +578,7 @@ const AddUpdateProductFormComp: React.FC<AddUpdateProductFormCompProps> = ({
                           src={base64Image}
                           alt={`Image ${id}`}
                           fill
-                          className="rounded-md transition duration-300 group-hover:brightness-50 object-cover"
+                          className="rounded-md object-cover transition duration-300 group-hover:brightness-50"
                         />
 
                         {/* Delete Icon */}
