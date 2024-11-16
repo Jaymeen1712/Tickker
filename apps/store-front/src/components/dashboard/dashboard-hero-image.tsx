@@ -10,6 +10,8 @@ const DashboardHeroImageContainer = () => {
     heroImageHorizontalVariants,
     heroRemainingVariants,
     heroImageVerticalVariants,
+    heroProduct,
+    router,
   } = useDashboardHeroImageController();
 
   return (
@@ -21,18 +23,18 @@ const DashboardHeroImageContainer = () => {
         animate="visible"
       >
         <div className="flex justify-between text-sm font-semibold">
-          <div className="rounded-full bg-brown-2/50 px-4 py-2">
-            Limited to 50 pieces
+          <div className="rounded-full bg-brown-2/100 px-4 py-2">
+            {heroProduct && `Limited to ${heroProduct.stock} pieces`}
           </div>
           <div className="uppercase">Available</div>
         </div>
         <div className="flex-1 uppercase">
           <div className="grid h-full flex-1 grid-cols-1 place-content-center gap-y-4 text-6xl">
             <span className="text-sm font-semibold opacity-50">
-              CH-9342.2-CUBK
+              {heroProduct?.model}
             </span>
             <div>
-              {"Space timer jupiter".split(" ").map((word) => (
+              {heroProduct?.category.split(" ").map((word) => (
                 <div className="tracking-tighter" key={word}>
                   {word}
                 </div>
@@ -41,7 +43,12 @@ const DashboardHeroImageContainer = () => {
           </div>
         </div>
         <div>
-          <CustomButton className="rounded-full bg-brown-2/50 uppercase">
+          <CustomButton
+            className="rounded-full bg-brown-2/100 uppercase hover:bg-brown-2/50"
+            onClick={() =>
+              heroProduct && router.push(`/watches/${heroProduct.id}`)
+            }
+          >
             Find out more
           </CustomButton>
         </div>
@@ -60,12 +67,7 @@ const DashboardHeroImageContainer = () => {
             animate="visible"
             className="relative h-[550px] w-[550px]"
           >
-            <Image
-              src={`/watches/${currentImg}`}
-              alt="logo-maker"
-              fill
-              className="object-cover"
-            />
+            <Image src={currentImg} alt="" fill className="object-cover" />
           </motion.div>
         </motion.div>
       </div>

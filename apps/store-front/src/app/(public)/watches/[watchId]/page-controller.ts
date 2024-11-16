@@ -1,5 +1,8 @@
 "use client";
-import { fetchSingleProductById } from "@/db/queries";
+import {
+  fetchSimilarProductsByCategory,
+  fetchSingleProductById,
+} from "@/db/queries";
 import { handleAPIResponse } from "@/utils";
 import { Product } from "@prisma/client";
 import { useCallback, useEffect, useState } from "react";
@@ -12,6 +15,13 @@ const useSingleWatchPageController = ({
   productId,
 }: SingleWatchPageControllerProps) => {
   const [product, setProduct] = useState<Product | undefined>(undefined);
+  const [similarProducts, setSimilarProducts] = useState<
+    | {
+        id: string;
+        images: string[];
+      }[]
+    | undefined
+  >(undefined);
 
   const handleGetProduct = useCallback(async () => {
     try {
@@ -24,11 +34,43 @@ const useSingleWatchPageController = ({
     }
   }, [productId]);
 
+  const handleGetSimilarProductsByCategory = async (
+    category: string,
+    id: string,
+  ) => {
+    try {
+      const { errors, response } =
+        await fetchSimilarProductsByCategory(category);
+
+      const result = handleAPIResponse(errors, response);
+
+      if (result) {
+        setSimilarProducts(
+          result.filter(
+            (subResult: { id: string; images: string[] }) =>
+              subResult.id !== id,
+          ),
+        );
+      }
+    } finally {
+    }
+  };
+
+  useEffect(() => {
+    if (!product) {
+      return;
+    }
+
+    const { category, id } = product;
+
+    handleGetSimilarProductsByCategory(category, id);
+  }, [product]);
+
   useEffect(() => {
     handleGetProduct();
   }, [handleGetProduct]);
 
-  return { product };
+  return { product, similarProducts };
 };
 
 export default useSingleWatchPageController;
