@@ -3,11 +3,10 @@ const LogoIcon = () => (
     width="160"
     height="40"
     viewBox="0 0 369.89473684210526 92.10526315789473"
-    class="looka-1j8o68f"
+    className="looka-1j8o68f"
   >
     <g
       id="SvgjsG2065"
-      featurekey="symbolFeature-0"
       transform="matrix(2.87828947368421,0,0,2.87828947368421,0,0)"
       fill="#f6e7d2"
     >
@@ -192,7 +191,6 @@ const LogoIcon = () => (
     </g>
     <g
       id="SvgjsG2066"
-      featurekey="nameFeature-0"
       transform="matrix(1.9270037422624573,0,0,1.9270037422624573,109.68759587683185,-4.12404306941551)"
       fill="#f6e7d2"
     >
