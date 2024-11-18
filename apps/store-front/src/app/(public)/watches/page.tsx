@@ -4,6 +4,7 @@ import {
   Header,
   ProductsContainerWithTitle,
   SingleProductCard,
+  Spinner,
 } from "@/components";
 import { WatchesFilter } from "./_components";
 import useWatchesPageController from "./page-controller";
@@ -23,22 +24,33 @@ const WatchesPage = () => {
         </div>
 
         <div className="hide-scrollbar container relative overflow-y-auto">
-          {categorizedProducts && (
+          {isGetProductsLoading ? (
+            <div className="py-12">
+              <Spinner />
+            </div>
+          ) : (
             <>
-              {!Object.keys(categorizedProducts).length ? (
-                <div className="flex w-full justify-center py-20 text-xl uppercase">
-                  No results found
-                </div>
-              ) : (
+              {categorizedProducts && (
                 <>
-                  {Object.entries(categorizedProducts).map(
-                    ([key, products]) => (
-                      <ProductsContainerWithTitle title={key} key={key}>
-                        {products.map((product, index) => (
-                          <SingleProductCard key={index} product={product} />
-                        ))}
-                      </ProductsContainerWithTitle>
-                    ),
+                  {!Object.keys(categorizedProducts).length ? (
+                    <div className="flex w-full justify-center py-20 text-xl uppercase">
+                      No results found
+                    </div>
+                  ) : (
+                    <>
+                      {Object.entries(categorizedProducts).map(
+                        ([key, products]) => (
+                          <ProductsContainerWithTitle title={key} key={key}>
+                            {products.map((product, index) => (
+                              <SingleProductCard
+                                key={index}
+                                product={product}
+                              />
+                            ))}
+                          </ProductsContainerWithTitle>
+                        ),
+                      )}
+                    </>
                   )}
                 </>
               )}

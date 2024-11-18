@@ -33,6 +33,8 @@ const useSingleProductHeroImageContainerController = ({
   const [currentImg, setCurrentImg] = useState("");
   const [imgArr, setImgArr] = useState<string[]>([]);
   const [isBuyButtonLoading, setIsBuyButtonLoading] = useState(false);
+  const [isAddToCartButtonLoading, setIsAddToCartButtonLoading] =
+    useState(false);
   const { profile } = useAppStore();
 
   const router = useRouter();
@@ -43,6 +45,7 @@ const useSingleProductHeroImageContainerController = ({
         handleNoProfileInPublicTemplate();
         return;
       }
+      setIsAddToCartButtonLoading(true);
 
       const { id } = profile;
 
@@ -68,12 +71,12 @@ const useSingleProductHeroImageContainerController = ({
         }
       }
     } finally {
+      setIsAddToCartButtonLoading(false);
     }
   };
 
   const handleBuyNowButtonClick = async () => {
     try {
-      setIsBuyButtonLoading(true);
       if (!profile) {
         handleNoProfileInPublicTemplate();
         return;
@@ -83,6 +86,7 @@ const useSingleProductHeroImageContainerController = ({
         handleShowError(3);
         return;
       }
+      setIsBuyButtonLoading(true);
 
       const { id: profileId } = profile;
       const { price, profileId: productOwnerId } = product;
@@ -145,6 +149,7 @@ const useSingleProductHeroImageContainerController = ({
     heroImageHorizontalVariants,
     handleAddToCartButtonClick,
     handleBuyNowButtonClick,
+    isAddToCartButtonLoading,
     isBuyButtonLoading,
   };
 };

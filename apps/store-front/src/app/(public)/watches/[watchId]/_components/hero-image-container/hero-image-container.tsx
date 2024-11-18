@@ -19,6 +19,7 @@ const SingleProductHeroImageContainer: React.FC<
     handleAddToCartButtonClick,
     handleBuyNowButtonClick,
     isBuyButtonLoading,
+    isAddToCartButtonLoading,
   } = useSingleProductHeroImageContainerController({
     productId,
     product,
@@ -59,6 +60,7 @@ const SingleProductHeroImageContainer: React.FC<
             <CustomButton
               className="rounded-full bg-brown-2/100 uppercase hover:bg-brown-2/50"
               onClick={handleAddToCartButtonClick}
+              loading={isAddToCartButtonLoading}
             >
               Add to cart
             </CustomButton>
