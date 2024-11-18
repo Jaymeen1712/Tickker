@@ -2,12 +2,12 @@
 const nextConfig = {
   env: {
     CLIP_DROP_API_KEY:
-      "0acf88a32f96321a0dae7e9d5c190406cfbcd6709b48bfeda1fd16e23a16eb16d593bff62cc9eb392a9504b9737134d8",
+      "8b82702806483e97f99a51ba40c436e16139121644abdaf00126afb693bf8458a6eaae970e8ac29c323c98f0dfc3072a",
   },
   reactStrictMode: false,
   experimental: {
     serverActions: {
-      bodySizeLimit: "50mb",
+      bodySizeLimit: "20mb",
     },
   },
   async redirects() {

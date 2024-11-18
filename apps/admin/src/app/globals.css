@@ -133,7 +133,7 @@ body {
 }
 
 .recharts-line {
-  stroke-width: 2px; /* Thicker line */
+  strokewidth: 2px; /* Thicker line */
   stroke: #8884d8; /* Custom line color (green in this case) */
 }
 

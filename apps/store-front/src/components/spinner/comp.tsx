@@ -43,7 +43,9 @@ export default function Spinner({
 }: SpinnerContentProps) {
   return (
     <span className={spinnerVariants({ show })}>
-      <LuLoader2 className={cn(loaderVariants({ size }), className)} />
+      <LuLoader2
+        className={cn(loaderVariants({ size }), "text-white-primary", className)}
+      />
       {children}
     </span>
   );

@@ -129,11 +129,12 @@ const useProductsPaymentCompController = ({
   useEffect(() => {
     if (cartSubTotal && cartSubTotal !== 0) {
       const weightedTotal = cartSubTotal && (cartSubTotal * 18) / 100;
+      const includeWeightedTotal = (weightedTotal + cartSubTotal).toFixed(2);
 
       setTotal({
-        excludeWeightedTotal: `${cartSubTotal}.00 ₹`,
-        includeWeightedTotal: `${weightedTotal + cartSubTotal} ₹`,
-        weightedTotal: `${weightedTotal} ₹`,
+        excludeWeightedTotal: `${cartSubTotal} ₹`,
+        includeWeightedTotal: `${includeWeightedTotal} ₹`,
+        weightedTotal: `${weightedTotal.toFixed(2)} ₹`,
       });
     } else {
       setTotal({

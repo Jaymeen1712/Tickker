@@ -97,7 +97,7 @@ const useWatchesFilterController = () => {
         waterResistance,
       });
     }
-  }, [productAdvanceFilters, isFilterSheetOpen]);
+  }, [productAdvanceFilters, isFilterSheetOpen, form]);
 
   return {
     form,
