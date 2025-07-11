@@ -1,13 +1,14 @@
 "use server";
 
-import { AuthError } from "next-auth";
-import * as z from "zod";
-
 import { signIn } from "@/auth";
-import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
-import { LoginFormSchema } from "@/schemas";
+import {
+  AuthError,
+  LoginFormSchema,
+  type LoginFormType,
+} from "@repo/shared-auth";
+import { DEFAULT_LOGIN_REDIRECT } from "@repo/shared-utils";
 
-export const loginAction = async (values: z.infer<typeof LoginFormSchema>) => {
+export const loginAction = async (values: LoginFormType) => {
   const validatedFields = LoginFormSchema.safeParse(values);
 
   if (!validatedFields.success) {

@@ -1,133 +1,71 @@
 "use server";
-import { db } from "@/db";
-import { Prisma } from "@prisma/client";
+import {
+  fetchProducts,
+  type ProductFilters,
+  type ProductSortOptions,
+} from "@repo/shared-database";
 
 export const fetchAllProducts = async ({
-  filters,
+  filters = {},
+  sortOptions = {},
+  pagination = {},
 }: {
-  filters?: Prisma.ProductWhereInput;
+  filters?: ProductFilters;
+  sortOptions?: ProductSortOptions;
+  pagination?: { page?: number; limit?: number };
 }) => {
-  let response;
-  let errors;
-
-  try {
-    const existingProducts = await db.product.findMany({
-      where: {
-        ...filters,
-      },
-    });
-
-    if (existingProducts) {
-      response = existingProducts;
-    }
-  } catch (error) {
-    errors = error;
-  }
-
-  return { errors, response };
+  const result = await fetchProducts(filters, sortOptions, pagination);
+  return {
+    errors: result.success ? null : [result.error],
+    response: result.data,
+  };
 };
 
 export const fetchSingleProductById = async (id: string) => {
-  let response;
-  let errors;
-
-  try {
-    const existingProduct = await db.product.findUnique({
-      where: {
-        id,
-      },
-    });
-
-    if (existingProduct) {
-      response = existingProduct;
-    } else {
-      errors = ["Product is not available!"];
-    }
-  } catch (error) {
-    errors = error;
-  }
-
-  return { errors, response };
+  const { fetchProductById } = await import("@repo/shared-database");
+  const result = await fetchProductById(id, true);
+  return {
+    errors: result.success ? null : [result.error || "Product not found"],
+    response: result.data,
+  };
 };
 
 export const fetchProductsBySearchQuery = async (
   searchQuery: string | undefined,
   count?: number,
 ) => {
-  let response;
-  let errors;
-
-  try {
-    const searchQueryProducts = await db.product.findMany({
-      where: {
-        OR: [
-          { name: { contains: searchQuery, mode: "insensitive" } },
-          { description: { contains: searchQuery, mode: "insensitive" } },
-          { category: { contains: searchQuery, mode: "insensitive" } },
-          { brand: { contains: searchQuery, mode: "insensitive" } },
-        ],
-      },
-      take: count,
-    });
-
-    if (searchQueryProducts) {
-      response = searchQueryProducts;
-    } else {
-      errors = ["Product is not available!"];
-    }
-  } catch (error) {
-    errors = error;
+  if (!searchQuery) {
+    return { errors: null, response: [] };
   }
 
-  return { errors, response };
+  const { searchProducts } = await import("@repo/shared-database");
+  const result = await searchProducts(searchQuery, count || 10);
+  return {
+    errors: result.success ? null : [result.error],
+    response: result.data || [],
+  };
 };
 
-export const fetchSimilarProductsByCategory = async (category: string) => {
-  let response;
-  let errors;
-
-  try {
-    const similarProducts = await db.product.findMany({
-      where: {
-        category,
-      },
-      select: {
-        id: true,
-        images: true,
-      },
-    });
-
-    if (similarProducts) {
-      response = similarProducts;
-    } else {
-      errors = ["Products are not available!"];
-    }
-  } catch (error) {
-    errors = error;
-  }
-
-  return { errors, response };
+export const fetchSimilarProductsByCategory = async (
+  productId: string,
+  category: string,
+  limit?: number,
+) => {
+  const { fetchSimilarProducts } = await import("@repo/shared-database");
+  const result = await fetchSimilarProducts(productId, category, limit || 6);
+  return {
+    errors: result.success ? null : [result.error],
+    response: result.data || [],
+  };
 };
 
 export const fetchDashboardProduct = async () => {
-  let response;
-  let errors;
-
-  try {
-    const existingProduct = await db.product.findUnique({
-      where: {
-        id: "cm3ih8tyu00012gvdupdywack",
-      },
-    });
-
-    if (existingProduct) {
-      response = existingProduct;
-    } else {
-      errors = ["Product is not available!"];
-    }
-  } catch (error) {
-    errors = error;
-  }
-
-  return { errors, response };
+  // This function should be removed or made configurable
+  // Hardcoded IDs are not good practice
+  const { fetchProductById } = await import("@repo/shared-database");
+  const result = await fetchProductById("cm3ih8tyu00012gvdupdywack", true);
+  return {
+    errors: result.success ? null : [result.error || "Product not found"],
+    response: result.data,
+  };
 };

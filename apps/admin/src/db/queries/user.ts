@@ -1,43 +1,15 @@
 "use server";
 
-import { db } from "@/db";
+import { fetchUserByEmail, fetchUserById } from "@repo/shared-database";
 
 export const getUserById = async (id: string) => {
-  try {
-    const user = await db.user.findFirst({
-      where: { id },
-    });
-
-    return user;
-  } catch (error) {
-    console.error(error);
-  }
+  const result = await fetchUserById(id, true);
+  return result.data || null;
 };
 
-// export const getUserByUsername = async (username: string) => {
-//   try {
-//     const user = await db.user.findFirst({
-//       where: {
-//         username,
-//       },
-//     });
-
-//     return user;
-//   } catch (error) {
-//     return null;
-//   }
-// };
-
 export const getUserByEmail = async (email: string) => {
-  try {
-    const user = await db.user.findFirst({
-      where: { email },
-    });
-
-    return user;
-  } catch (error) {
-    return null;
-  }
+  const result = await fetchUserByEmail(email, true);
+  return result.data || null;
 };
 
 // export const updateUser = async (

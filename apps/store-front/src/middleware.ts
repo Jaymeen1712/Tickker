@@ -1,22 +1,13 @@
-import NextAuth from "next-auth";
-
-import authConfig from "./auth.config";
 import {
   DEFAULT_LOGIN_REDIRECT,
   apiAuthPrefix,
   authRoutes,
-  publicRoutes,
-} from "./routes";
+  checkIsPublicRoute,
+} from "@repo/shared-utils";
+import NextAuth from "next-auth";
+import authConfig from "./auth.config";
 
 const { auth } = NextAuth(authConfig);
-
-const checkIsPublicRoute = (pathname: string) => {
-  const publicRoutePatterns = publicRoutes.map((route) => {
-    return new RegExp(`^${route.replace(/\[.*?\]/g, "[^/]+")}$`);
-  });
-
-  return publicRoutePatterns.some((pattern) => pattern.test(pathname));
-};
 
 export default auth((req) => {
   const { nextUrl } = req;

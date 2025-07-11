@@ -1,22 +1,28 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "globalDependencies": ["**/.env.*local"],
+  "globalEnv": ["NODE_ENV"],
   "tasks": {
     "build": {
-      "env": ["AUTH_SECRET"],
-      "dependsOn": ["^build", "^prisma"],
+      "env": ["AUTH_SECRET", "DATABASE_URL"],
+      "dependsOn": ["^build", "^generate"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "outputs": [".next/**", "!.next/cache/**"]
+      "outputs": [".next/**", "!.next/cache/**", "dist/**"]
     },
     "store-front#build": {
-      "dependsOn": ["^build"],
-      "env": ["AUTH_SECRET", "AUTH_TRUST_HOST", "NEXTAUTH_URL"],
+      "dependsOn": ["^build", "^generate"],
+      "env": ["AUTH_SECRET", "AUTH_TRUST_HOST", "NEXTAUTH_URL", "DATABASE_URL"],
       "outputs": [".next/**", "!.next/cache/**"]
     },
     "admin#build": {
-      "dependsOn": ["^build"],
-      "env": ["AUTH_SECRET"],
+      "dependsOn": ["^build", "^generate"],
+      "env": ["AUTH_SECRET", "DATABASE_URL"],
       "outputs": [".next/**", "!.next/cache/**"]
+    },
+    "generate": {
+      "cache": true,
+      "dependsOn": ["^generate"],
+      "outputs": ["node_modules/.prisma/client/**", "dist/**"]
     },
     "prisma": {
       "cache": false,
@@ -24,11 +30,26 @@
     },
     "lint": {
       "cache": true,
-      "dependsOn": ["^lint"]
+      "dependsOn": ["^lint"],
+      "inputs": ["$TURBO_DEFAULT$", ".eslintrc*", "eslint.config.*"]
+    },
+    "type-check": {
+      "cache": true,
+      "dependsOn": ["^type-check", "^generate"],
+      "inputs": ["$TURBO_DEFAULT$", "tsconfig*.json"]
+    },
+    "test": {
+      "cache": true,
+      "dependsOn": ["^build"],
+      "inputs": ["$TURBO_DEFAULT$", "jest.config.*", "vitest.config.*"]
     },
     "dev": {
       "cache": false,
-      "persistent": true
+      "persistent": true,
+      "dependsOn": ["^generate"]
+    },
+    "clean": {
+      "cache": false
     }
   }
 }

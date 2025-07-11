@@ -1,0 +1,23 @@
+{
+  "name": "@repo/shared-store",
+  "version": "1.0.0",
+  "exports": {
+    ".": "./index.ts",
+    "./slices/*": "./slices/*",
+    "./types": "./types.ts"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "lint": "eslint . --max-warnings 0",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.16.2",
+    "zustand": "^5.0.0-rc.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "typescript": "^5"
+  }
+}

@@ -1,7 +1,7 @@
-import NextAuth from "next-auth";
-
 import authConfig from "@/auth.config";
 import { PrismaAdapter } from "@auth/prisma-adapter";
+import { defaultCallbacks } from "@repo/shared-auth";
+import NextAuth from "next-auth";
 import { db } from "./db";
 
 export const {
@@ -10,23 +10,7 @@ export const {
   signIn,
   signOut,
 } = NextAuth({
-  callbacks: {
-    async session({ session, token }) {
-      if (session.user && token.sub) {
-        session.user.id = token.sub;
-      }
-      return session;
-    },
-    async jwt({ token }) {
-      return token;
-    },
-    async signIn({ user }) {
-      // if (user && user.email) {
-      //   await getUserByEmail(user.email);
-      // }
-      return true;
-    },
-  },
+  callbacks: defaultCallbacks,
   adapter: PrismaAdapter(db),
   session: { strategy: "jwt" },
   ...authConfig,

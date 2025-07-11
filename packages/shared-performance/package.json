@@ -1,0 +1,29 @@
+{
+  "name": "@repo/shared-performance",
+  "version": "1.0.0",
+  "exports": {
+    ".": "./index.ts",
+    "./hooks": "./hooks/index.ts",
+    "./components": "./components/index.ts",
+    "./utils": "./utils/index.ts"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "lint": "eslint . --max-warnings 0",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "react": "^18",
+    "react-dom": "^18"
+  },
+  "devDependencies": {
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "typescript": "^5"
+  },
+  "peerDependencies": {
+    "react": "^18",
+    "react-dom": "^18"
+  }
+}

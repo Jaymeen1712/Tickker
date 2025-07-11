@@ -1,23 +1,23 @@
-import { create } from "zustand";
-import { persist } from "zustand/middleware";
 import {
-  CommonSlice,
+  createAppStore,
   createCommonSlice,
   createUtilsSlice,
-  UtilsSlice,
-} from "./slices";
+  type CommonSlice,
+  type UtilsSlice,
+} from "@repo/shared-store";
 
 type StoreState = UtilsSlice & CommonSlice;
 
-export const useAppStore = create<StoreState>()(
-  persist(
-    (...a) => ({
-      ...createUtilsSlice(...a),
-      ...createCommonSlice(...a),
+export const useAppStore = createAppStore<StoreState>(
+  (...a) => ({
+    ...createUtilsSlice(...a),
+    ...createCommonSlice(...a),
+  }),
+  {
+    name: "Tickker-Storefront-Storage",
+    partialize: (state) => ({
+      // Only persist specific parts of the state
+      profile: state.profile,
     }),
-    {
-      name: "App-storage",
-      partialize: (state) => ({}),
-    },
-  ),
+  },
 );

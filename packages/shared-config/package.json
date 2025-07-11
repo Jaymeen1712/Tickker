@@ -1,0 +1,17 @@
+{
+  "name": "@repo/shared-config",
+  "version": "1.0.0",
+  "exports": {
+    "./next": "./next.config.js",
+    "./tailwind": "./tailwind.config.js",
+    "./prettier": "./prettier.config.js"
+  },
+  "dependencies": {
+    "next": "14.2.5"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.1",
+    "prettier": "^3.2.5",
+    "prettier-plugin-tailwindcss": "^0.6.5"
+  }
+}

@@ -1,13 +1,5 @@
-import { WatchSpecificProductFieldsType } from "@/types";
 import { StateCreator } from "zustand";
-
-export interface CommonSlice {
-  productAdvanceFilters: WatchSpecificProductFieldsType | undefined;
-  setProductAdvanceFilters: (
-    data: WatchSpecificProductFieldsType | undefined,
-  ) => void;
-  resetProductAdvanceFilters: () => void;
-}
+import { CommonSlice } from "../types";
 
 export const createCommonSlice: StateCreator<CommonSlice> = (set, get) => ({
   productAdvanceFilters: undefined,
@@ -23,3 +15,5 @@ export const createCommonSlice: StateCreator<CommonSlice> = (set, get) => ({
       productAdvanceFilters: undefined,
     }),
 });
+
+export type { CommonSlice };
