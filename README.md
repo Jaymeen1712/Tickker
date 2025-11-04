@@ -1,88 +1,141 @@
-# Turborepo starter
+# 🕒 Tickker – Modern E-commerce Platform
 
-This is an official starter Turborepo.
+A **full-stack e-commerce platform** for selling premium watches, built with **TurboRepo** for a scalable monorepo architecture.  
+Tickker includes a **storefront** for customers and an **admin dashboard** for managing products, orders, and analytics — both sharing a unified design system and backend.
 
-## Using this example
+---
 
-Run the following command:
+## 🚀 Tech Stack
 
-```sh
-npx create-turbo@latest
-```
+**Frameworks & Libraries**
 
-## What's inside?
+- **Next.js 14** (App Router, Server Components)
+- **NextAuth.js** (Authentication)
+- **Radix UI** + **Tailwind CSS** (Accessible UI & Styling)
+- **Framer Motion** (Animations)
+- **Zustand** (Global State Management)
+- **Zod** + **React Hook Form** (Schema Validation & Form Handling)
+- **Prisma ORM** (Database)
+- **PostgreSQL** (Relational Database)
+- **TurboRepo** (Monorepo Management)
 
-This Turborepo includes the following packages/apps:
+---
 
-### Apps and Packages
+## ✨ Features
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+### 🛍️ Storefront
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+- Dynamic product pages with SEO-optimized routing
+- Category-based filtering & sorting
+- User authentication & session handling
+- Cart, checkout, and order flow
+- Responsive, accessible, and animated UI
 
-### Utilities
+### 🧭 Admin Dashboard
 
-This Turborepo has some additional tools already setup for you:
+- Product, category, and order management
+- Analytics & sales overview
+- Image upload and asset management
+- Role-based authentication
+- Built on the same stack for consistency and code sharing
 
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+---
 
-### Build
+## 🧩 Architecture
 
-To build all apps and packages, run the following command:
-
-```
-cd my-turborepo
-pnpm build
-```
-
-### Develop
-
-To develop all apps and packages, run the following command:
-
-```
-cd my-turborepo
-pnpm dev
-```
-
-### Remote Caching
-
-Turborepo can use a technique known as [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup), then enter the following commands:
+This project follows a **monorepo setup** using **TurboRepo**, with shared configurations, types, and database schema:
 
 ```
-cd my-turborepo
-npx turbo login
+
+tickker/
+├── apps/
+│ ├── tickker-storefront/ # Customer-facing app
+│ ├── tickker-admin/ # Admin dashboard
+├── packages/
+│ ├── database/ # Prisma schema and migrations
+│ ├── ui/ # (Optional) shared UI components
+│ ├── config/ # ESLint, Tailwind, tsconfig, etc.
+
 ```
 
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
+---
 
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
+## 🛠️ Getting Started
 
+### 1️⃣ Clone the repository
+
+```bash
+git clone https://github.com/Jaymeen1712/Tickker.git
+cd Tickker
 ```
-npx turbo link
+
+### 2️⃣ Install dependencies
+
+```bash
+npm install
 ```
 
-## Useful Links
+### 3️⃣ Setup environment variables
 
-Learn more about the power of Turborepo:
+Create `.env` files in both `apps/tickker-storefront` and `apps/tickker-admin`:
 
-- [Tasks](https://turbo.build/repo/docs/core-concepts/monorepos/running-tasks)
-- [Caching](https://turbo.build/repo/docs/core-concepts/caching)
-- [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching)
-- [Filtering](https://turbo.build/repo/docs/core-concepts/monorepos/filtering)
-- [Configuration Options](https://turbo.build/repo/docs/reference/configuration)
-- [CLI Usage](https://turbo.build/repo/docs/reference/command-line-reference)
+```env
+DATABASE_URL="postgresql://user:password@localhost:5432/tickker"
+NEXTAUTH_SECRET="your_secret"
+NEXTAUTH_URL="http://localhost:3000"
+```
+
+### 4️⃣ Run database migrations
+
+```bash
+npx prisma migrate dev
+```
+
+### 5️⃣ Start development servers
+
+```bash
+npm run dev
+```
+
+Storefront: [http://localhost:3000](http://localhost:3000)
+Admin Dashboard: [http://localhost:3001](http://localhost:3001)
+
+---
+
+## 🧠 Learnings
+
+- Mastered **monorepo architecture** with TurboRepo for managing multiple Next.js apps.
+- Implemented **full-stack authentication** using NextAuth and Prisma adapter.
+- Designed **reusable UI and validation logic** shared across admin and storefront.
+
+---
+
+## 🔗 Links
+
+- 🌐 **Live Demo:** [tickker.vercel.app](https://tickker.vercel.app/)
+- 💻 **GitHub Repo:** [github.com/Jaymeen1712/Tickker](https://github.com/Jaymeen1712/Tickker)
+
+---
+
+## 🖼️ Screenshots
+
+| Storefront                               |
+| ---------------------------------------- |
+| ![Tickker Storefront](./tickker-img.png) |
+
+---
 
 # Design links
 
 1. Admin: https://dribbble.com/shots/22092501-Clothes-Search-Admin-Dashboard-Analytics-UX-UI
 2. Storefront: https://dribbble.com/shots/23365393-E-commerce-Watches-Web-Design
 
-Check for text mask fading: https://pqina.nl/blog/fade-out-overflow-using-css-mask-image/
+---
+
+## 👨‍💻 Author
+
+**Jaymeen Sonara**
+Frontend Developer | React | Next.js | TypeScript
+[GitHub](https://github.com/Jaymeen1712) • [LinkedIn](#)
+
+---
